@@ -1,0 +1,72 @@
+@extends('vistaBaseMenu')
+@section('content')
+
+<style>
+    .contenedorA {
+        width: 450px;
+        height: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        /* border:1px white solid ; */
+    }
+
+
+    .labelC {
+        color: white;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: whitesmoke;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    }
+</style>
+<!-- <center> -->
+<div class="contenedorA p-5" style="margin-top: 105px;">
+    <h2>Cuenta</h2>
+
+
+    @error('imgUser')
+    <h5 class="alert alert-danger"> {{$message}}</h5>
+    @enderror
+
+    @if (session('success'))
+    <h5 class="alert alert-success">{{session('success')}}</h5>
+    @endif
+
+    @if (session('error'))
+    <h5 class="alert alert-success">{{session('error')}}</h5>
+    @endif
+
+    <!-- <div class="f"> -->
+    <label for="" class="form-label labelC">Usuario</label>
+    <input class="form-control" type="text" name="name" value="{{auth()->user()->name}}" id="" readonly>
+    <!-- </div> -->
+    <br><label for="" class="form-label labelC" >Email</label>
+    <input class="form-control" type="email" name="email" value="{{auth()->user()->email}}" id="" readonly>
+    <br><label for="" class="form-label labelC">Contraseña</label>
+    <input class="form-control" type="password" name="email" value="{{auth()->user()->password}}" id="" readonly>
+    <form action="{{route('modificarUser', ['user' => auth()->user()->id])}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PATCH')
+
+        @if (auth()->user()->imgUser==null)
+        <br><label for="" class="form-label labelC">Agregar imagen de usuario</label>
+        @else
+        <br><label for="" class="form-label labelC">Modificar imagen de usuario</label>
+        @endif
+        <input class="form-control" type="file" name="imgUser" id="" accept="image/*">
+        <br>
+        <input type="submit" value="Modificar" class="btn btn-primary">
+    </form>
+</div>
+<!-- </center> -->
+
+
+<script>
+    function obtener(t) {
+        return t;
+    }
+</script>
+@endsection
