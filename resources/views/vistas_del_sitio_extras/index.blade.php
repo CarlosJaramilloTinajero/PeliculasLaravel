@@ -10,7 +10,18 @@
   #ImagenFondo {
     position: absolute;
     z-index: 0;
+
   }
+
+  #background {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+  }
+
+
 </style>
 
 
@@ -29,9 +40,7 @@ foreach ($peliculas as $peliculaf) {
 
 ?>
 
-<!-- Imagen fondo -->
-<img style="transition: all .7s ease-in-out; opacity: 0;" id="ImagenFondo"  onload="var img= document.getElementById('ImagenFondo'); img.style.opacity=1;" class="fixed-top ImagenFondoInicio d-block" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
-
+<img style="transition: all .7s ease-in-out; opacity: 0; box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset($peliculas[0]->ImagenCartel)}}');" id="ImagenFondo" onload="var img= document.getElementById('ImagenFondo'); img.style.opacity=1;" class="fixed-top ImagenFondoInicio d-block" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
 
 
 <!--Primer slide -->

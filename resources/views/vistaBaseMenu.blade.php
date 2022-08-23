@@ -426,15 +426,15 @@
         @auth
 
         @if (auth()->user()->imgUser==null)
-        <img src="{{asset('Imagenes/guest.png')}}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 25px;" alt="">
+        <img class="shadow" src="{{asset('Imagenes/guest.png')}}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 25px;" alt="">
         @else
-        <img class="shadow" src="{{asset(auth()->user()->imgUser)}}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 25px;" alt="">
+        <img class="shadow" src="{{asset(auth()->user()->imgUser)}}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 25px;" alt="">
         @endif
 
         @endauth
 
         @guest
-        <img src="{{asset('Imagenes/guest.png')}}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 25px;" alt="">
+        <img class="shadow" src="{{asset('Imagenes/guest.png')}}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 25px;" alt="">
         @endguest
       </button>
 
