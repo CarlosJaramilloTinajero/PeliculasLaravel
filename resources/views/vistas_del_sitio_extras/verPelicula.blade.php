@@ -12,7 +12,7 @@
     <script src="/splide-4.0.7/dist/js/splide.min.js"></script>
     <link rel="shortcut icon" href="/Imagenes/Icono/icon.png">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/helpers/ratio/">
-
+    <meta name="google" value="notranslate">
 </head>
 
 <body>

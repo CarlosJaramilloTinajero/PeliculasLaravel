@@ -85,7 +85,7 @@ foreach ($peliculas as $peliculaf) {
 
 
 <!-- //Segundo slide -->
-<section class="splide " style="margin-top: 52%;">
+<section class="splide " style="margin-top: 47%;">
   <ul class="splide__pagination opacity-0"></ul>
 
   <div class="splide__arrows">
