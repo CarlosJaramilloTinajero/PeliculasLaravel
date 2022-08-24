@@ -20,8 +20,6 @@
     background-repeat: no-repeat;
     /* background-size: cover; */
   }
-
-
 </style>
 
 
@@ -44,7 +42,7 @@ foreach ($peliculas as $peliculaf) {
 
 
 <!--Primer slide -->
-<section id="capa1" class="splide fixed-top " style="margin-top: 23%;">
+<section id="capa1" class="splide fixed-top" style="margin-top: 23%;">
   <ul class="splide__pagination opacity-0"></ul>
 
   <div class="splide__arrows">
@@ -85,7 +83,7 @@ foreach ($peliculas as $peliculaf) {
 
 
 <!-- //Segundo slide -->
-<section class="splide " style="margin-top: 47%;">
+<section id="segundoSlide" class="splide " style="margin-top: 47%;">
   <ul class="splide__pagination opacity-0"></ul>
 
   <div class="splide__arrows">
@@ -109,7 +107,7 @@ foreach ($peliculas as $peliculaf) {
           <div id="divSegundoSlide{{$pel}}">
 
             <center>
-              <div class="card carta shadow-lg  rounded ">
+              <div class="card carta shadow-lg  rounded shadow">
                 <img src="{{$pelicula->ImagenCartel}}" class="card-img-top PeliculaDiv" alt="..." style="height: 60%; border: 0px;">
                 <div class="card-body" style="background-color: rgb(43, 39, 39); height: 30%;">
                   <h5 class="card-title">{{$pelicula->nombre}}</h5>
@@ -277,6 +275,14 @@ foreach ($categorias as $categoria) {
     }
 
 
+
+    //Primer slide
+    if (ancho < 900) {
+      S1 = document.getElementById('capa1');
+      S2 = document.getElementById('segundoSlide');
+      S1.style.marginTop = "33%";
+      S2.style.marginTop = "64%";
+    }
     //Letras Categorias
     i = 0;
     while (document.getElementById('LetrasSlide' + i)) {
@@ -390,7 +396,7 @@ function splide($peliculas, $categorias, $categoriaS, $divs3, $i)
 
 
   echo '
-  <section style="margin-top:3%; class="shadow-lg" class="splide">
+  <section style="margin-top:3%;" class="splide">
   <ul class="splide__pagination opacity-0"></ul>
 
   <div class="splide__arrows">
@@ -409,7 +415,7 @@ function splide($peliculas, $categorias, $categoriaS, $divs3, $i)
 
       echo '<li class="splide__slide zoom">
         <a href="' . route('mostrarPelicula', ['pelicula' => $pelicula->id]) . '">
-           <center> <div  id="divCategoria' . $divs3 . '">
+           <center> <div  id="divCategoria' . $divs3 . '" class="shadow"  style="height:90%;">
             
                   <img src="' . $pelicula->ImagenCartel . '" class=" PeliculaDiv rounded" alt="...">
             
