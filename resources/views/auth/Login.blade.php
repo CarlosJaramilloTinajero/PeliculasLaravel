@@ -42,10 +42,10 @@
 
     <form action="{{route('login')}}" method="POST">
         @csrf
-        <label for="inputEmail3" class="labelC form-label">Usare name / Email</label>
+        <label for="inputEmail3" class="labelC form-label">Nombre de usuario / Email</label>
         <input type="text" class="form-control" name="name"><br>
 
-        <label for="inputPassword3" class="form-label labelC">Password</label>
+        <label for="inputPassword3" class="form-label labelC">Contraseña</label>
         <input type="password" class="form-control" name="password"><br>
 
         <center>

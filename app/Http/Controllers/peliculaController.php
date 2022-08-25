@@ -51,6 +51,9 @@ class peliculaController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check() || auth()->user()->name != "admin") {
+            return redirect()->route('extras');
+        }
         $request->validate([
             'nombre' => 'required|min:4',
             'descripcion' => 'required|min:10',
@@ -120,6 +123,10 @@ class peliculaController extends Controller
     public function update(Request $request, $id)
     {
 
+        if (!Auth::check() || auth()->user()->name != "admin") {
+            return redirect()->route('extras');
+        }
+
         if ($request->chbImagen == "si") {
             $request->validate([
                 'nombre' => 'required|min:4',
@@ -180,6 +187,10 @@ class peliculaController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::check() || auth()->user()->name != "admin") {
+            return redirect()->route('extras');
+        }
+
         $pelicula = pelicula::find($id);
         if (!File::delete($pelicula->ImagenCartel)) {
             return redirect()->back()->with('error', 'Error al borrar la imagen');

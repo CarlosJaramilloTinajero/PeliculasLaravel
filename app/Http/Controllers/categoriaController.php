@@ -48,6 +48,9 @@ class categoriaController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check() || auth()->user()->name != "admin") {
+            return redirect()->route('extras');
+        }
         $request->validate([
             'nombre' => 'required|min:4',
             'descripcion' => 'required|min:10'
@@ -101,6 +104,9 @@ class categoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Auth::check() || auth()->user()->name != "admin") {
+            return redirect()->route('extras');
+        }
         $request->validate([
             'nombre' => 'required|min:4',
             'descripcion' => 'required|min:10'
@@ -124,6 +130,10 @@ class categoriaController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::check() || auth()->user()->name != "admin") {
+            return redirect()->route('extras');
+        }
+
         $categoria = categoria::find($id);
 
         //Con esta linea de codigo se eliminan primero los registros de la tablatodos que tengan como llave foranea el id de la categoria a elimainar

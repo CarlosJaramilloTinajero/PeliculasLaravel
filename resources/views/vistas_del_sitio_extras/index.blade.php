@@ -24,21 +24,18 @@
 
 
 <?php
-$otro = false;
-$catnMax = 4;
-$cant = 0;
 $aux = 0;
 foreach ($peliculas as $peliculaf) {
   $aux++;
-  if ($aux > 4) {
-    $cant++;
-    $aux = 1;
-  }
 }
 
 ?>
 
+@if ($aux>0)
 <img style="transition: all .7s ease-in-out; opacity: 0; box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset($peliculas[0]->ImagenCartel)}}');" id="ImagenFondo" onload="var img= document.getElementById('ImagenFondo'); img.style.opacity=1;" class="fixed-top ImagenFondoInicio d-block" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
+@else
+<img src="" id="ImagenFondo" alt="...">
+@endif
 
 
 <!--Primer slide -->
@@ -81,7 +78,7 @@ foreach ($peliculas as $peliculaf) {
 
 
 
-
+@if ($aux>0)
 <!-- //Segundo slide -->
 <section id="segundoSlide" class="splide " style="margin-top: 47%;">
   <ul class="splide__pagination opacity-0"></ul>
@@ -130,6 +127,8 @@ foreach ($peliculas as $peliculaf) {
 </section>
 
 
+
+
 <!-- Slides por categoria -->
 <?php $categoriaS = null;
 $divs3 = 0;
@@ -149,7 +148,7 @@ foreach ($categorias as $categoria) {
 }
 
 ?>
-
+@endif
 
 <script>
   let ancho = document.documentElement.clientWidth;

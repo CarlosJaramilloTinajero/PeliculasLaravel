@@ -43,7 +43,7 @@
     <label for="" class="form-label labelC">Usuario</label>
     <input class="form-control" type="text" name="name" value="{{auth()->user()->name}}" id="" readonly>
     <!-- </div> -->
-    <br><label for="" class="form-label labelC" >Email</label>
+    <br><label for="" class="form-label labelC">Email</label>
     <input class="form-control" type="email" name="email" value="{{auth()->user()->email}}" id="" readonly>
     <br><label for="" class="form-label labelC">Contraseña</label>
     <input class="form-control" type="password" name="email" value="{{auth()->user()->password}}" id="" readonly>
@@ -58,7 +58,13 @@
         @endif
         <input class="form-control" type="file" name="imgUser" id="" accept="image/*">
         <br>
-        <input type="submit" value="Modificar" class="btn btn-primary">
+        <div class="d-grid gap-2">
+            @if (auth()->user()->imgUser==null)
+            <input type="submit" value="Agregar" class="btn boton3">
+            @else
+            <input type="submit" value="Modificar" class="btn boton3">
+            @endif
+        </div>
     </form>
 </div>
 <!-- </center> -->
