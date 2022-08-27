@@ -15,7 +15,7 @@
         color: white;
     }
 
-    h2 {
+    h1 {
         margin-bottom: 20px;
         color: whitesmoke;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -24,7 +24,7 @@
 </style>
 <!-- <center> -->
 <div class="contenedorA p-5" style="margin-top: 105px;">
-    <h2>Cuenta</h2>
+    <h1>Cuenta</h1>
 
 
     @error('imgUser')
@@ -41,12 +41,12 @@
 
     <!-- <div class="f"> -->
     <label for="" class="form-label labelC">Usuario</label>
-    <input class="form-control" type="text" name="name" value="{{auth()->user()->name}}" id="" readonly>
+    <input class="form-control" type="text" name="name" value="{{auth()->user()->name}}" readonly>
     <!-- </div> -->
     <br><label for="" class="form-label labelC">Email</label>
-    <input class="form-control" type="email" name="email" value="{{auth()->user()->email}}" id="" readonly>
+    <input class="form-control" type="email" name="email" value="{{auth()->user()->email}}" readonly>
     <br><label for="" class="form-label labelC">Contraseña</label>
-    <input class="form-control" type="password" name="email" value="{{auth()->user()->password}}" id="" readonly>
+    <input class="form-control" type="password" name="email" value="{{auth()->user()->password}}" readonly>
     <form action="{{route('modificarUser', ['user' => auth()->user()->id])}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
@@ -56,7 +56,7 @@
         @else
         <br><label for="" class="form-label labelC">Modificar imagen de usuario</label>
         @endif
-        <input class="form-control" type="file" name="imgUser" id="" accept="image/*">
+        <input class="form-control" type="file" name="imgUser" accept="image/*">
         <br>
         <div class="d-grid gap-2">
             @if (auth()->user()->imgUser==null)

@@ -422,6 +422,198 @@
       </div>
 
 
+      <style>
+        .ImagenSlideInicio {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .botonesMenuCuenta {
+          /* margin-bottom: 180px; */
+          margin-left: 20px;
+          margin-right: 20px;
+          text-decoration: none;
+          color: white;
+          opacity: .70;
+          /* margin-top: 10px; */
+          margin-top: 20px;
+        }
+
+        .TituloMenuCuenta {
+          /* margin-bottom: 180px; */
+          margin-left: 20px;
+          margin-right: 20px;
+          text-decoration: none;
+          color: white;
+          font-size: 18px;
+
+          /* margin-top: 10px; */
+          margin-top: 20px;
+        }
+
+        .botonesMenuCuenta:hover {
+          color: white;
+          opacity: 1;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        .popover__title {
+          font-size: 18px;
+          /* line-height: 36px; */
+          /* text-decoration: none; */
+          color: white;
+          text-align: left;
+          margin-right: 20px;
+          /* padding: 15px 0; */
+        }
+
+        .popover__wrapper {
+          position: relative;
+          margin-top: 10px;
+          /* display: inline-block; */
+        }
+
+        .popover__content {
+          width: 250px;
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          left: -136px;
+          top: 70px;
+          transform: translate(0, 10px);
+          background-color: black;
+          border-radius: 4px;
+          padding-top: 14px;
+          padding-bottom: 20px;
+          /* padding-right: 20px; */
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+          /* width: auto; */
+        }
+
+        .popover__content:before {
+          position: absolute;
+          z-index: -1;
+          content: "";
+          right: calc(40% - 14px);
+          top: -8px;
+          border-style: solid;
+          border-width: 0 10px 10px 10px;
+          border-color: transparent transparent black transparent;
+          transition-duration: 0.3s;
+          transition-property: transform;
+        }
+
+        .popover__wrapper:hover .popover__content {
+          z-index: 10;
+          opacity: 1;
+          visibility: visible;
+          transform: translate(0, -20px);
+          transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+        }
+
+        .popover__message {
+          text-align: center;
+          margin-left: 10px;
+          margin-right: 80px;
+        }
+
+        .botonesNav {
+          margin-left: 30px;
+          text-decoration: none;
+          color: black;
+        }
+
+        .navBar {
+          background-image: radial-gradient(circle at 84.87% 74.42%, #ff65b3 0, #ff59c0 10%, #ff4ecd 20%, #ff45d9 30%, #ff3fe6 40%, #f23cf2 50%, #d33ffe 60%, #ad46ff 70%, #7b4fff 80%, #0058ff 90%, #0060ff 100%);
+        }
+
+        .popover-title {
+          color: blue;
+          font-size: 15px;
+        }
+
+        .imagenPerfil {
+          width: 55px;
+          height: 55px;
+          border-radius: 27.5px;
+
+        }
+
+        .imagenPerfilNav {
+          width: 36px;
+          height: 36px;
+          border-radius: 16px;
+
+        }
+      </style>
+
+      <div class="popover__wrapper">
+        <div>
+
+          @auth
+          @if (auth()->user()->imgUser==null)
+          <h2 class="popover__title"><img class="imagenPerfilNav" src="{{asset('Imagenes/guest.png')}}" alt=""> {{auth()->user()->name}}</h2>
+          @else
+          <h2 class="popover__title"><img class="imagenPerfilNav" src="{{asset(auth()->user()->imgUser)}}" alt=""> {{auth()->user()->name}}</h2>
+          @endif
+          @endauth
+
+          @guest
+          <a class="popover__title"><img class="imagenPerfilNav" src="{{asset('Imagenes/guest.png')}}" alt=""> Inicia sesion</a>
+          @endguest
+
+        </div>
+
+        @auth
+        <div class="popover__content">
+          <?php
+          $cant = strlen(auth()->user()->name);
+          // echo $cant-1;
+          $x = str_split(auth()->user()->name);
+          $aux = "";
+          $maxPalabras = 7;
+          if ($cant-1 > $maxPalabras) {
+            for ($i = 0; $i < $maxPalabras; $i++) {
+              $aux .= $x[$i];
+            }
+            // echo $aux;
+          } else {
+            $aux = auth()->user()->name;
+          }
+
+          ?>
+          <p class="popover__message">
+            @if (auth()->user()->imgUser==null)
+            <img class="imagenPerfil" src="{{asset('Imagenes/guest.png')}}" alt="">
+            @else
+            <img class="imagenPerfil" src="{{asset(auth()->user()->imgUser)}}" alt="">
+            @endif
+            <small>Hola {{$aux}}</small>
+          </p>
+          <hr class="opacity-50">
+          <a class="botonesMenuCuenta" href="{{route('cuenta')}}">Cuenta</a><br>
+          @if (auth()->user()->name=="admin")
+          <hr class="opacity-50">
+          <h4 class="TituloMenuCuenta">Peliculas</h4>
+          <a class="botonesMenuCuenta" href="{{route('pelicula.create')}}">Agregar</a><br>
+          <a class="botonesMenuCuenta" href="{{route('pelicula.index')}}">Agregadas</a><br>
+          <hr class="opacity-50">
+          <h4 class="TituloMenuCuenta">Categorias</h4>
+          <a class="botonesMenuCuenta" href="{{route('categoria.create')}}">Agregar</a><br>
+          <a class="botonesMenuCuenta" href="{{route('categoria.index')}}">Agregadas</a><br>
+          @endif
+
+          <hr class="opacity-50">
+          <a class="botonesMenuCuenta" href="{{route('logout')}}">Salir</a>
+        </div>
+        @endauth
+      </div>
+
+      <!-- 
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         @auth
 
@@ -436,7 +628,7 @@
         @guest
         <img class="shadow" src="{{asset('Imagenes/guest.png')}}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 25px;" alt="">
         @endguest
-      </button>
+      </button> -->
 
       <div style=" background-color: white; width: 300px;" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div style=" background-color: black;" class="offcanvas-header">

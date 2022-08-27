@@ -60,7 +60,7 @@ foreach ($peliculas as $peliculaf) {
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
           <center>
             <div id="divPrimerSlide{{$divs1}}">
-              <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded " alt="...">
+              <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded" alt="...">
 
             </div>
           </center>

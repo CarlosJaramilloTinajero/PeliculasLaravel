@@ -3,6 +3,7 @@
 @section('content')
 <div class="container w-55 p-5" style="margin-top: 100px;">
     <h2 class="">Peliculas agregadas</h2>
+    <a href="{{route('pelicula.create')}}" style="margin-top: 10px;" class="btn btn-primary">Agregar pelicula</a><br>
     <br>
     @if (session('success'))
     <h5 class="alert alert-success">{{session('success')}}</h5>
@@ -22,11 +23,11 @@
             <th>Imagen</th>
             <th>Acciones</th>
         </tr>
-        <?php $i = 0; ?>
+        <?php $y = 0; ?>
         @foreach ($peliculas as $pelicula)
         <tr>
-            <?php $i++; ?>
-            <td>{{$i}}</td>
+            <?php $y++; ?>
+            <td>{{$y}}</td>
             @foreach ($categorias as $categoria)
             <?php
             if ($categoria->id == $pelicula->categoria_id) {
@@ -36,10 +37,11 @@
             @endforeach
             <td>{{$pelicula->nombre}}</td>
             <?php
+            $cant = strlen($pelicula->descripcion);
             $x = str_split($pelicula->descripcion);
             $aux = "";
             $maxPalabras = 10;
-            if ($x > $maxPalabras) {
+            if ($cant > $maxPalabras) {
                 for ($i = 0; $i < $maxPalabras; $i++) {
                     $aux .= $x[$i];
                 }

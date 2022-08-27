@@ -1,5 +1,10 @@
 @extends('vistaBaseMenu')
 @section('content')
+<style>
+    .button2 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+</style>
 <div class="row">
 
     <div id="Imagen" class="col-sm-12 col-md-6 transicion shadow-lg zoom3">
@@ -20,18 +25,144 @@
 
 </div>
 
+<!-- <hr> -->
+<section class="splide" style="margin-top: 5%;">
+    <hr class="border opacity-10">
+    <ul class="splide__pagination opacity-0"></ul>
 
-<style>
-    .button2 {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev opacity-0">
+
+        </button>
+        <button class="splide__arrow splide__arrow--next opacity-0">
+
+        </button>
+    </div>
+    <div class="splide__track">
+        <h6 id="LetrasSlide0" style="margin-bottom: 2%;"><strong>Recomendado para ti</strong> </h6>
+        <ul class="splide__list">
+            <?php
+            $divs1 = 0; ?>
+            @foreach ($peliculas as $peliculaN)
+            @if ($pelicula->id != $peliculaN->id)
+            <li class="splide__slide zoom">
+                <a href="{{route('mostrarPelicula',['pelicula' => $peliculaN->id])}}">
+                    <div id="divPrimerSlide{{$divs1}}">
+                        <img style="margin-top: 4.5%;" src="{{asset($peliculaN->ImagenCartel)}}" class="PeliculaDiv rounded" alt="">
+                    </div>
+                </a>
+            </li>
+            <?php $divs1++;
+            ?>
+            @endif
+
+            @endforeach
+        </ul>
+    </div>
+</section>
+
+<script>
+    let ancho = document.documentElement.clientWidth;
+
+    var elms = document.getElementsByClassName('splide');
+    var pan0 = 1750;
+    var pan1 = 900;
+    var pan2 = 650;
+    for (var i = 0; i < elms.length; i++) {
+        if (ancho > pan0) {
+            var splide = new Splide(elms[i], {
+                perPage: 4,
+                perMove: 1,
+                drag: 'free',
+                padding: '8rem'
+            });
+        } else {
+            var splide = new Splide(elms[i], {
+                perPage: 4,
+                perMove: 1,
+                drag: 'free',
+                padding: '3rem'
+            });
+        }
+
+
+
+        var t = true;
+
+        splide.on('resized', function() {
+            ancho = document.documentElement.clientWidth;
+
+            if (ancho > pan0) {
+                splide.options.padding = '5rem';
+
+            }
+
+            if (ancho > pan2 && ancho < pan1 && t) {
+                splide.options.perPage = 3;
+
+
+            } else if (ancho < pan2) {
+                splide.options.perPage = 2;
+            }
+
+            t = false;
+
+            if (ancho > 1000) {
+                t = true;
+            }
+        });
+
+        splide.mount();
     }
-</style>
+</script>
 
 <script>
     function obtener(t) {
         let ancho = document.documentElement.clientWidth;
-        var imagen = document.getElementById('Imagen');
+        var pan1 = 900;
+        var pan2 = 650;
+        var i = 0;
+        //Slider Peliculas
+        if (ancho >= pan1) {
+            var AnchoPorcentaje = .200;
+            var AltoPorcentaje = .345;
+        } else if (ancho < pan1 && ancho > pan2) {
+            var AnchoPorcentaje = .250;
+            var AltoPorcentaje = .3785;
+        } else if (ancho < pan2) {
+            var AnchoPorcentaje = .320;
+            var AltoPorcentaje = .3785;
+        }
 
+        var w = AnchoPorcentaje * ancho;
+        i = 0;
+        while (document.getElementById('divPrimerSlide' + i)) {
+            var div = document.getElementById('divPrimerSlide' + i);
+            div.style.width = w + "px";
+            div.style.height = (w + 2) + "px";
+            // div.style.margin = "left " + (ancho * .005) + "px";
+            i++;
+        }
+
+        //Letras Categorias
+        i = 0;
+        while (document.getElementById('LetrasSlide' + i)) {
+            var l = document.getElementById('LetrasSlide' + i);
+            if (ancho < 800) {
+                l.style.marginTop = "30px";
+            } else {
+                l.style.marginTop = (.013 * ancho) + "px";
+            }
+            if (ancho > 950) {
+                l.style.fontSize = (.013 * ancho) + "px";
+            } else {
+                l.style.fontSize = "13px";
+            }
+            i++;
+        }
+
+        //Imagen Pelicula
+        var imagen = document.getElementById('Imagen');
         if (ancho < 900) {
             // imagen.style.marginTop = "95px";
             imagen.style.width = (900 * .4) + "px";
@@ -43,7 +174,8 @@
         imagen.style.marginTop = "95px";
 
 
-        var i = 0;
+        //botones
+        i = 0;
         while (document.getElementById('btn-' + i)) {
             var btn = document.getElementById('btn-' + i);
             var aux = 0;
@@ -91,8 +223,8 @@
             i++;
         }
 
+        //svg Boton
         var iconPlay = document.getElementById('iconPlay');
-
         if (ancho > 1500) {
             var aux = 1500;
             iconPlay.style.width = (aux * .03) + "px";
@@ -108,6 +240,7 @@
 
         }
 
+        //Descripcion pelicula
         var descripcion = document.getElementById('descripcion');
         var nombre = document.getElementById('nombre');
         if (ancho < 1150) {

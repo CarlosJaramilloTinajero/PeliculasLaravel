@@ -7,11 +7,16 @@
 
         <div class="splide__track">
             <ul class="splide__list">
-                <a href="" selected class="btn botonesCategorias" style="background-color: white; color: black;">Todas las peliculas</a>
-                @foreach ($categorias as $categoria)
-                <a href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoria->id])}}" class="btn  botonesCategorias">{{$categoria->nombre}}</a>
-                @endforeach
 
+
+                <li class="splide__slide">
+                    <a href="" selected class="btn botonesCategorias" style="background-color: white; color: black;">Todas las peliculas</a>
+                </li>
+                @foreach ($categorias as $categoria)
+                <li class="splide__slide">
+                    <a href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoria->id])}}" class="btn  botonesCategorias">{{$categoria->nombre}}</a>
+                </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -64,6 +69,15 @@
 </div>
 
 <br><br>
+
+<!-- <script>
+    var splide = new Splide('.splide', {
+        perPage: 14,
+        rewind: true,
+    });
+
+    splide.mount();
+</script> -->
 
 <script>
     function obtener(t) {
