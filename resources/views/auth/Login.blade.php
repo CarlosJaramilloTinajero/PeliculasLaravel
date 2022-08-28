@@ -1,5 +1,7 @@
 @extends('vistaBaseMenu')
 @section('content')
+
+<title>Login</title>
 <style>
     .contenedorA {
         width: 450px;

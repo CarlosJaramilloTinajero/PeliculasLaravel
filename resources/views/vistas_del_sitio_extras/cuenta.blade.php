@@ -1,6 +1,7 @@
 @extends('vistaBaseMenu')
 @section('content')
 
+<title>Cuenta</title>
 <style>
     .contenedorA {
         width: 450px;
@@ -23,7 +24,7 @@
     }
 </style>
 <!-- <center> -->
-<div class="contenedorA p-5" style="margin-top: 105px;">
+<div class="contenedorA p-5" style="margin-top: 0px;">
     <h1>Cuenta</h1>
 
 

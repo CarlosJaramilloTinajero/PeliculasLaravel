@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\categoria;
+use App\Models\lista;
 use App\Models\pelicula;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -49,6 +50,12 @@ class controladorDeLSitio extends Controller
             return view('vistas_del_sitio_extras.cuenta');
         }
         return redirect()->route('extras');
+    }
+
+
+    public function index_series()
+    {
+        return view('vistas_del_sitio_extras.Series');
     }
 
     public function index_Peliculas()

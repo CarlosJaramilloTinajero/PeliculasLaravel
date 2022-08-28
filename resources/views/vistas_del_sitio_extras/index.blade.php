@@ -1,6 +1,6 @@
 @extends('vistaBaseMenu')
-
 @section('content')
+<title>PELICULAS DE CHILL - INICIO</title>
 <style>
   #capa1 {
     position: absolute;
@@ -32,7 +32,7 @@ foreach ($peliculas as $peliculaf) {
 ?>
 
 @if ($aux>0)
-<img style="transition: all .7s ease-in-out; opacity: 0; box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset($peliculas[0]->ImagenCartel)}}');" id="ImagenFondo" onload="var img= document.getElementById('ImagenFondo'); img.style.opacity=1;" class="fixed-top ImagenFondoInicio d-block" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
+<img style="transition: all .7s ease-in-out; opacity: 0; box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset($peliculas[0]->ImagenCartel)}}');" id="ImagenFondo" onload="var img= document.getElementById('ImagenFondo'); img.style.opacity=.8;" class="fixed-top ImagenFondoInicio d-block" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
 @else
 <img src="" id="ImagenFondo" alt="...">
 @endif
@@ -150,7 +150,82 @@ foreach ($categorias as $categoria) {
 ?>
 @endif
 
+
 <script>
+  let ancho = document.documentElement.clientWidth;
+
+  var elms = document.getElementsByClassName('splide');
+  var pan0 = 1750;
+  var pan1 = 900;
+  var pan2 = 650;
+  var Arreglo = new Array(elms.length);
+  for (var i = 0; i < elms.length; i++) {
+    
+    if (ancho > pan0) {
+      var splide = new Splide(elms[i], {
+        perPage: 4,
+        perMove: 1,
+        drag: 'free',
+        padding: '8rem'
+      });
+    } else {
+      var splide = new Splide(elms[i], {
+        perPage: 4,
+        perMove: 1,
+        drag: 'free',
+        padding: '3rem'
+      });
+    }
+    Arreglo[i] = splide;
+    splide.mount();
+  }
+
+
+  for (var i = 0; i < Arreglo.length; i++) {
+    var t = true;
+    var panActual = 0;
+    Arreglo[i].on('resized', function() {
+
+      // var t = true;
+      var pan0 = 1750;
+      var pan_1 = 1749;
+      var pan1 = 900;
+      var pan2 = 650;
+      let ancho = document.documentElement.clientWidth;
+
+      if (ancho > pan0 && t) {
+        splide.options.padding = '8rem';
+        splide.options.perPage = 4;
+        panActual = pan0;
+
+      } else
+      if (ancho > pan1 && ancho < pan0 && t) {
+        splide.options.padding = '3rem';
+        splide.options.perPage = 4;
+        panActual = pan_1;
+      } else
+      if (ancho > pan2 && ancho < pan1 && t) {
+        splide.options.perPage = 3;
+        splide.options.padding = '3rem';
+        panActual = pan1;
+      } else
+      if (ancho < pan2 && t) {
+        splide.options.perPage = 2;
+        splide.options.padding = '3rem';
+        panActual = pan2;
+
+      }
+
+      t = false;
+
+      if (ancho > panActual || ancho < panActual) {
+        t = true;
+      }
+    });
+  }
+</script>
+
+<!-- <script>
   let ancho = document.documentElement.clientWidth;
 
   var elms = document.getElementsByClassName('splide');
@@ -203,7 +278,7 @@ foreach ($categorias as $categoria) {
 
     splide.mount();
   }
-</script>
+</script> -->
 
 <script>
   function obtener(t) {
@@ -310,7 +385,7 @@ foreach ($categorias as $categoria) {
     divImagen.style.width = wImagen + "px";
     divImagen.style.height = hImagen + "px";
     if (ancho < 600) {
-      divImagen.style.marginTop = "76px";
+      divImagen.style.marginTop = "67px";
     }
 
 
@@ -338,7 +413,6 @@ foreach ($categorias as $categoria) {
     }
 
     // Categorias slide
-
     if (ancho >= pan1) {
       var AnchoPorcentaje = .200;
       var AltoPorcentaje = .345;

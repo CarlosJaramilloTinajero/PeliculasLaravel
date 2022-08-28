@@ -1,5 +1,6 @@
 @extends('vistaBaseMenu')
 @section('content')
+<title>PELICULAS DE CHILL - PELICULAS</title>
 <div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">
 
     <div style="margin-top: 60px;" class="splide ">

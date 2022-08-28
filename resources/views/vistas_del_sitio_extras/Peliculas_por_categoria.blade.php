@@ -1,10 +1,8 @@
 @extends('vistaBaseMenu')
 @section('content')
 
-<!-- Trabajar en la parte de eliminar una categoria, cuando eliminemos la categoria tambien eliminar las imagenes de las peliculas que se van a eliminar con la categoria
+<title>PELICULAS DE CHILL - PELICULAS</title>
 
-y en el tamaño de la letra de showPelicula, de la descripcion de la pelicula
--->
 <div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">
 
     <div style="margin-top: 60px;" class="splide ">

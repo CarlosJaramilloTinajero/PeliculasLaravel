@@ -1,6 +1,6 @@
 @extends('vistaBaseMenu')
-
 @section('content')
+<title>Peliculas</title>
 <div class="container w-55 p-5" style="margin-top: 100px;">
     <h2 class="">Peliculas agregadas</h2>
     <a href="{{route('pelicula.create')}}" style="margin-top: 10px;" class="btn btn-primary">Agregar pelicula</a><br>

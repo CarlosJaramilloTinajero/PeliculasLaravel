@@ -4,14 +4,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\peliculaController;
 use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\controladorDelSitio;
+use App\Http\Controllers\listaController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegiterController;
 use App\Http\Controllers\userController;
 
-Route::patch('/User/{user}',[userController::class,'update'])->name('modificarUser');
+Route::delete('Lista/{lista}', [listaController::class, 'destroy'])->name('eliminarLista');
 
-Route::get('/VerTrailer/{pelicula}', [controladorDelSitio::class,'verTrailer'])->name('verTailer');
+Route::post('/Lista/{pelicula}', [listaController::class, 'store'])->name('agregarLista');
+
+Route::get('/Lista', [listaController::class, 'index'])->name('Lista');
+
+Route::get('/Series', [controladorDelSitio::class, 'index_series'])->name('Series');
+
+Route::patch('/User/{user}', [userController::class, 'update'])->name('modificarUser');
+
+Route::get('/VerTrailer/{pelicula}', [controladorDelSitio::class, 'verTrailer'])->name('verTailer');
 
 Route::get('/VerPelicula/{pelicula}', [controladorDelSitio::class, 'verPelicula'])->name('verPelicula');
 

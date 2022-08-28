@@ -1,5 +1,6 @@
 @extends('vistaBaseMenu')
 @section('content')
+<title>Editar categoria</title>
 <div class="container w-50 p-5" style="margin-top: 100px;">
 
 
