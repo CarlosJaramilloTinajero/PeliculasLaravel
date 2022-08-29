@@ -18,22 +18,47 @@
         <p id="descripcion" style="margin-top: 20px; font-size: 21px; font-family: sans-serif; margin-left: 10px;  max-width: 874px;">
             {{$pelicula->descripcion}}
         </p>
-
-        <form action="{{route('agregarLista',['pelicula' => $pelicula->id])}}" method="POST">
-            @csrf
-            <a href="{{route('verPelicula',['pelicula' => $pelicula->id])}}" id="btn-0" class="btn shadow-lg boton3" type="button"><svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-                    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-                </svg><strong> VER AHORA</strong></a>
-            <a href="{{route('verTailer',['pelicula' => $pelicula->id])}}" id="btn-1" class="btn shadow-lg boton3" type="button"><strong>TRAILER</strong></a>
-
-            <button type="submit" id="btn-2" class="btn shadow-lg boton3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                </svg>
-            </button>
+        <?php $agregada = false;
+        $listaId = null; ?>
+        @foreach ($listas as $lista)
+        @if ($lista->idUser == auth()->user()->id)
+        @if ($pelicula->id == $lista->idPelicula)
+        <?php $agregada = true;
+        $listaId = $lista->id ?>
+        @endif
+        @endif
+        @endforeach
 
 
-        </form>
+        @if ($agregada)
+        <form action="{{route('eliminarLista',['lista' => $listaId])}}" method="POST">
+            @method('DELETE')
+            @else
+            <form action="{{route('agregarLista',['pelicula' => $pelicula->id])}}" method="POST">
+                @endif
+                @csrf
+                <a href="{{route('verPelicula',['pelicula' => $pelicula->id])}}" id="btn-0" class="btn shadow-lg boton3" type="button"><svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                    </svg><strong> VER AHORA</strong></a>
+                <a href="{{route('verTailer',['pelicula' => $pelicula->id])}}" id="btn-1" class="btn shadow-lg boton3" type="button"><strong>TRAILER</strong></a>
+
+                @if (!$agregada)
+                <button type="submit" id="btn-2" class="btn shadow-lg boton3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                    </svg>
+                </button>
+                @else
+                <button type="submit" id="btn-2" class="btn shadow-lg boton3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg>
+                </button>
+                @endif
+
+
+
+            </form>
 
 
     </div>
@@ -76,6 +101,8 @@
     </div>
 </section>
 
+
+
 <script>
     let ancho = document.documentElement.clientWidth;
 
@@ -103,26 +130,41 @@
 
 
         var t = true;
-
+        var panActual = 0;
         splide.on('resized', function() {
-            ancho = document.documentElement.clientWidth;
+            // var t = true;
+            var pan0 = 1750;
+            var pan_1 = 1749;
+            var pan1 = 900;
+            var pan2 = 650;
+            let ancho = document.documentElement.clientWidth;
 
-            if (ancho > pan0) {
-                splide.options.padding = '5rem';
+            if (ancho > pan0 && t) {
+                splide.options.padding = '8rem';
+                splide.options.perPage = 4;
+                panActual = pan0;
 
-            }
-
+            } else
+            if (ancho > pan1 && ancho < pan0 && t) {
+                splide.options.padding = '3rem';
+                splide.options.perPage = 4;
+                panActual = pan_1;
+            } else
             if (ancho > pan2 && ancho < pan1 && t) {
                 splide.options.perPage = 3;
-
-
-            } else if (ancho < pan2) {
+                splide.options.padding = '3rem';
+                panActual = pan1;
+            } else
+            if (ancho < pan2 && t) {
                 splide.options.perPage = 2;
+                splide.options.padding = '3rem';
+                panActual = pan2;
+
             }
 
             t = false;
 
-            if (ancho > 1000) {
+            if (ancho > panActual || ancho < panActual) {
                 t = true;
             }
         });
@@ -212,11 +254,12 @@
                 btn.style.paddingTop = (aux * .008) + "px";
                 btn.style.paddingBottom = (aux * .008) + "px";
             }
-            if (i == 2) {
+            if (i == 2 || i == 3) {
                 btn.style.borderRadius = (aux * .08) + "px";
                 btn.style.paddingLeft = (aux * .0086) + "px";
                 btn.style.paddingRight = (aux * .0086) + "px";
             }
+
             btn.style.marginTop = "25px";
             btn.style.marginLeft = "17px";
             if (ancho <= 1150) {

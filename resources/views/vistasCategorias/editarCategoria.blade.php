@@ -53,6 +53,7 @@
         </tr>
         <?php $j = 0; ?>
         @foreach ($peliculas as $pelicula)
+        @if ($pelicula->categoria_id==$categoria->id)
         <tr>
             <?php $j++; ?>
             <td>{{$j}}</td>
@@ -82,8 +83,6 @@
             </td>
         </tr>
 
-
-
         <div class="modal fade" id="modal-{{$pelicula->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -106,6 +105,7 @@
                 </div>
             </div>
         </div>
+        @endif
         @endforeach
     </table>
 </div>

@@ -1,10 +1,24 @@
 @extends('vistaBaseMenu')
 @section('content')
 <title>Lista</title>
-<!-- <center>
-    <p style="margin-top: 100px;">PAGINA EN PROCESO</p>
-</center> -->
 
+<style>
+    .botonX {
+        color: white;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 5), 0 0 20px rgba(0, 0, 0, 5);
+        outline-color: rgba(49, 138, 172, 0);
+        outline-offset: 80px;
+        text-shadow: 1px 1px 6px #fff;
+        border: none;
+    }
+</style>
+
+<?php $cont = 0; ?>
+@foreach ($listas as $listat)
+@if ($listat->idUser == auth()->user()->id)
+<?php $cont++; ?>
+@endif
+@endforeach
 
 <section style="margin-top: 89px;" class="splide">
     <ul class="splide__pagination opacity-0"></ul>
@@ -19,7 +33,13 @@
     </div>
 
     <div class="splide__track">
+        @if ($cont > 0)
         <h6 id="LetrasSlide0" style="margin-bottom : 2%;"><strong>Tu lista</strong> </h6>
+        @else
+        <center>
+            <h6 id="LetrasSlide0" style="margin-bottom : 2%;"><strong>Lista vacia</strong> </h6>
+        </center>
+        @endif
         <ul class="splide__list">
             <?php
             $s1 = 0;
@@ -42,17 +62,14 @@
                         <div class="row">
                             <div class="col">
                                 <div id="divCategoria{{$s1}}" class="shadow" style="height:90%;">
-
-
                                     <img src="{{$peliculaM->ImagenCartel}}" class=" PeliculaDiv rounded" alt="...">
-
                                 </div>
                             </div>
                             <form action="{{route('eliminarLista',['lista' => $lista->id])}}" class="col" style="position: absolute; margin-left: 43%;" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" style="background-color: transparent; border: none;">
-                                    <svg id="iconPlay-{{$s1}}" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                    <svg id="iconPlay-{{$s1}}" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-square-fill botonX" viewBox="0 0 16 16">
                                         <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" />
                                     </svg>
                                 </button>

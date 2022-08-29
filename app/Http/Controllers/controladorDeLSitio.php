@@ -78,6 +78,7 @@ class controladorDeLSitio extends Controller
     {
         $peliculaN = pelicula::find($pelicula);
         $peliculas = pelicula::all();
-        return view('vistas_del_sitio_extras.showPelicula', ['pelicula' => $peliculaN, 'peliculas' => $peliculas]);
+        $listas = lista::all();
+        return view('vistas_del_sitio_extras.showPelicula', ['pelicula' => $peliculaN, 'peliculas' => $peliculas, 'listas' => $listas]);
     }
 }

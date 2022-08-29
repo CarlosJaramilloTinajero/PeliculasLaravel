@@ -252,8 +252,6 @@
       text-shadow: 1px 1px 6px #fff;
     }
 
-
-
     .MostrarContenidos {
 
       margin-left: 2.2%;
@@ -456,7 +454,7 @@
   var c = true;
 </script>
 
-<body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);">
+<body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);" >
 
   <header>
     <nav class="navbar fixed-top bg-dark shadow-lg">

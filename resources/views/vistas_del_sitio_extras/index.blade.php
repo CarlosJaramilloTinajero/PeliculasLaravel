@@ -38,6 +38,7 @@ foreach ($peliculas as $peliculaf) {
 @endif
 
 
+<!-- data-splide='{"padding":"3rem","perPage":4,"drag":"free","permove":1}' -->
 <!--Primer slide -->
 <section id="capa1" class="splide fixed-top" style="margin-top: 23%;">
   <ul class="splide__pagination opacity-0"></ul>
@@ -152,135 +153,6 @@ foreach ($categorias as $categoria) {
 
 
 <script>
-  let ancho = document.documentElement.clientWidth;
-
-  var elms = document.getElementsByClassName('splide');
-  var pan0 = 1750;
-  var pan1 = 900;
-  var pan2 = 650;
-  var Arreglo = new Array(elms.length);
-  for (var i = 0; i < elms.length; i++) {
-    
-    if (ancho > pan0) {
-      var splide = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '8rem'
-      });
-    } else {
-      var splide = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '3rem'
-      });
-    }
-    Arreglo[i] = splide;
-    splide.mount();
-  }
-
-
-  for (var i = 0; i < Arreglo.length; i++) {
-    var t = true;
-    var panActual = 0;
-    Arreglo[i].on('resized', function() {
-
-      // var t = true;
-      var pan0 = 1750;
-      var pan_1 = 1749;
-      var pan1 = 900;
-      var pan2 = 650;
-      let ancho = document.documentElement.clientWidth;
-
-      if (ancho > pan0 && t) {
-        splide.options.padding = '8rem';
-        splide.options.perPage = 4;
-        panActual = pan0;
-
-      } else
-      if (ancho > pan1 && ancho < pan0 && t) {
-        splide.options.padding = '3rem';
-        splide.options.perPage = 4;
-        panActual = pan_1;
-      } else
-      if (ancho > pan2 && ancho < pan1 && t) {
-        splide.options.perPage = 3;
-        splide.options.padding = '3rem';
-        panActual = pan1;
-      } else
-      if (ancho < pan2 && t) {
-        splide.options.perPage = 2;
-        splide.options.padding = '3rem';
-        panActual = pan2;
-
-      }
-
-      t = false;
-
-      if (ancho > panActual || ancho < panActual) {
-        t = true;
-      }
-    });
-  }
-</script>
-
-<!-- <script>
-  let ancho = document.documentElement.clientWidth;
-
-  var elms = document.getElementsByClassName('splide');
-  var pan0 = 1750;
-  var pan1 = 900;
-  var pan2 = 650;
-  for (var i = 0; i < elms.length; i++) {
-    if (ancho > pan0) {
-      var splide = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '8rem'
-      });
-    } else {
-      var splide = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '3rem'
-      });
-    }
-
-
-
-    var t = true;
-
-    splide.on('resized', function() {
-      ancho = document.documentElement.clientWidth;
-
-      if (ancho > pan0) {
-        splide.options.padding = '5rem';
-
-      }
-
-      if (ancho > pan2 && ancho < pan1 && t) {
-        splide.options.perPage = 3;
-
-
-      } else if (ancho < pan2) {
-        splide.options.perPage = 2;
-      }
-
-      t = false;
-
-      if (ancho > 1000) {
-        t = true;
-      }
-    });
-
-    splide.mount();
-  }
-</script> -->
-
-<script>
   function obtener(t) {
     let ancho = document.documentElement.clientWidth;
     var w = 0;
@@ -354,9 +226,16 @@ foreach ($categorias as $categoria) {
     if (ancho < 900) {
       S1 = document.getElementById('capa1');
       S2 = document.getElementById('segundoSlide');
-      S1.style.marginTop = "33%";
-      S2.style.marginTop = "64%";
+      S1.style.marginTop = "23%";
+      if (ancho < pan2) {
+        S2.style.marginTop = "50%";
+        S2.style.marginTop = "58%";
+
+      } else {
+        S2.style.marginTop = "50%";
+      }
     }
+
     //Letras Categorias
     i = 0;
     while (document.getElementById('LetrasSlide' + i)) {
@@ -438,6 +317,138 @@ foreach ($categorias as $categoria) {
     return t;
   }
 </script>
+
+<script>
+  let ancho = document.documentElement.clientWidth;
+
+  var elms = document.getElementsByClassName('splide');
+  var pan0 = 1750;
+  var pan1 = 900;
+  var pan2 = 650;
+  var Arreglo = null;
+  var splide = new Array(elms.length);
+  for (var i = 0; i < elms.length; i++) {
+    if (ancho > pan0) {
+      splide[i] = new Splide(elms[i], {
+        perPage: 4,
+        perMove: 1,
+        drag: 'free',
+        padding: '8rem'
+      });
+    } else {
+      splide[i] = new Splide(elms[i], {
+        perPage: 4,
+        perMove: 1,
+        drag: 'free',
+        padding: '3rem'
+      });
+    }
+
+
+
+    var t = true;
+    var panActual = 0;
+    splide[i].on('resized', function() {
+      var pan0 = 1750;
+      var pan_1 = 1749;
+      var pan1 = 900;
+      var pan2 = 650;
+      let ancho = document.documentElement.clientWidth;
+      for (var j = 0; j < splide.length; j++) {
+        if (ancho > pan0 && t) {
+          splide[j].options.padding = '8rem';
+          splide[j].options.perPage = 4;
+          panActual = pan0;
+
+        } else
+        if (ancho > pan1 && ancho < pan0 && t) {
+          splide[j].options.padding = '3rem';
+          splide[j].options.perPage = 4;
+          panActual = pan_1;
+        } else
+        if (ancho > pan2 && ancho < pan1 && t) {
+          splide[j].options.perPage = 3;
+          splide[j].options.padding = '3rem';
+          panActual = pan1;
+        } else
+        if (ancho < pan2 && t) {
+
+          splide[j].options.perPage = 2;
+          splide[j].options.padding = '3rem';
+          panActual = pan2;
+
+        }
+
+        t = false;
+
+        if (ancho > panActual || ancho < panActual) {
+          t = true;
+        }
+      }
+      // var t = true;
+
+
+
+    });
+
+    splide[i].mount();
+  }
+</script>
+
+<!-- <script>
+  let ancho = document.documentElement.clientWidth;
+
+  var elms = document.getElementsByClassName('splide');
+  var pan0 = 1750;
+  var pan1 = 900;
+  var pan2 = 650;
+  for (var i = 0; i < elms.length; i++) {
+    if (ancho > pan0) {
+      var splide = new Splide(elms[i], {
+        perPage: 4,
+        perMove: 1,
+        drag: 'free',
+        padding: '8rem'
+      });
+    } else {
+      var splide = new Splide(elms[i], {
+        perPage: 4,
+        perMove: 1,
+        drag: 'free',
+        padding: '3rem'
+      });
+    }
+
+
+
+    var t = true;
+
+    splide.on('resized', function() {
+      ancho = document.documentElement.clientWidth;
+
+      if (ancho > pan0) {
+        splide.options.padding = '5rem';
+
+      }
+
+      if (ancho > pan2 && ancho < pan1 && t) {
+        splide.options.perPage = 3;
+
+
+      } else if (ancho < pan2) {
+        splide.options.perPage = 2;
+      }
+
+      t = false;
+
+      if (ancho > 1000) {
+        t = true;
+      }
+    });
+
+    splide.mount();
+  }
+</script> -->
 
 @endsection
 
