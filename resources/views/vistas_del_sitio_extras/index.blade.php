@@ -38,6 +38,43 @@ foreach ($peliculas as $peliculaf) {
 @endif
 
 
+
+<!-- Slide fantasma -->
+<section class="splide" style="margin-top: -300%; position: absolute;">
+  <ul class="splide__pagination opacity-0"></ul>
+
+  <div class="splide__arrows">
+    <button class="splide__arrow splide__arrow--prev opacity-0">
+
+    </button>
+    <button class="splide__arrow splide__arrow--next opacity-0">
+
+    </button>
+  </div>
+
+  <div class="splide__track ">
+    <ul class="splide__list ">
+      <?php
+      $divsf = 0; ?>
+      @foreach ($peliculas as $peliculat)
+      <li class="splide__slide zoom">
+        <a href="{{route('mostrarPelicula',['pelicula' => $peliculat->id])}}">
+          <div id="divFanSlide{{$divsf}}">
+            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" class=" PeliculaDiv rounded" alt="...">
+
+          </div>
+        </a>
+      </li>
+      <?php $divsf++;
+      ?>
+      @endforeach
+    </ul>
+
+  </div>
+</section>
+
+
+
 <!-- data-splide='{"padding":"3rem","perPage":4,"drag":"free","permove":1}' -->
 <!--Primer slide -->
 <section id="capa1" class="splide fixed-top" style="margin-top: 23%;">
@@ -59,12 +96,10 @@ foreach ($peliculas as $peliculaf) {
       @foreach ($peliculas as $pelicula)
       <li class="splide__slide zoom">
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
-          <center>
-            <div id="divPrimerSlide{{$divs1}}">
-              <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded" alt="...">
+          <div id="divPrimerSlide{{$divs1}}">
+            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded" alt="...">
 
-            </div>
-          </center>
+          </div>
         </a>
       </li>
       <?php $divs1++;
@@ -74,10 +109,6 @@ foreach ($peliculas as $peliculaf) {
 
   </div>
 </section>
-
-
-
-
 
 @if ($aux>0)
 <!-- //Segundo slide -->
@@ -92,11 +123,10 @@ foreach ($peliculas as $peliculaf) {
 
     </button>
   </div>
+
   <div class="splide__track">
     <h6 id="LetrasSlide0" style="margin-bottom: 2%;"><strong>Recomendado para ti</strong> </h6>
     <ul class="splide__list">
-
-
 
       <?php $pel = 0 ?>
       @foreach ($peliculas as $pelicula)
@@ -105,7 +135,7 @@ foreach ($peliculas as $peliculaf) {
           <div id="divSegundoSlide{{$pel}}">
 
             <center>
-              <div class="card carta shadow-lg  rounded shadow">
+              <div class="card carta rounded">
                 <img src="{{$pelicula->ImagenCartel}}" class="card-img-top PeliculaDiv" alt="..." style="height: 60%; border: 0px;">
                 <div class="card-body" style="background-color: rgb(43, 39, 39); height: 30%;">
                   <h5 class="card-title">{{$pelicula->nombre}}</h5>
@@ -126,8 +156,6 @@ foreach ($peliculas as $peliculaf) {
     </ul>
   </div>
 </section>
-
-
 
 
 <!-- Slides por categoria -->
@@ -229,10 +257,10 @@ foreach ($categorias as $categoria) {
       S1.style.marginTop = "23%";
       if (ancho < pan2) {
         S2.style.marginTop = "50%";
-        S2.style.marginTop = "58%";
+        // S2.style.marginTop = "58%";
 
       } else {
-        S2.style.marginTop = "50%";
+        S2.style.marginTop = "47%";
       }
     }
 
@@ -240,11 +268,20 @@ foreach ($categorias as $categoria) {
     i = 0;
     while (document.getElementById('LetrasSlide' + i)) {
       var l = document.getElementById('LetrasSlide' + i);
-      if (ancho < 800) {
-        l.style.marginTop = "30px";
+      if (ancho < 900) {
+        if (i == 0) {
+          l.style.marginTop = "60px";
+        } else {
+          l.style.marginTop = "30px";
+        }
       } else {
-        l.style.marginTop = (.013 * ancho) + "px";
+        if (i == 1) {
+          l.style.marginTop = (.048 * ancho) + "px";
+        } else {
+          l.style.marginTop = (.013 * ancho) + "px";
+        }
       }
+
       if (ancho > 950) {
         l.style.fontSize = (.013 * ancho) + "px";
       } else {
@@ -265,6 +302,9 @@ foreach ($categorias as $categoria) {
     divImagen.style.height = hImagen + "px";
     if (ancho < 600) {
       divImagen.style.marginTop = "67px";
+    } else {
+      divImagen.style.marginTop = "0px";
+
     }
 
 
@@ -285,6 +325,29 @@ foreach ($categorias as $categoria) {
     i = 0;
     while (document.getElementById('divPrimerSlide' + i)) {
       var div = document.getElementById('divPrimerSlide' + i);
+      div.style.width = w + "px";
+      div.style.height = (w + 2) + "px";
+      // div.style.margin = "left " + (ancho * .005) + "px";
+      i++;
+    }
+
+
+    //slide Fantasma
+    if (ancho >= pan1) {
+      var AnchoPorcentajef = .200;
+      var AltoPorcentajef = .345;
+    } else if (ancho < pan1 && ancho > pan2) {
+      var AnchoPorcentajef = .250;
+      var AltoPorcentajef = .3785;
+    } else if (ancho < pan2) {
+      var AnchoPorcentajef = .320;
+      var AltoPorcentajef = .3785;
+    }
+
+    w = .1 * ancho;
+    i = 0;
+    while (document.getElementById('divFanSlide' + i)) {
+      var div = document.getElementById('divFanSlide' + i);
       div.style.width = w + "px";
       div.style.height = (w + 2) + "px";
       // div.style.margin = "left " + (ancho * .005) + "px";
@@ -327,33 +390,29 @@ foreach ($categorias as $categoria) {
   var pan2 = 650;
   var Arreglo = null;
   var splide = new Array(elms.length);
+  // alert(splide.length);
   for (var i = 0; i < elms.length; i++) {
-    if (ancho > pan0) {
-      splide[i] = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '8rem'
-      });
-    } else {
-      splide[i] = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '3rem'
-      });
-    }
+    splide[i] = new Splide(elms[i], {
+      perPage: 2,
+      perMove: 1,
+      drag: 'free',
+      padding: '3rem'
+    });
+
+
+    splide[i].mount();
 
 
 
-    var t = true;
-    var panActual = 0;
     splide[i].on('resized', function() {
+      var t = true;
+      var panActual = 0;
       var pan0 = 1750;
       var pan_1 = 1749;
       var pan1 = 900;
       var pan2 = 650;
       let ancho = document.documentElement.clientWidth;
+      // var splide = splide;
       for (var j = 0; j < splide.length; j++) {
         if (ancho > pan0 && t) {
           splide[j].options.padding = '8rem';
@@ -362,19 +421,21 @@ foreach ($categorias as $categoria) {
 
         } else
         if (ancho > pan1 && ancho < pan0 && t) {
-          splide[j].options.padding = '3rem';
+          // splide[j].options.padding = '3rem';
           splide[j].options.perPage = 4;
           panActual = pan_1;
         } else
         if (ancho > pan2 && ancho < pan1 && t) {
+          // splide[j].options.padding = '3rem';
           splide[j].options.perPage = 3;
-          splide[j].options.padding = '3rem';
+
           panActual = pan1;
         } else
         if (ancho < pan2 && t) {
 
+          // splide[j].options.padding = '3rem';
           splide[j].options.perPage = 2;
-          splide[j].options.padding = '3rem';
+
           panActual = pan2;
 
         }
@@ -391,7 +452,6 @@ foreach ($categorias as $categoria) {
 
     });
 
-    splide[i].mount();
   }
 </script>
 
@@ -499,7 +559,7 @@ function splide($peliculas, $categorias, $categoriaS, $divs3, $i)
 
       echo '<li class="splide__slide zoom">
         <a href="' . route('mostrarPelicula', ['pelicula' => $pelicula->id]) . '">
-           <center> <div  id="divCategoria' . $divs3 . '" class="shadow"  style="height:90%;">
+           <center> <div  id="divCategoria' . $divs3 . '" style="height:90%;">
             
                   <img src="' . $pelicula->ImagenCartel . '" class=" PeliculaDiv rounded" alt="...">
             

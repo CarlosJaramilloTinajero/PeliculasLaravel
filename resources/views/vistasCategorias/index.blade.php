@@ -4,7 +4,7 @@
 <title>Categorias</title>
 <div class="container w-55 p-5" style="margin-top: 100px;">
     <h2 class="">Categorias agregadas</h2>
-    <a href="{{route('categoria.create')}}" style="margin-top: 10px;" class="btn btn-primary">Agregar pelicula</a><br>
+    <a href="{{route('categoria.create')}}" style="margin-top: 10px;" class="btn btn-primary">Agregar categoria</a><br>
 
     <br>
     @if (session('success'))

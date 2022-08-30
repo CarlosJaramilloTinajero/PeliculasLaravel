@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=10, initial-scale=1.0">
-    <meta name="google" value="notranslate">
+  <meta name="google" value="notranslate">
 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <link rel="stylesheet" href="/splide-4.0.7/dist/css/splide.min.css">
   <script src="/splide-4.0.7/dist/js/splide.min.js"></script>
   <link rel="shortcut icon" href="/Imagenes/Icono/icon.png">
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/helpers/ratio/">
+  <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.2/helpers/ratio/"> -->
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
@@ -231,13 +231,13 @@
       transition: all 1.5s ease;
     }
 
-    .pruebaB {
+    /* .pruebaB {
       transition: all 1s ease;
     }
 
     .pruebaB:hover {
       border-bottom: 2px solid white;
-    }
+    } */
 
     .boton5 {
       color: white !important;
@@ -276,10 +276,10 @@
 
     }
 
-    .cardd:hover {
+    /* .cardd:hover {
       border-top: 55px solid white;
       border: 5px solid white;
-    }
+    } */
 
     .ImagenFondoInicio {
       width: 100%;
@@ -338,16 +338,22 @@
       width: 100%;
       height: 90%;
       object-fit: cover;
+
+      box-shadow:  0 0 20px rgba(0, 0, 0, 7), 0 0 20px rgba(0, 0, 0, 7);
+      /* outline-color: rgba(0, 0, 0, 8); */
+      /* outline-offset: 80px; */
+      /* text-shadow: 1px 1px 6px #fff; */
+
       transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 
     }
 
     .PeliculaDiv:hover {
       border: 2px white solid;
-      box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);
+      /* box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);
       outline-color: rgba(49, 138, 172, 0);
       outline-offset: 80px;
-      text-shadow: 1px 1px 6px #fff;
+      text-shadow: 1px 1px 6px #fff; */
 
     }
 
