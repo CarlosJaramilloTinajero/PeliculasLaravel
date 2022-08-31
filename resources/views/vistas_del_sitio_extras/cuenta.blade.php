@@ -4,7 +4,7 @@
 <title>Cuenta</title>
 <style>
     .contenedorA {
-        width: 450px;
+        max-width: 450px;
         height: max-content;
         margin-left: auto;
         margin-right: auto;
@@ -70,9 +70,13 @@
 </div>
 <!-- </center> -->
 
-
+<script>
+    var menu = document.getElementById('MenuInicio');
+    menu.style.opacity = 1;
+</script>
 <script>
     function obtener(t) {
+
         return t;
     }
 </script>

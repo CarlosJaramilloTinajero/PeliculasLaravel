@@ -93,11 +93,10 @@
 </div>
 <br>
 
-<!-- <script>
-   $(document).ready(function() {
-      $('[data-toggle="popover"]').popover();
-   });
-</script> -->
+<script>
+    var menu = document.getElementById('MenuInicio');
+    menu.style.opacity = 1;
+</script>
 
 <script>
    function obtener(t) {

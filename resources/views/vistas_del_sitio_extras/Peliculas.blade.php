@@ -65,20 +65,12 @@
         </div>
 </center>
 
-
-
-</div>
-
 <br><br>
 
-<!-- <script>
-    var splide = new Splide('.splide', {
-        perPage: 14,
-        rewind: true,
-    });
-
-    splide.mount();
-</script> -->
+<script>
+    var menu = document.getElementById('MenuInicio');
+    menu.style.opacity = 1;
+</script>
 
 <script>
     function obtener(t) {

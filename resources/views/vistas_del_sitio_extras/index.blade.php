@@ -97,7 +97,7 @@ foreach ($peliculas as $peliculaf) {
       <li class="splide__slide zoom">
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
           <div id="divPrimerSlide{{$divs1}}">
-            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded" alt="...">
+            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class="shadow-lg rounded" alt="...">
 
           </div>
         </a>
@@ -130,18 +130,18 @@ foreach ($peliculas as $peliculaf) {
 
       <?php $pel = 0 ?>
       @foreach ($peliculas as $pelicula)
-      <li class="splide__slide zoom">
+      <li class="splide__slide ">
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
           <div id="divSegundoSlide{{$pel}}">
 
             <center>
-              <div class="card carta rounded">
-                <img src="{{$pelicula->ImagenCartel}}" class="card-img-top PeliculaDiv" alt="..." style="height: 60%; border: 0px;">
-                <div class="card-body" style="background-color: rgb(43, 39, 39); height: 30%;">
-                  <h5 class="card-title">{{$pelicula->nombre}}</h5>
+              <div id="divCarta" class="carta zoom rounded">
+                <img src="{{asset($pelicula->ImagenCartel)}}" alt="..." style="height: 60%; border: 0px;" class="shadow-lg">
+                <div class="shadow-lg" style="background-color: rgb(43, 39, 39); height: 30%;">
+                  <h5>{{$pelicula->nombre}}</h5>
                   @foreach ($categorias as $categoria)
                   <?php if ($categoria->id == $pelicula->categoria_id) { ?>
-                    <p class="card-text"><small>{{$categoria->nombre}} <span class="color-container_inicio" style="background-color:{{$categoria->Color}}"></span></small></p>
+                    <p><small>{{$categoria->nombre}} <span class="color-container_inicio" style="background-color:{{$categoria->Color}}"></span></small></p>
                   <?php } ?>
                   @endforeach
                 </div>
@@ -179,8 +179,22 @@ foreach ($categorias as $categoria) {
 ?>
 @endif
 
-
 <script>
+  function scroll() {
+    var y = window.scrollY;
+    let ancho = document.documentElement.clientWidth;
+
+    // alert(y);
+    //Menu
+    var menu = document.getElementById('MenuInicio');
+    if (y < 200) {
+      menu.style.opacity = ((y/2) / 100);
+    }else{
+      menu.style.opacity = 1;
+    }
+    // Element.get
+  }
+
   function obtener(t) {
     let ancho = document.documentElement.clientWidth;
     var w = 0;
@@ -189,6 +203,7 @@ foreach ($categorias as $categoria) {
 
     var pan1 = 900;
     var pan2 = 650;
+
     //Segundo Slide
     if (ancho >= pan1) {
       var AnchoPorcentajeP = .200;
@@ -206,16 +221,16 @@ foreach ($categorias as $categoria) {
     i = 0;
     while (document.getElementById('divSegundoSlide' + i)) {
       var div = document.getElementById('divSegundoSlide' + i);
-      var divFotos = div.getElementsByClassName('card');
+      var divFotos = div.getElementsByClassName('carta');
       var divh5 = div.getElementsByTagName('h5');
       var divp = div.getElementsByTagName('p');
       var divspan = div.getElementsByTagName('span');
 
       //Estilo de las imagenes
       for (var z = 0; z < divFotos.length; z++) {
-        var divU = div.getElementsByClassName('card')[z];
+        var divU = div.getElementsByClassName('carta')[z];
         divU.style.width = w + "px";
-        divU.style.height = h + "px";
+        divU.style.height = h + "px";        
         divU.style.marginLeft = (ancho * .005) + "px";
       }
 
@@ -299,12 +314,10 @@ foreach ($categorias as $categoria) {
 
     var divImagen = document.getElementById('ImagenFondo');
     divImagen.style.width = wImagen + "px";
-    divImagen.style.height = hImagen + "px";
     if (ancho < 600) {
-      divImagen.style.marginTop = "67px";
+      divImagen.style.height = (hImagen + 60) + "px";
     } else {
-      divImagen.style.marginTop = "0px";
-
+      divImagen.style.height = hImagen + "px";
     }
 
 

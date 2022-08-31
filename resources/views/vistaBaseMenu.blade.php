@@ -339,21 +339,14 @@
       height: 90%;
       object-fit: cover;
 
-      box-shadow:  0 0 20px rgba(0, 0, 0, 7), 0 0 20px rgba(0, 0, 0, 7);
-      /* outline-color: rgba(0, 0, 0, 8); */
-      /* outline-offset: 80px; */
-      /* text-shadow: 1px 1px 6px #fff; */
-
+      box-shadow: 0 0 20px rgba(0, 0, 0, 4), 0 0 20px rgba(0, 0, 0, 4);
       transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 
     }
 
     .PeliculaDiv:hover {
       border: 2px white solid;
-      /* box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);
-      outline-color: rgba(49, 138, 172, 0);
-      outline-offset: 80px;
-      text-shadow: 1px 1px 6px #fff; */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 12), 0 0 20px rgba(0, 0, 0, 12);
 
     }
 
@@ -460,11 +453,17 @@
   var c = true;
 </script>
 
-<body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);" >
+<body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);" onscroll="scroll();">
 
   <header>
-    <nav class="navbar fixed-top bg-dark shadow-lg">
-      <div class="container-fluid  bg-dark">
+    <!-- <div class="shadow-lg  fixed-top" style="width: 100%; height: 1px;">
+
+    </div> -->
+    <div id="MenuInicio" style="width: 100%; height: 60px; opacity: 0;" class="bg-dark fixed-top shadow-lg">
+
+    </div>
+    <nav class="navbar fixed-top">
+      <div class="container-fluid">
 
         <!-- Visible solo el pantallas mas chicas que las lg -->
         <div class="d-lg-none">

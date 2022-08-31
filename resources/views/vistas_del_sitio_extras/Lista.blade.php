@@ -1,5 +1,39 @@
 @extends('vistaBaseMenu')
 @section('content')
+<!-- Slide fantasma -->
+<section class="splide" style="margin-top: -300%; position: absolute;">
+    <ul class="splide__pagination opacity-0"></ul>
+
+    <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev opacity-0">
+
+        </button>
+        <button class="splide__arrow splide__arrow--next opacity-0">
+
+        </button>
+    </div>
+
+    <div class="splide__track ">
+        <ul class="splide__list ">
+            <?php
+            $divsf = 0; ?>
+            @foreach ($peliculas as $peliculat)
+            <li class="splide__slide zoom">
+                <a href="{{route('mostrarPelicula',['pelicula' => $peliculat->id])}}">
+                    <div id="divFanSlide{{$divsf}}">
+                        <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" class=" PeliculaDiv rounded" alt="...">
+
+                    </div>
+                </a>
+            </li>
+            <?php $divsf++;
+            ?>
+            @endforeach
+        </ul>
+
+    </div>
+</section>
+
 <title>Lista</title>
 
 <style>
@@ -61,7 +95,7 @@
                     <center>
                         <div class="row">
                             <div class="col">
-                                <div id="divCategoria{{$s1}}" class="shadow" style="height:90%;">
+                                <div id="divCategoria{{$s1}}" style="height:90%;">
                                     <img src="{{$peliculaM->ImagenCartel}}" class=" PeliculaDiv rounded" alt="...">
                                 </div>
                             </div>
@@ -91,29 +125,36 @@
 </section>
 
 <script>
+    var menu = document.getElementById('MenuInicio');
+    menu.style.opacity = 1;
+</script>
+
+<script>
     let ancho = document.documentElement.clientWidth;
 
     var elms = document.getElementsByClassName('splide');
     var pan0 = 1750;
     var pan1 = 900;
     var pan2 = 650;
-    for (var i = 0; i < elms.length; i++) {
-        if (ancho > pan0) {
-            var splide = new Splide(elms[i], {
-                perPage: 4,
-                perMove: 1,
-                drag: 'free',
-                padding: '8rem'
-            });
-        } else {
-            var splide = new Splide(elms[i], {
-                perPage: 4,
-                perMove: 1,
-                drag: 'free',
-                padding: '3rem'
-            });
-        }
 
+    for (var i = 0; i < elms.length; i++) {
+        // if (ancho > pan0) {
+        //     var splide = new Splide(elms[i], {
+        //         perPage: 4,
+        //         perMove: 1,
+        //         drag: 'free',
+        //         padding: '8rem'
+        //     });
+        // } else {
+        var splide = new Splide(elms[i], {
+            perPage: 2,
+            perMove: 1,
+            drag: 'free',
+            padding: '3rem'
+        });
+        // }
+
+        splide.mount();
 
 
         var t = true;
@@ -156,10 +197,8 @@
             }
         });
 
-        splide.mount();
     }
 </script>
-
 
 <script>
     function obtener(t) {
@@ -169,6 +208,30 @@
         var i = 0;
         var w = 0;
         var h = 0;
+
+
+        //slide Fantasma
+        if (ancho >= pan1) {
+            var AnchoPorcentajef = .200;
+            var AltoPorcentajef = .345;
+        } else if (ancho < pan1 && ancho > pan2) {
+            var AnchoPorcentajef = .250;
+            var AltoPorcentajef = .3785;
+        } else if (ancho < pan2) {
+            var AnchoPorcentajef = .320;
+            var AltoPorcentajef = .3785;
+        }
+
+        w = .1 * ancho;
+        i = 0;
+        while (document.getElementById('divFanSlide' + i)) {
+            var div = document.getElementById('divFanSlide' + i);
+            div.style.width = w + "px";
+            div.style.height = (w + 2) + "px";
+            // div.style.margin = "left " + (ancho * .005) + "px";
+            i++;
+        }
+
         //Letras Categorias
         i = 0;
         while (document.getElementById('LetrasSlide' + i)) {

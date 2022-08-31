@@ -87,6 +87,10 @@
     </table>
 </div>
 <br>
+<script>
+    var menu = document.getElementById('MenuInicio');
+    menu.style.opacity = 1;
+</script>
 
 <script>
     function obtener(t) {
