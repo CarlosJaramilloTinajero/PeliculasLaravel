@@ -81,15 +81,19 @@
             ?>
             @foreach ($listas as $lista)
             @if ($lista->idUser == auth()->user()->id)
-
             @foreach ($peliculas as $pelicula)
             @if ($pelicula->id==$lista->idPelicula)
             <?php
-            $peliculaM = $pelicula;
+            if ($pelicula != null) {
+                $peliculaM = $pelicula;
+            } else {
+                return redirect()->route('eliminarLista', [$lista->id]);
+            }
             ?>
             @endif
             @endforeach
 
+            @if ($peliculaM != null)
             <li class="splide__slide zoom">
                 <a href="{{route('mostrarPelicula', ['pelicula' => $peliculaM->id])}}">
                     <center>
@@ -118,6 +122,8 @@
             $s1++;
             ?>
             @endif
+
+            @endif
             @endforeach
 
         </ul>
@@ -138,29 +144,18 @@
     var pan2 = 650;
 
     for (var i = 0; i < elms.length; i++) {
-        // if (ancho > pan0) {
-        //     var splide = new Splide(elms[i], {
-        //         perPage: 4,
-        //         perMove: 1,
-        //         drag: 'free',
-        //         padding: '8rem'
-        //     });
-        // } else {
         var splide = new Splide(elms[i], {
             perPage: 2,
             perMove: 1,
             drag: 'free',
             padding: '3rem'
         });
-        // }
-
         splide.mount();
 
 
         var t = true;
         var panActual = 0;
         splide.on('resized', function() {
-            // var t = true;
             var pan0 = 1750;
             var pan_1 = 1749;
             var pan1 = 900;
@@ -228,7 +223,6 @@
             var div = document.getElementById('divFanSlide' + i);
             div.style.width = w + "px";
             div.style.height = (w + 2) + "px";
-            // div.style.margin = "left " + (ancho * .005) + "px";
             i++;
         }
 
@@ -266,9 +260,10 @@
         i = 0;
         while (document.getElementById('divCategoria' + i)) {
             var div = document.getElementById('divCategoria' + i);
+            var imga = div.getElementsByTagName('img')[0];
             div.style.width = w + "px";
             div.style.height = (h + 2) + "px";
-            // div.style.margin = "left " + (ancho * .005) + "px";
+            imga.style.boxShadow = "0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4)";
             i++;
         }
 

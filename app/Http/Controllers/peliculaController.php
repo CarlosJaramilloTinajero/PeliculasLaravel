@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\pelicula;
 use App\Models\categoria;
+use App\Models\lista;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -194,6 +195,13 @@ class peliculaController extends Controller
         $pelicula = pelicula::find($id);
         if (!File::delete($pelicula->ImagenCartel)) {
             return redirect()->back()->with('error', 'Error al borrar la imagen');
+        }
+
+        $listas = lista::all();
+        foreach ($listas as $lista) {
+            if ($lista->idPelicula == $pelicula->id) {
+                $lista->delete();
+            }
         }
         $pelicula->delete();
         return redirect()->route('pelicula.index')->with('success', 'Pelicula eliminada correctamente');

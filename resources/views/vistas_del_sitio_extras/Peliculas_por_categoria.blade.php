@@ -36,9 +36,6 @@
                 @foreach ($categorias as $categoriam)
                 <li><a class="dropdown-item" href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoriam->id])}}">{{$categoriam->nombre}}</a></li>
                 @endforeach
-                <!-- <li>
-                    <hr class="dropdown-divider">
-                </li> -->
             </ul>
         </div>
 

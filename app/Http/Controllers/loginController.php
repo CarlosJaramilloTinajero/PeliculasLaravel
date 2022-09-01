@@ -22,7 +22,6 @@ class loginController extends Controller
     {
         $credentials = $request->getCredentials();
         if (!Auth::validate($credentials)) {
-            // return redirect()->route('login')->withErrors('auth.failed');
             return redirect()->route('login')->with('error','Contraseña o usuario incorrectos');
         }
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

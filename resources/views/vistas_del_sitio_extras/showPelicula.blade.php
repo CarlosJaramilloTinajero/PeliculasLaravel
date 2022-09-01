@@ -108,8 +108,6 @@
     </div>
 
 </div>
-
-<!-- <hr> -->
 <section class="splide" style="margin-top: 5%;">
     <hr class="border opacity-10">
     <ul class="splide__pagination opacity-0"></ul>
@@ -171,7 +169,6 @@
         var t = true;
         var panActual = 0;
         splide.on('resized', function() {
-            // var t = true;
             var pan0 = 1750;
             var pan_1 = 1749;
             var pan1 = 900;
@@ -256,8 +253,11 @@
         i = 0;
         while (document.getElementById('divPrimerSlide' + i)) {
             var div = document.getElementById('divPrimerSlide' + i);
+            var imga = div.getElementsByTagName('img')[0];
             div.style.width = w + "px";
             div.style.height = (w + 2) + "px";
+            imga.style.boxShadow = "0 0 " + (ancho * .018) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .018) + "px rgba(0, 0, 0, 4)";
+
             // div.style.margin = "left " + (ancho * .005) + "px";
             i++;
         }

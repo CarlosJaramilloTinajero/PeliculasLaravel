@@ -23,7 +23,6 @@
 
     }
 </style>
-<!-- <center> -->
 <div class="contenedorA p-5" style="margin-top: 0px;">
     <h1>Cuenta</h1>
 
@@ -40,10 +39,8 @@
     <h5 class="alert alert-success">{{session('error')}}</h5>
     @endif
 
-    <!-- <div class="f"> -->
     <label for="" class="form-label labelC">Usuario</label>
     <input class="form-control" type="text" name="name" value="{{auth()->user()->name}}" readonly>
-    <!-- </div> -->
     <br><label for="" class="form-label labelC">Email</label>
     <input class="form-control" type="email" name="email" value="{{auth()->user()->email}}" readonly>
     <br><label for="" class="form-label labelC">Contraseña</label>
@@ -68,7 +65,6 @@
         </div>
     </form>
 </div>
-<!-- </center> -->
 
 <script>
     var menu = document.getElementById('MenuInicio');

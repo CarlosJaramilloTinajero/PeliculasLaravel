@@ -181,18 +181,17 @@ foreach ($categorias as $categoria) {
 
 <script>
   function scroll() {
-    var y = window.scrollY;
+    // var y = window.scrollY;
+    var y = window.pageYOffset;
     let ancho = document.documentElement.clientWidth;
 
-    // alert(y);
     //Menu
     var menu = document.getElementById('MenuInicio');
     if (y < 200) {
-      menu.style.opacity = ((y/2) / 100);
-    }else{
+      menu.style.opacity = ((y / 2) / 100);
+    } else {
       menu.style.opacity = 1;
     }
-    // Element.get
   }
 
   function obtener(t) {
@@ -230,7 +229,7 @@ foreach ($categorias as $categoria) {
       for (var z = 0; z < divFotos.length; z++) {
         var divU = div.getElementsByClassName('carta')[z];
         divU.style.width = w + "px";
-        divU.style.height = h + "px";        
+        divU.style.height = h + "px";
         divU.style.marginLeft = (ancho * .005) + "px";
       }
 
@@ -269,14 +268,15 @@ foreach ($categorias as $categoria) {
     if (ancho < 900) {
       S1 = document.getElementById('capa1');
       S2 = document.getElementById('segundoSlide');
-      S1.style.marginTop = "23%";
-      if (ancho < pan2) {
-        S2.style.marginTop = "50%";
-        // S2.style.marginTop = "58%";
-
-      } else {
-        S2.style.marginTop = "47%";
+      if (S1 != null && S2 != null) {
+        S1.style.marginTop = "23%";
+        if (ancho < pan2) {
+          S2.style.marginTop = "50%";
+        } else {
+          S2.style.marginTop = "47%";
+        }
       }
+
     }
 
     //Letras Categorias
@@ -340,7 +340,6 @@ foreach ($categorias as $categoria) {
       var div = document.getElementById('divPrimerSlide' + i);
       div.style.width = w + "px";
       div.style.height = (w + 2) + "px";
-      // div.style.margin = "left " + (ancho * .005) + "px";
       i++;
     }
 
@@ -363,7 +362,6 @@ foreach ($categorias as $categoria) {
       var div = document.getElementById('divFanSlide' + i);
       div.style.width = w + "px";
       div.style.height = (w + 2) + "px";
-      // div.style.margin = "left " + (ancho * .005) + "px";
       i++;
     }
 
@@ -384,9 +382,10 @@ foreach ($categorias as $categoria) {
     i = 0;
     while (document.getElementById('divCategoria' + i)) {
       var div = document.getElementById('divCategoria' + i);
+      var imga = div.getElementsByTagName('img')[0];
       div.style.width = w + "px";
       div.style.height = (h + 2) + "px";
-      // div.style.margin = "left " + (ancho * .005) + "px";
+      imga.style.boxShadow = "0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4)";
       i++;
     }
 
@@ -403,7 +402,6 @@ foreach ($categorias as $categoria) {
   var pan2 = 650;
   var Arreglo = null;
   var splide = new Array(elms.length);
-  // alert(splide.length);
   for (var i = 0; i < elms.length; i++) {
     splide[i] = new Splide(elms[i], {
       perPage: 2,
@@ -425,7 +423,6 @@ foreach ($categorias as $categoria) {
       var pan1 = 900;
       var pan2 = 650;
       let ancho = document.documentElement.clientWidth;
-      // var splide = splide;
       for (var j = 0; j < splide.length; j++) {
         if (ancho > pan0 && t) {
           splide[j].options.padding = '8rem';
@@ -434,23 +431,17 @@ foreach ($categorias as $categoria) {
 
         } else
         if (ancho > pan1 && ancho < pan0 && t) {
-          // splide[j].options.padding = '3rem';
           splide[j].options.perPage = 4;
           panActual = pan_1;
         } else
         if (ancho > pan2 && ancho < pan1 && t) {
-          // splide[j].options.padding = '3rem';
           splide[j].options.perPage = 3;
 
           panActual = pan1;
         } else
         if (ancho < pan2 && t) {
-
-          // splide[j].options.padding = '3rem';
           splide[j].options.perPage = 2;
-
           panActual = pan2;
-
         }
 
         t = false;
@@ -459,70 +450,10 @@ foreach ($categorias as $categoria) {
           t = true;
         }
       }
-      // var t = true;
-
-
-
     });
 
   }
 </script>
-
-<!-- <script>
-  let ancho = document.documentElement.clientWidth;
-
-  var elms = document.getElementsByClassName('splide');
-  var pan0 = 1750;
-  var pan1 = 900;
-  var pan2 = 650;
-  for (var i = 0; i < elms.length; i++) {
-    if (ancho > pan0) {
-      var splide = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '8rem'
-      });
-    } else {
-      var splide = new Splide(elms[i], {
-        perPage: 4,
-        perMove: 1,
-        drag: 'free',
-        padding: '3rem'
-      });
-    }
-
-
-
-    var t = true;
-
-    splide.on('resized', function() {
-      ancho = document.documentElement.clientWidth;
-
-      if (ancho > pan0) {
-        splide.options.padding = '5rem';
-
-      }
-
-      if (ancho > pan2 && ancho < pan1 && t) {
-        splide.options.perPage = 3;
-
-
-      } else if (ancho < pan2) {
-        splide.options.perPage = 2;
-      }
-
-      t = false;
-
-      if (ancho > 1000) {
-        t = true;
-      }
-    });
-
-    splide.mount();
-  }
-</script> -->
-
 @endsection
 
 

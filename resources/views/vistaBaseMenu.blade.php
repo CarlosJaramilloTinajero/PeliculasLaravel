@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="/splide-4.0.7/dist/css/splide.min.css">
   <script src="/splide-4.0.7/dist/js/splide.min.js"></script>
   <link rel="shortcut icon" href="/Imagenes/Icono/icon.png">
-  <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.2/helpers/ratio/"> -->
-
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
@@ -339,14 +337,14 @@
       height: 90%;
       object-fit: cover;
 
-      box-shadow: 0 0 20px rgba(0, 0, 0, 4), 0 0 20px rgba(0, 0, 0, 4);
+      /* box-shadow: 0 0 20px rgba(0, 0, 0, 4), 0 0 20px rgba(0, 0, 0, 4); */
       transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 
     }
 
     .PeliculaDiv:hover {
       border: 2px white solid;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 12), 0 0 20px rgba(0, 0, 0, 12);
+      /* box-shadow: 0 0 20px rgba(0, 0, 0, 12), 0 0 20px rgba(0, 0, 0, 12); */
 
     }
 
@@ -456,9 +454,7 @@
 <body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);" onscroll="scroll();">
 
   <header>
-    <!-- <div class="shadow-lg  fixed-top" style="width: 100%; height: 1px;">
 
-    </div> -->
     <div id="MenuInicio" style="width: 100%; height: 60px; opacity: 0;" class="bg-dark fixed-top shadow-lg">
 
     </div>

@@ -16,12 +16,9 @@
 </head>
 
 <body>
-    <!-- <div style="width: 100%; height: 100%;"> -->
     <div class="ratio ratio-16x9">
         <iframe src="{{$pelicula->linkPelicula}}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write;" allowfullscreen></iframe>
     </div>
-    <!-- </div> -->
-
 </body>
 
 </html>

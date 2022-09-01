@@ -24,7 +24,6 @@ class listaController extends Controller
     public function store($pelicula)
     {
         if (Auth::check()) {
-            // $peliculaF = pelicula::find($pelicula);
             $lista = new lista();
             $lista->idUser =  auth()->user()->id;
             $lista->idPelicula = $pelicula;

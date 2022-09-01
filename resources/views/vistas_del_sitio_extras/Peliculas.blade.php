@@ -25,7 +25,6 @@
 
 <div class="MenuCategorias2 bg-dark bg-gradient d-lg-none">
     <div style="margin-left: 35px; padding-top: 60px; ">
-        <!-- <h1 id="Cartel">Peliculas - </h1> -->
         <div class="nav-item dropdown">
             <a style="color: white; font-size: 21px;" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Peliculas - Todas las peliculas
@@ -34,9 +33,6 @@
                 @foreach ($categorias as $categoria)
                 <li><a class="dropdown-item" href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoria->id])}}">{{$categoria->nombre}}</a></li>
                 @endforeach
-                <!-- <li>
-                    <hr class="dropdown-divider">
-                </li> -->
             </ul>
         </div>
 
