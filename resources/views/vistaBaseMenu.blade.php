@@ -639,7 +639,7 @@
     <center>
       <div>
         <p style="color: white; font-size: 12px;">
-          Sitio web Desarrollado por Carlos Daniel Jaramillo Tinajero
+          Sitio web Desarrollado por Carlos Daniel Jaramillo Tinajero <br>Proyecto en mejora constante
         </p>
         <div class="d-flex justify-content-center mb-3">
           <div class="p-2">

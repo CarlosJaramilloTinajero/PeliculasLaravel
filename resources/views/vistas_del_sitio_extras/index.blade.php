@@ -97,7 +97,7 @@ foreach ($peliculas as $peliculaf) {
       <li class="splide__slide zoom">
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
           <div id="divPrimerSlide{{$divs1}}">
-            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class="shadow-lg rounded" alt="...">
+            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class="shadow-lg rounded PeliculaDiv" alt="...">
 
           </div>
         </a>

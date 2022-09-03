@@ -40,26 +40,28 @@
     </div>
 </div>
 
+<div id="divF" class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 1%;">
+    <?php $contD = 0; ?>
+    @foreach ($peliculas as $pelicula)
 
-<center>
-    <div class="MostrarContenidos">
 
-        <div class="card-group" id="divF">
+    <div id="div-{{$contD}}" class="zoom2 col">
 
-            @foreach ($peliculas as $pelicula)
-            <center>
-                <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
-                    <div class="zoom2 card cartaMotrarContenido shadow ">
-                        <img style="height: 100%;" src="{{asset($pelicula->ImagenCartel)}}" class="img-fluid ImagenPeliculaChica" alt="...">
-                    </div>
-                </a>
+        <a class=" shadow" href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}" style="width: 100%; height: 100%;">
+            <div class=" card text-bg-dark PeliculaDiv" style="width: 100%; height: 100%;">
+                <img src="{{asset($pelicula->ImagenCartel)}}" class=" rounded card-img" alt="..." style="height: 100%;">
+                <div class="card-img-overlay">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <?php $contD++; ?>
+    @endforeach
+</div>
 
-            </center>
-
-            @endforeach
-
-        </div>
-</center>
 
 <br><br>
 
@@ -71,55 +73,34 @@
 <script>
     function obtener(t) {
         let ancho = document.documentElement.clientWidth;
-        var AnchoPorcentaje = .231;
-        var sumaPorcentaje = .07;
+        var AnchoPorcentaje = .237;
+        var sumaPorcentaje = .0035;
+        var pan0 = 1750;
+        var pan1 = 900;
+        var pan2 = 650;
+        var pantA = 0;
         var w = 0;
-
-        if (ancho < 900 && ancho >= 600) {
-            w = (AnchoPorcentaje + sumaPorcentaje) * ancho;
-            var div = document.getElementById('divF');
-
-            var divFotos = div.getElementsByTagName('div');
-
-            for (var i = 0; i < divFotos.length; i++) {
-                var aux = div.getElementsByTagName('div')[i];
-                aux.style.width = w + "px";
-                aux.style.height = w + "px";
+        var i = 0;
+        // var divD = document.getElementById('divF');
+        
+        while (document.getElementById('div-' + i)) {
+            var divFotos = document.getElementById('div-' + i);
+            if (divFotos != null) {
+                if (ancho > pan0) {
+                    w = (AnchoPorcentaje -.0795)  * ancho;
+                } else if (ancho > pan1 && ancho <= pan0) {
+                    w = (AnchoPorcentaje - .0455) * ancho;
+                } else if (ancho < pan1 && ancho >= pan2) {
+                    w = (AnchoPorcentaje + sumaPorcentaje) * ancho;
+                } else if (ancho < pan2) {
+                    w = ((AnchoPorcentaje + (sumaPorcentaje * 2)) + .08) * ancho;
+                }
+                divFotos.style.width = w + "px";
+                divFotos.style.height = (w + (w * .3)) + "px";
+                divFotos.style.margin = (ancho * .005) + "px";
+                i++;
             }
-        } else
-        if (ancho < 600) {
-            w = ((AnchoPorcentaje + (sumaPorcentaje * 2)) + .08) * ancho;
-            var div = document.getElementById('divF');
 
-            var divFotos = div.getElementsByTagName('div');
-
-            for (var i = 0; i < divFotos.length; i++) {
-                var aux = div.getElementsByTagName('div')[i];
-                aux.style.width = w + "px";
-                aux.style.height = w + "px";
-            }
-        } else if (ancho > 1500) {
-            w = (AnchoPorcentaje - .0455) * ancho;
-            var div = document.getElementById('divF');
-
-            var divFotos = div.getElementsByTagName('div');
-
-            for (var i = 0; i < divFotos.length; i++) {
-                var aux = div.getElementsByTagName('div')[i];
-                aux.style.width = w + "px";
-                aux.style.height = w + "px";
-            }
-        } else {
-            w = AnchoPorcentaje * ancho;
-            var div = document.getElementById('divF');
-
-            var divFotos = div.getElementsByTagName('div');
-
-            for (var i = 0; i < divFotos.length; i++) {
-                var aux = div.getElementsByTagName('div')[i];
-                aux.style.width = w + "px";
-                aux.style.height = w + "px";
-            }
         }
         return t;
     }
