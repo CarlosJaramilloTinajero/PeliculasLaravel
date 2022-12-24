@@ -15,39 +15,127 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@1,500&family=Roboto+Flex:opsz,wght@8..144,600&display=swap" rel="stylesheet">
+
   <style>
+    ::-webkit-scrollbar {
+      background-color: transparent;
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #2d7591c5;
+      border-radius: 50px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #2d7491;
+    }
+
+    footer {
+      /* background-color: rgb(20, 20, 20); */
+      background-color: #060608;
+      padding-top: 80px;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      -webkit-box-shadow: 0px 0px 5vw 1vw #060608;
+      -moz-box-shadow: 0px 0px 5vw 1vw #060608;
+      box-shadow: 0px 0px 5vw 1vw #060608;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+    }
+
+    footer p {
+      font-size: 11.5px;
+    }
+
+    footer p a svg {
+      margin-top: 20px;
+    }
+
+    footer p a svg:hover {
+      fill: white;
+    }
+
+    footer strong {
+      font-size: 13px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, .7);
+    }
+
+    .wid-0 {
+      width: 10vw;
+      height: 10vw;
+    }
+
+    .divCatalogoImagen {
+      width: 22vw;
+      height: 22vw;
+    }
+
+    .boton3 {
+      color: white !important;
+      padding: 0.5em 1.2em;
+      background: transparent;
+      border: 2px solid white;
+      border-bottom: 4px solid white;
+      transition: all .5s ease-in-out;
+      text-shadow: 0 0 10px rgba(255, 255, 255, .5);
+    }
+
+    .boton3:hover {
+      background-color: #3a5b6b;
+      border: 2px #283b46 solid;
+      border-bottom: 4px #283b46 solid;
+      opacity: .85;
+      scale: .97;
+    }
+
     .ImagenSlideInicio {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
+    .botonesMenuCuentaDrop {
+      color: white;
+      opacity: .8;
+    }
+
+    .botonesMenuCuentaDrop:hover {
+      opacity: 1;
+      color: white;
+    }
+
     .botonesMenuCuenta {
-      /* margin-bottom: 180px; */
-      margin-left: 20px;
-      margin-right: 20px;
+      opacity: .70;
+      margin-left: 15px;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+
+    .botonesMenuCuenta a {
       text-decoration: none;
       color: white;
-      opacity: .70;
-      /* margin-top: 10px; */
-      margin-top: 20px;
     }
 
     .TituloMenuCuenta {
-      /* margin-bottom: 180px; */
       margin-left: 20px;
       margin-right: 20px;
       text-decoration: none;
       color: white;
       font-size: 18px;
-
-      /* margin-top: 10px; */
       margin-top: 20px;
     }
 
     .botonesMenuCuenta:hover {
-      color: white;
       opacity: 1;
+    }
+
+    .botonesMenuCuenta:hover a {
+      text-shadow: 0 0 10px rgb(255, 255, 255);
     }
 
     a {
@@ -73,8 +161,6 @@
       margin-top: 10px;
       /* display: inline-block; */
     }
-
-
 
     .popover__content2 {
       width: 250px;
@@ -106,7 +192,8 @@
       transition-property: transform;
     }
 
-    .popover__wrapper:hover .popover__content2 {
+    .popover__wrapper:hover .popover__content2,
+    .popover__wrapper:focus .popover__content2 {
       z-index: 10;
       opacity: 1;
       visibility: visible;
@@ -142,7 +229,8 @@
       transition-property: transform;
     }
 
-    .popover__wrapper:hover .popover__content {
+    .popover__wrapper:hover .popover__content,
+    .popover__wrapper:focus .popover__content {
       z-index: 10;
       opacity: 1;
       visibility: visible;
@@ -162,10 +250,6 @@
       color: black;
     }
 
-    .navBar {
-      background-image: radial-gradient(circle at 84.87% 74.42%, #ff65b3 0, #ff59c0 10%, #ff4ecd 20%, #ff45d9 30%, #ff3fe6 40%, #f23cf2 50%, #d33ffe 60%, #ad46ff 70%, #7b4fff 80%, #0058ff 90%, #0060ff 100%);
-    }
-
     .popover-title {
       color: blue;
       font-size: 15px;
@@ -181,18 +265,16 @@
     .imagenPerfilNav {
       width: 36px;
       height: 36px;
-      border-radius: 16px;
-
+      border-radius: 50%;
+      margin-top: -8px;
     }
-  </style>
 
-  <style>
     .zoom {
-      transition: all .7s ease;
+      transition: transform .5s ease-in-out;
     }
 
     .zoom:hover {
-      transform: scale(1.08);
+      transform: scale(1.06);
     }
 
     .zoom2 {
@@ -211,43 +293,8 @@
       transform: scale(1.025);
     }
 
-
-    .boton3 {
-      color: white !important;
-      padding: 0.5em 1.2em;
-      background: rgba(0, 0, 0, 0);
-      border: 2px solid white;
-      transition: all 1s ease;
-    }
-
-    .boton3:hover {
-      background: white;
-      color: black !important;
-    }
-
     .transicion {
       transition: all 1.5s ease;
-    }
-
-    /* .pruebaB {
-      transition: all 1s ease;
-    }
-
-    .pruebaB:hover {
-      border-bottom: 2px solid white;
-    } */
-
-    .boton5 {
-      color: white !important;
-      padding: 0.5em 1.2em;
-      transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .boton5:hover {
-      box-shadow: inset 0 0 20px rgba(49, 138, 172, 0.5), 0 0 20px rgba(49, 138, 172, 0.4);
-      outline-color: rgba(49, 138, 172, 0);
-      outline-offset: 80px;
-      text-shadow: 1px 1px 6px #fff;
     }
 
     .MostrarContenidos {
@@ -255,34 +302,43 @@
       margin-left: 2.2%;
     }
 
-    .botonesCategorias {
-      background-color: gray;
-      color: white;
+    .btn {
       padding: 10px;
-      margin-left: 30px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      transition: all .4s ease-in-out;
     }
 
-    .botonesCategorias:hover {
-      background-color: white;
-      color: black;
+    .botonesCategorias {
+      margin-left: 30px;
+      background-color: #3a5b6b;
+      color: white;
+      text-shadow: 0 0 10px rgba(255, 255, 255, .9);
+      border: 2px #283b46 solid;
+      border-bottom: 4px #283b46 solid;
+    }
+
+    .botonesCategorias:hover,
+    .botonesCategorias:focus,
+    .botonesCategorias:target {
+      scale: .95;
+      background-color: #22323c;
+      border: 2px #283b46 solid;
+      border-bottom: 4px #283b46 solid;
+      color: white;
+    }
+
+    .selectBtn {
+      background-color: #22323c;
+      border: 2px #283b46 solid;
+      border-bottom: 4px #283b46 solid;
+      color: white;
     }
 
     .splideCategorias {
       width: 100%;
       height: 30px;
 
-    }
-
-    /* .cardd:hover {
-      border-top: 55px solid white;
-      border: 5px solid white;
-    } */
-
-    .ImagenFondoInicio {
-      width: 100%;
-      height: 70%;
-      /* position: absolute; */
     }
 
     .Tabla {
@@ -311,7 +367,9 @@
     }
 
     body {
-      background-color: rgb(26, 26, 27);
+      /* background-color: rgb(26, 26, 27); */
+      background-color: #1e1d25;
+      overflow-x: hidden;
     }
 
     .contenedor {
@@ -336,40 +394,104 @@
       width: 100%;
       height: 90%;
       object-fit: cover;
-
-      /* box-shadow: 0 0 20px rgba(0, 0, 0, 4), 0 0 20px rgba(0, 0, 0, 4); */
-      transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-
     }
 
     .PeliculaDiv:hover {
       border: 2px white solid;
-      /* box-shadow: 0 0 20px rgba(0, 0, 0, 12), 0 0 20px rgba(0, 0, 0, 12); */
-
     }
 
     .carta {
+      position: relative;
       width: 302px;
       height: 240px;
+      z-index: 1;
+      -webkit-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+      box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+      transition: box-shadow .7s ease-in-out;
+      border-radius: 2%;
+      overflow: hidden;
     }
 
-    .cartaMotrarContenido {
-      width: 302px;
-      height: 220px;
-      background-color: black;
-      margin-left: 10px;
+    .carta:hover {
+      -webkit-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+      box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    }
 
-      padding-left: 1.3%;
-      padding-bottom: 1%;
-      margin-top: 3.5%;
+    .carta .bodyCarta {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1b1c19;
+      height: 35%;
+
+    }
+
+    .carta img {
+      transition: height 1s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 65%;
+    }
+
+    .carta:hover img {
+      transition: height .3s ease-in-out;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .carta:hover .bodyCarta {
+      transition: background-color 1s ease-in-out;
+      transition: height 1s ease-in-out;
+      left: 0;
+      height: 100%;
+      background-color: #1b1c197c;
+    }
+
+    .bodyCarta h5,
+    .bodyCarta p {
+      font-family: 'Roboto Flex', sans-serif;
+    }
+
+    .carta:hover h5,
+    .carta:hover p {
+      transition: text-shadow 1s ease-in-out;
+      text-shadow: 0 0 1.5vw rgba(255, 255, 255, 0.9), 0 0 1.5vw rgba(255, 255, 255, 0.9);
+    }
+
+    .bodyCarta p {
+      opacity: .5;
+    }
+
+    .carta:hover .bodyCarta p {
+      opacity: .75;
+    }
+
+    .enMedio {
+      position: absolute;
+      width: 90%;
+      height: max-content;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
 
     }
 
     .color-container_inicio {
-      width: 15px;
-      height: 15px;
+      width: 1%;
+      height: 1%;
+      min-width: 10px;
+      min-height: 10px;
+      border-radius: 50%;
       display: inline-block;
-      border: radius 4px;
+      margin-bottom: -1.2%;
+      margin-left: 2%;
     }
 
     .color-container {
@@ -380,13 +502,20 @@
     }
 
     .container {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
       border: 5px solid black;
+      border-radius: 10px;
+      max-width: 1000px;
+      width: 95%;
     }
 
+    /* 
+    .container .btn{
+
+    } */
+
     img {
-      width: 100%;
-      height: 540px;
       object-fit: cover;
       cursor: pointer;
     }
@@ -424,15 +553,69 @@
     .barraInicio {
       color: white;
       text-decoration: none;
-      font-size: 16px;
-      margin-left: 35px;
+      font-size: 17px;
+      margin-left: 45px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .barraInicio svg {
+      margin-right: 5px;
+      margin-top: -4px;
+      margin-left: 14px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .barraInicio strong {
+      margin-right: 14px;
+    }
+
+    .boton5 {
+      color: white !important;
+      /* padding: 0.5em 1.2em; */
+      transition: all 1s ease-in-out;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      overflow: hidden;
+
+    }
+
+    .boton5:hover {
+      text-shadow: 0 0 15px #fff;
+      scale: 1.1;
+    }
+
+    .boton5::before {
+      transition: 1s ease-in-out;
+      content: "";
+      z-index: -1;
+      position: absolute;
+      bottom: -6px;
+      width: 0%;
+      height: 3px;
+      border-radius: 3px;
+      left: 0%;
+      background-color: white;
+    }
+
+    .boton5:hover::before {
+      box-shadow: 0 0 10px rgba(255, 255, 255, .9), 0 0 10px rgba(255, 255, 255, .9);
+      width: 100%;
     }
 
     .barraInicio2 {
       color: white;
       text-decoration: none;
+      margin-right: 12px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .barraInicio2 svg {
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 20px;
+      height: 20px;
     }
 
     .menuDespeglegable1 {
@@ -444,20 +627,45 @@
       font-size: 23px;
 
     }
+
+    .hrClass {
+      width: 90%;
+      border: 0;
+      height: 2px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255), rgba(255, 255, 255, 0));
+      margin: 0 auto;
+    }
+
+    .menuInicio {
+      width: 100%;
+      height: 60px;
+      opacity: 0;
+      background-color: #060608ad;
+      backdrop-filter: blur(10px);
+      -webkit-box-shadow: 0px 0px 4vw .5vw rgba(0, 0, 0, 0.85);
+      -moz-box-shadow: 0px 0px 4vw .5vw rgba(0, 0, 0, 0.85);
+      box-shadow: 0px 0px 4vw .5vw rgba(0, 0, 0, 0.85);
+    }
   </style>
 
 </head>
 <script>
   var c = true;
+
+  function obtener(t) {
+    return t;
+  }
+
+  // window.onload = () => {
+  //   obtener(true);
+  // };
 </script>
 
 <body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);" onscroll="scroll();">
 
   <header>
 
-    <div id="MenuInicio" style="width: 100%; height: 60px; opacity: 0;" class="bg-dark fixed-top shadow-lg">
-
-    </div>
+    <div id="MenuInicio" class="menuInicio  fixed-top"></div>
     <nav class="navbar fixed-top">
       <div class="container-fluid">
 
@@ -545,7 +753,6 @@
           @auth
           <?php
           $cant = strlen(auth()->user()->name);
-          // echo $cant-1;
           $x = str_split(auth()->user()->name);
           $aux = "";
           $maxPalabras = 7;
@@ -553,7 +760,6 @@
             for ($i = 0; $i < $maxPalabras; $i++) {
               $aux .= $x[$i];
             }
-            // echo $aux;
           } else {
             $aux = auth()->user()->name;
           }
@@ -585,23 +791,47 @@
             @endif
             <small>Hola {{$aux}}</small>
           </p>
-          <hr class="opacity-50">
-          <a class="botonesMenuCuenta" href="{{route('cuenta')}}">Cuenta</a><br>
-          <a class="botonesMenuCuenta" href="{{route('Lista')}}">Lista</a><br>
+          <hr class="hrClass">
+          <p class="botonesMenuCuenta"><a href="{{route('cuenta')}}">Cuenta</a></p>
+          <p class="botonesMenuCuenta"><a href="{{route('Lista')}}">Lista</a></p>
           @if (auth()->user()->name=="admin")
-          <hr class="opacity-50">
-          <h4 class="TituloMenuCuenta">Peliculas</h4>
-          <a class="botonesMenuCuenta" href="{{route('pelicula.create')}}">Agregar</a><br>
-          <a class="botonesMenuCuenta" href="{{route('pelicula.index')}}">Agregadas</a><br>
-          <hr class="opacity-50">
-          <h4 class="TituloMenuCuenta">Categorias</h4>
-          <a class="botonesMenuCuenta" href="{{route('categoria.create')}}">Agregar</a><br>
-          <a class="botonesMenuCuenta" href="{{route('categoria.index')}}">Agregadas</a><br>
+          <hr class="hrClass">
+
+          <div class="dropdown">
+            <a style="border: none; margin-top: -6px; margin-left: 10px;" class="btn botonesMenuCuentaDrop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Peliculas
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('pelicula.create')}}">Agregar pelicula</a></li>
+              <li><a class="dropdown-item" href="{{route('pelicula.index')}}">Peliculas agregadas</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <a style="border: none; margin-top: -6px; margin-left: 10px;" class="btn botonesMenuCuentaDrop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Series
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('create.series')}}">Agregar serie</a></li>
+              <li><a class="dropdown-item" href="{{route('seriesAgregadas')}}">Series agregadas</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <a style="border: none; margin-top: -6px; margin-left: 10px;" class="btn botonesMenuCuentaDrop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Categorias
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('categoria.create')}}">Agregar categoria</a></li>
+              <li><a class="dropdown-item" href="{{route('categoria.index')}}">Categorias agregadas</a></li>
+            </ul>
+          </div>
           @endif
 
-          <hr class="opacity-50">
-          <a class="botonesMenuCuenta" href="{{route('logout')}}">Salir</a>
+          <hr class="hrClass">
+          <p class="botonesMenuCuenta"><a href="{{route('logout')}}">Salir</a></p>
         </div>
+
         <div class="popover__content2 d-sm-none">
           <p class="popover__message">
             @if (auth()->user()->imgUser==null)
@@ -611,22 +841,45 @@
             @endif
             <small>Hola {{$aux}}</small>
           </p>
-          <hr class="opacity-50">
-          <a class="botonesMenuCuenta" href="{{route('cuenta')}}">Cuenta</a><br>
-          <a class="botonesMenuCuenta" href="{{route('Lista')}}">Lista</a><br>
+          <hr class="hrClass">
+          <p class="botonesMenuCuenta"><a href="{{route('cuenta')}}">Cuenta</a></p>
+          <p class="botonesMenuCuenta"><a href="{{route('Lista')}}">Lista</a></p>
           @if (auth()->user()->name=="admin")
-          <hr class="opacity-50">
-          <h4 class="TituloMenuCuenta">Peliculas</h4>
-          <a class="botonesMenuCuenta" href="{{route('pelicula.create')}}">Agregar</a><br>
-          <a class="botonesMenuCuenta" href="{{route('pelicula.index')}}">Agregadas</a><br>
-          <hr class="opacity-50">
-          <h4 class="TituloMenuCuenta">Categorias</h4>
-          <a class="botonesMenuCuenta" href="{{route('categoria.create')}}">Agregar</a><br>
-          <a class="botonesMenuCuenta" href="{{route('categoria.index')}}">Agregadas</a><br>
+          <hr class="hrClass">
+
+          <div class="dropdown">
+            <a style="border: none; margin-top: -6px; margin-left: 10px;" class="btn botonesMenuCuentaDrop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Peliculas
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('pelicula.create')}}">Agregar pelicula</a></li>
+              <li><a class="dropdown-item" href="{{route('pelicula.index')}}">Peliculas agregadas</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <a style="border: none; margin-top: -6px; margin-left: 10px;" class="btn botonesMenuCuentaDrop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Series
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('create.series')}}">Agregar serie</a></li>
+              <li><a class="dropdown-item" href="{{route('seriesAgregadas')}}">Series agregadas</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <a style="border: none; margin-top: -6px; margin-left: 10px;" class="btn botonesMenuCuentaDrop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Categorias
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{route('categoria.create')}}">Agregar categoria</a></li>
+              <li><a class="dropdown-item" href="{{route('categoria.index')}}">Categorias agregadas</a></li>
+            </ul>
+          </div>
           @endif
 
-          <hr class="opacity-50">
-          <a class="botonesMenuCuenta" href="{{route('logout')}}">Salir</a>
+          <hr class="hrClass">
+          <p class="botonesMenuCuenta"><a href="{{route('logout')}}">Salir</a></p>
         </div>
         @endauth
       </div>
@@ -635,38 +888,42 @@
 
   @yield('content')
 
-  <footer style="background-color: rgb(20, 20, 20); padding-top: 80px; padding-bottom: 10px; margin-top: 40px;">
+  <footer>
     <center>
       <div>
-        <p style="color: white; font-size: 12px;">
-          Sitio web Desarrollado por Carlos Daniel Jaramillo Tinajero <br>Proyecto en mejora constante
+        <p style="color: white;">
+          Sitio web Desarrollado por <strong>Carlos Daniel Jaramillo Tinajero</strong><br>Proyecto en mejora constante
         </p>
         <div class="d-flex justify-content-center mb-3">
           <div class="p-2">
-            <p class="col" style="max-width: 150px; color: white; font-size: 11px; text-align: center;">
-              FrameWorks utilizados <br>
+            <p class="col" style="max-width: 150px; color: white; text-align: center;">
+              <strong>FrameWorks utilizados</strong><br>
               Laravel <br>
-              BootStrap <br>
             </p>
           </div>
           <div class="p-2">
-            <p class="col" style="max-width: 150px; color: white; font-size: 11px; text-align: center;">
-              Lenguajes utilizados <br>
+            <p class="col" style="max-width: 150px; color: white; text-align: center;">
+              <strong>Lenguajes utilizados</strong><br>
               PHP <br>
               HTML <br>
               JavaScript <br>
               MySql <br>
-              CSS
+              CSS <br>
+              <a href="https://github.com/CarlosJaramilloTinajero/PeliculasLaravel" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+              </a>
             </p>
           </div>
           <div class="p-2">
-            <p class="col" style="max-width: 150px; color: white; font-size: 11px; text-align: center;">
-              Librerias utilizadas <br>
+            <p class="col" style="max-width: 150px; color: white; text-align: center;">
+              <strong>Librerias utilizadas</strong><br>
               Splide<br>
+              BootStrap <br>
             </p>
           </div>
         </div>
-        <p style="color: white; font-size: 12px;">https://github.com/CarlosJaramilloTinajero/PeliculasLaravel</p>
       </div>
     </center>
   </footer>
@@ -677,6 +934,8 @@
       return new bootstrap.Tooltip(popoverTriggerEl)
     })
   </script>
+
+
 </body>
 
 </html>

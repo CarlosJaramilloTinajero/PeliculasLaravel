@@ -1,184 +1,6 @@
 @extends('vistaBaseMenu')
 @section('content')
 <title>PELICULAS DE CHILL - INICIO</title>
-<style>
-  #capa1 {
-    position: absolute;
-    z-index: 1;
-  }
-
-  #ImagenFondo {
-    position: absolute;
-    z-index: 0;
-
-  }
-
-  #background {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-    width: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* background-size: cover; */
-  }
-</style>
-
-
-<?php
-$aux = 0;
-foreach ($peliculas as $peliculaf) {
-  $aux++;
-}
-
-?>
-
-@if ($aux>0)
-<img style="transition: all .7s ease-in-out; opacity: 0; box-shadow: inset 0 0 2rem rgba(49, 138, 172, 0.5), 0 0 2rem rgba(49, 138, 172, 0.4);  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{asset($peliculas[0]->ImagenCartel)}}');" id="ImagenFondo" onload="var img= document.getElementById('ImagenFondo'); img.style.opacity=.8;" class="fixed-top ImagenFondoInicio d-block" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
-@else
-<img src="" id="ImagenFondo" alt="...">
-@endif
-
-
-
-<!-- Slide fantasma -->
-<section class="splide" style="margin-top: -300%; position: absolute;">
-  <ul class="splide__pagination opacity-0"></ul>
-
-  <div class="splide__arrows">
-    <button class="splide__arrow splide__arrow--prev opacity-0">
-
-    </button>
-    <button class="splide__arrow splide__arrow--next opacity-0">
-
-    </button>
-  </div>
-
-  <div class="splide__track ">
-    <ul class="splide__list ">
-      <?php
-      $divsf = 0; ?>
-      @foreach ($peliculas as $peliculat)
-      <li class="splide__slide zoom">
-        <a href="{{route('mostrarPelicula',['pelicula' => $peliculat->id])}}">
-          <div id="divFanSlide{{$divsf}}">
-            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" class=" PeliculaDiv rounded" alt="...">
-
-          </div>
-        </a>
-      </li>
-      <?php $divsf++;
-      ?>
-      @endforeach
-    </ul>
-
-  </div>
-</section>
-
-
-
-<!-- data-splide='{"padding":"3rem","perPage":4,"drag":"free","permove":1}' -->
-<!--Primer slide -->
-<section id="capa1" class="splide fixed-top" style="margin-top: 23%;">
-  <ul class="splide__pagination opacity-0"></ul>
-
-  <div class="splide__arrows">
-    <button class="splide__arrow splide__arrow--prev opacity-0">
-
-    </button>
-    <button class="splide__arrow splide__arrow--next opacity-0">
-
-    </button>
-  </div>
-
-  <div class="splide__track ">
-    <ul class="splide__list ">
-      <?php
-      $divs1 = 0; ?>
-      @foreach ($peliculas as $pelicula)
-      <li class="splide__slide zoom">
-        <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
-          <div id="divPrimerSlide{{$divs1}}">
-            <img style="margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="var img = document.getElementById('ImagenFondo');  img.src='{{asset($pelicula->ImagenCartel)}}';  img.style.opacity=0;" src="{{asset($pelicula->ImagenCartel)}}" class="shadow-lg rounded PeliculaDiv" alt="...">
-
-          </div>
-        </a>
-      </li>
-      <?php $divs1++;
-      ?>
-      @endforeach
-    </ul>
-
-  </div>
-</section>
-
-@if ($aux>0)
-<!-- //Segundo slide -->
-<section id="segundoSlide" class="splide " style="margin-top: 47%;">
-  <ul class="splide__pagination opacity-0"></ul>
-
-  <div class="splide__arrows">
-    <button class="splide__arrow splide__arrow--prev opacity-0">
-
-    </button>
-    <button class="splide__arrow splide__arrow--next opacity-0">
-
-    </button>
-  </div>
-
-  <div class="splide__track">
-    <h6 id="LetrasSlide0" style="margin-bottom: 2%;"><strong>Recomendado para ti</strong> </h6>
-    <ul class="splide__list">
-
-      <?php $pel = 0 ?>
-      @foreach ($peliculas as $pelicula)
-      <li class="splide__slide ">
-        <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
-          <div id="divSegundoSlide{{$pel}}">
-
-            <center>
-              <div id="divCarta" class="carta zoom rounded">
-                <img src="{{asset($pelicula->ImagenCartel)}}" alt="..." style="height: 60%; border: 0px;" class="shadow-lg">
-                <div class="shadow-lg" style="background-color: rgb(43, 39, 39); height: 30%;">
-                  <h5>{{$pelicula->nombre}}</h5>
-                  @foreach ($categorias as $categoria)
-                  <?php if ($categoria->id == $pelicula->categoria_id) { ?>
-                    <p><small>{{$categoria->nombre}} <span class="color-container_inicio" style="background-color:{{$categoria->Color}}"></span></small></p>
-                  <?php } ?>
-                  @endforeach
-                </div>
-              </div>
-            </center>
-
-          </div>
-        </a>
-      </li>
-      <?php $pel++; ?>
-      @endforeach
-    </ul>
-  </div>
-</section>
-
-
-<!-- Slides por categoria -->
-<?php $categoriaS = null;
-$divs3 = 0;
-$i = 1;
-foreach ($categorias as $categoria) {
-  $contadorDePeliculas = 0;
-  foreach ($peliculas as $pelicula) {
-    if ($categoria->id == $pelicula->categoria_id) {
-      $contadorDePeliculas++;
-    }
-  }
-  if ($contadorDePeliculas > 0) {
-    $categoriaS = $categoria;
-    $divs3 = splide($peliculas, $categorias, $categoriaS, $divs3, $i);
-    $i++;
-  }
-}
-
-?>
-@endif
-
 <script>
   function scroll() {
     // var y = window.scrollY;
@@ -206,13 +28,13 @@ foreach ($categorias as $categoria) {
     //Segundo Slide
     if (ancho >= pan1) {
       var AnchoPorcentajeP = .200;
-      var AltoPorcentajeP = .345;
+      var AltoPorcentajeP = .325;
     } else if (ancho < pan1 && ancho > pan2) {
       var AnchoPorcentajeP = .250;
-      var AltoPorcentajeP = .3785;
+      var AltoPorcentajeP = .42;
     } else if (ancho < pan2) {
       var AnchoPorcentajeP = .320;
-      var AltoPorcentajeP = .3785;
+      var AltoPorcentajeP = .52;
     }
 
     w = AnchoPorcentajeP * ancho;
@@ -262,23 +84,6 @@ foreach ($categorias as $categoria) {
       i++;
     }
 
-
-
-    //Primer slide
-    if (ancho < 900) {
-      S1 = document.getElementById('capa1');
-      S2 = document.getElementById('segundoSlide');
-      if (S1 != null && S2 != null) {
-        S1.style.marginTop = "23%";
-        if (ancho < pan2) {
-          S2.style.marginTop = "50%";
-        } else {
-          S2.style.marginTop = "47%";
-        }
-      }
-
-    }
-
     //Letras Categorias
     i = 0;
     while (document.getElementById('LetrasSlide' + i)) {
@@ -298,26 +103,11 @@ foreach ($categorias as $categoria) {
       }
 
       if (ancho > 950) {
-        l.style.fontSize = (.013 * ancho) + "px";
+        l.style.fontSize = (.018 * ancho) + "px";
       } else {
         l.style.fontSize = "13px";
       }
       i++;
-    }
-
-    //Imagen fondo
-    let anchoImagen = document.documentElement.clientWidth;
-    var AnchoPorcentajeImagen = 1;
-    var AltoPorcentajeImagen = .4;
-    var wImagen = AnchoPorcentajeImagen * anchoImagen;
-    var hImagen = AltoPorcentajeImagen * anchoImagen;
-
-    var divImagen = document.getElementById('ImagenFondo');
-    divImagen.style.width = wImagen + "px";
-    if (ancho < 600) {
-      divImagen.style.height = (hImagen + 60) + "px";
-    } else {
-      divImagen.style.height = hImagen + "px";
     }
 
 
@@ -371,10 +161,10 @@ foreach ($categorias as $categoria) {
       var AltoPorcentaje = .345;
     } else if (ancho < pan1 && ancho > pan2) {
       var AnchoPorcentaje = .250;
-      var AltoPorcentaje = .3785;
+      var AltoPorcentaje = .42;
     } else if (ancho < pan2) {
       var AnchoPorcentaje = .320;
-      var AltoPorcentaje = .3785;
+      var AltoPorcentaje = .52;
     }
     w = AnchoPorcentaje * ancho;
     h = AltoPorcentaje * ancho;
@@ -385,7 +175,7 @@ foreach ($categorias as $categoria) {
       var imga = div.getElementsByTagName('img')[0];
       div.style.width = w + "px";
       div.style.height = (h + 2) + "px";
-      imga.style.boxShadow = "0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4)";
+      // imga.style.boxShadow = "0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4)";
       i++;
     }
 
@@ -393,6 +183,325 @@ foreach ($categorias as $categoria) {
   }
 </script>
 
+<style>
+  #capa1 {
+    position: absolute;
+    z-index: 2;
+  }
+
+  #background {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+  }
+
+  .imagenFondoD {
+    width: 100%;
+    height: 100%;
+    transition: all .8s ease-in-out;
+    opacity: .8;
+  }
+
+  .imagenFondoDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 35vw;
+    -webkit-box-shadow: 0px 0px 10vw 5vw rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: 0px 0px 10vw 5vw rgba(0, 0, 0, 0.9);
+    box-shadow: 0px 0px 10vw 5vw rgba(0, 0, 0, 0.9);
+  }
+
+  .imagenFondoDiv::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    -webkit-box-shadow: inset 0px 0px 40vw 5vw rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: inset 0px 0px 40vw 5vw rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0px 0px 40vw 5vw rgba(0, 0, 0, 0.9);
+  }
+
+  .splide__slide {
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+  }
+
+  .splide__slide img {
+    transition: box-shadow .5s ease-in-out;
+    -webkit-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    transition: opacity 2s ease-in-out;
+
+  }
+
+  .splide__slide img:hover {
+    -webkit-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+  }
+
+  .subTitulo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-shadow: -3px 3px 5px rgba(0, 0, 0, 1);
+    margin-bottom: 1%;
+    /* font-family: 'Roboto Flex', sans-serif; */
+  }
+
+  .opaciti-0 {
+    opacity: 0;
+  }
+</style>
+
+
+<?php
+$aux = 0;
+foreach ($peliculas as $peliculaf) {
+  $aux++;
+}
+
+?>
+
+<script>
+  let idT = null;
+
+  function onloadImg() {
+    var img = document.getElementById('ImagenFondo');
+    img.style.opacity = .8;
+  }
+
+  function onloadImgs(id) {
+    // var idS = id.toString();
+    var img = document.getElementById(id);
+    var idS = setTimeout(() => {
+      img.style.opacity = 1;
+      window.clearTimeout(idS);
+    }, 1000);
+  }
+
+  function imagen(src) {
+    var img = document.getElementById('ImagenFondo');
+    if (src != img.src) {
+      img.style.opacity = 0;
+
+      window.clearTimeout(idT);
+      idT = setTimeout(() => {
+        img.src = src;
+        var idT2 = setTimeout(() => {
+          img.style.opacity = .8;
+          window.clearTimeout(idT2);
+        }, 300);
+        window.clearTimeout(idT);
+      }, 700);
+    }
+  }
+</script>
+
+@if ($aux>0)
+<div class="imagenFondoDiv">
+  <img class=" d-block imagenFondoD" id="ImagenFondo" src="{{asset($peliculas[0]->ImagenCartel)}}" alt="">
+</div>
+@else
+<img src="" id="ImagenFondo" alt="...">
+@endif
+<!-- Slide fantasma -->
+<section class="splide" style="margin-top: -300%; position: absolute;">
+  <ul class="splide__pagination opacity-0"></ul>
+
+  <div class="splide__arrows">
+    <button class="splide__arrow splide__arrow--prev opacity-0">
+
+    </button>
+    <button class="splide__arrow splide__arrow--next opacity-0">
+
+    </button>
+  </div>
+
+  <div class="splide__track ">
+    <ul class="splide__list ">
+      <?php
+      $divsf = 0; ?>
+      @foreach ($peliculas as $peliculat)
+      <li class="splide__slide zoom">
+        <a href="{{route('mostrarPelicula',['pelicula' => $peliculat->id])}}">
+          <div id="divFanSlide{{$divsf}}">
+            <img style="margin-top: 4.5%; visibility: hidden; margin-bottom: 4.4%; height: 90%;" class=" PeliculaDiv rounded" alt="...">
+
+          </div>
+        </a>
+      </li>
+      <?php $divsf++;
+      ?>
+      @endforeach
+    </ul>
+
+  </div>
+</section>
+
+
+<!--Primer slide -->
+<section id="capa1" class="splide fixed-top" style="margin-top: 23%;">
+  <ul class="splide__pagination opacity-0"></ul>
+
+  <div class="splide__arrows">
+    <button class="splide__arrow splide__arrow--prev opacity-0">
+
+    </button>
+    <button class="splide__arrow splide__arrow--next opacity-0">
+
+    </button>
+  </div>
+
+  <div class="splide__track">
+    <ul class="splide__list">
+      <?php
+      $divs1 = 0; ?>
+      @foreach ($peliculas as $pelicula)
+      <li class="splide__slide zoom">
+        <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
+          <div id="divPrimerSlide{{$divs1}}">
+            <img onload="onloadImgs('imagen{{$divs1}}')" id="imagen{{$divs1}}" style=" margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="imagen('{{asset($pelicula->ImagenCartel)}}')" src="{{asset($pelicula->ImagenCartel)}}" class="rounded PeliculaDiv opaciti-0" alt="...">
+          </div>
+        </a>
+      </li>
+      <?php $divs1++;
+      ?>
+      @endforeach
+    </ul>
+
+  </div>
+</section>
+
+@if ($aux>0)
+<!-- //Segundo slide -->
+<section id="segundoSlide" class="splide " style="margin-top: 52vw;">
+  <ul class="splide__pagination opacity-0"></ul>
+
+  <div class="splide__arrows">
+    <button class="splide__arrow splide__arrow--prev opacity-0">
+
+    </button>
+    <button class="splide__arrow splide__arrow--next opacity-0">
+
+    </button>
+  </div>
+
+  <div class="splide__track">
+    <h6 id="LetrasSlide0" class="subTitulo"><strong>Recomendado para tí</strong> </h6>
+    <ul class="splide__list">
+
+      <?php $pel = 0 ?>
+      @foreach ($peliculas as $pelicula)
+      <li class="splide__slide" style="padding-bottom: 3.5%;">
+        <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
+          <div id="divSegundoSlide{{$pel}}" class="zoom">
+            <center>
+              <div class="carta">
+                <img onload="onloadImgs('imgS2{{$pel}}')" id="imgS2{{$pel}}" src="{{asset($pelicula->ImagenCartel)}}" class="opaciti-0" alt="..." style="box-shadow: none;">
+                <div class="bodyCarta">
+                  <div class="enMedio">
+                    <h5>{{$pelicula->nombre}}</h5>
+                    @foreach ($categorias as $categoria)
+                    <?php if ($categoria->id == $pelicula->categoria_id) { ?>
+                      <p><small>{{$categoria->nombre}} <span class="color-container_inicio" style="background-color:{{$categoria->Color}}"></span></small></p>
+                    <?php } ?>
+                    @endforeach
+                  </div>
+
+                </div>
+              </div>
+            </center>
+
+          </div>
+        </a>
+      </li>
+      <?php $pel++; ?>
+      @endforeach
+    </ul>
+  </div>
+</section>
+
+<?php
+$divs3 = 0;
+$i = 1;
+?>
+
+<!-- Por categoria -->
+@foreach ($categorias as $categoria)
+<?php
+$contadorDePeliculas = 0;
+foreach ($peliculas as $pelicula) {
+  if ($categoria->id == $pelicula->categoria_id) {
+    $contadorDePeliculas++;
+  }
+}
+?>
+@if ($contadorDePeliculas > 0)
+
+<?php
+$categoriaS = $categoria;
+
+$categoriaPel = null;
+foreach ($categorias as $categoriaE) {
+  if ($categoriaE->id == $categoriaS->id) {
+    $categoriaPel = $categoriaE;
+  }
+}
+?>
+
+<section style="margin-top:3%;" class="splide">
+  <ul class="splide__pagination opacity-0"></ul>
+
+  <div class="splide__arrows">
+    <button class="splide__arrow splide__arrow--prev opacity-0">
+
+    </button>
+    <button class="splide__arrow splide__arrow--next opacity-0">
+
+    </button>
+  </div>
+  <div class="splide__track">
+    <h6 id="LetrasSlide{{$i}}" class="subTitulo"><strong>{{$categoriaPel->nombre}}</strong> </h6>
+    <ul class="splide__list">';
+      @foreach ($peliculas as $pelicula)
+
+      @if ($pelicula->categoria_id == $categoriaS->id)
+
+      <li class="splide__slide zoom">
+        <a href="{{route('mostrarPelicula', ['pelicula' => $pelicula->id])}}">
+          <center>
+            <div id="divCategoria{{$divs3}}" style="height:90%;">
+
+              <img src="{{asset($pelicula->ImagenCartel)}}" onload="onloadImgs('imgS3{{$divs3}}')" id="imgS3{{$divs3}}" class=" PeliculaDiv rounded opaciti-0" alt="...">
+
+            </div>
+          </center>
+        </a>
+      </li>
+
+      <?php
+      $divs3++;
+      ?>
+      @endif
+      @endforeach
+    </ul>
+  </div>
+</section>
+
+<?php
+$i++;
+?>
+@endif
+@endforeach
+@endif
 <script>
   let ancho = document.documentElement.clientWidth;
 
@@ -455,70 +564,3 @@ foreach ($categorias as $categoria) {
   }
 </script>
 @endsection
-
-
-
-<?php
-function splide($peliculas, $categorias, $categoriaS, $divs3, $i)
-{
-
-  $otro = false;
-  $cant = 0;
-  $aux = 0;
-  foreach ($peliculas as $peliculaf) {
-    if ($peliculaf->categoria_id == $categoriaS->id) {
-      $aux++;
-      if ($aux > 5) {
-        $cant++;
-        $aux = 1;
-      }
-    }
-  }
-
-  $categoriaPel = null;
-  foreach ($categorias as $categoriaE) {
-    if ($categoriaE->id == $categoriaS->id) {
-      $categoriaPel = $categoriaE;
-    }
-  }
-
-
-  echo '
-  <section style="margin-top:3%;" class="splide">
-  <ul class="splide__pagination opacity-0"></ul>
-
-  <div class="splide__arrows">
-  <button class="splide__arrow splide__arrow--prev opacity-0">
-
-  </button>
-  <button class="splide__arrow splide__arrow--next opacity-0">
-
-  </button>
-</div>
-    <div class="splide__track">
-      <h6 id="LetrasSlide' . $i . '" style="margin-bottom : 2%;"><strong>' . $categoriaPel->nombre . '</strong> </h6>
-      <ul class="splide__list">';
-  foreach ($peliculas as $pelicula) {
-    if ($pelicula->categoria_id == $categoriaS->id) {
-
-      echo '<li class="splide__slide zoom">
-        <a href="' . route('mostrarPelicula', ['pelicula' => $pelicula->id]) . '">
-           <center> <div  id="divCategoria' . $divs3 . '" style="height:90%;">
-            
-                  <img src="' . $pelicula->ImagenCartel . '" class=" PeliculaDiv rounded" alt="...">
-            
-          </div>  </center>
-        </a>
-      </li>';
-      $divs3++;
-    }
-  }
-
-  echo '
-    </ul>
-  </div>
-</section>
-    ';
-  return $divs3;
-}
-?>

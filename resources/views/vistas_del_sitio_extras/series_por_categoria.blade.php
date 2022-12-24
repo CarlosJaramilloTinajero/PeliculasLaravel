@@ -1,30 +1,26 @@
 @extends('vistaBaseMenu')
 @section('content')
-<title>Series</title>
-<!-- <center>
-    <p style="margin-top: 100px;">PAGINA EN PROCESO</p>
-</center> -->
+
+<title>PELICULAS DE CHILL - SERIES</title>
 
 <div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">
 
     <div style="margin-top: 60px;" class="splide ">
-        <h1 style="margin-bottom: 40px; font-size: 40px ">Series - Todas las series</h1>
+        <h1 style="margin-bottom: 40px; font-size: 40px ">Series - {{$categoria->nombre}}</h1>
 
         <div class="splide__track">
             <ul class="splide__list">
-
-
-                <li class="splide__slide">
-                    <a href="" selected class="btn botonesCategorias selectBtn">Todas las series</a>
-                </li>
-                @foreach ($categorias as $categoria)
-                @if ($categoria->Tipo=="serie")
-                <li class="splide__slide">
-                    <a href="{{route('seriesPorCategoria',['categoria' => $categoria->id])}}" class="btn  botonesCategorias">{{$categoria->nombre}}</a>
-                </li>
+                <a href="{{route('Series')}}" selected class="btn botonesCategorias">Todas las series</a>
+                @foreach ($categorias as $categoriam)
+                @if ($categoriam->Tipo=="serie")
+                @if ($categoria->id == $categoriam->id)
+                <a href="{{route('seriesPorCategoria',['categoria' => $categoriam->id])}}" class="btn botonesCategorias selectBtn">{{$categoriam->nombre}}</a>
+                @else
+                <a href="{{route('seriesPorCategoria',['categoria' => $categoriam->id])}}" class="btn botonesCategorias">{{$categoriam->nombre}}</a>
                 @endif
-
+                @endif
                 @endforeach
+
             </ul>
         </div>
     </div>
@@ -34,12 +30,14 @@
     <div style="margin-left: 35px; padding-top: 60px; ">
         <div class="nav-item dropdown">
             <a style="color: white; font-size: 16px; width: max-content; margin-left: -20px;" class="nav-link dropdown-toggle btn botonesCategorias btn botonesCategorias" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Series - Todas las series
+                Series - {{$categoria->nombre}}
             </a>
             <ul class="dropdown-menu">
-                @foreach ($categorias as $categoria)
-                @if ($categoria->Tipo=="serie")
-                <li><a class="dropdown-item" href="{{route('seriesPorCategoria',['categoria' => $categoria->id])}}">{{$categoria->nombre}}</a></li>
+
+                <li><a class="dropdown-item" href="{{route('Series')}}">Todas las series</a></li>
+                @foreach ($categorias as $categoriam)
+                @if ($categoriam->Tipo=="serie")
+                <li><a class="dropdown-item" href="{{route('seriesPorCategoria',['categoria' => $categoriam->id])}}">{{$categoriam->nombre}}</a></li>
                 @endif
                 @endforeach
             </ul>
@@ -49,11 +47,13 @@
     </div>
 </div>
 
+
+
 <div id="divF" class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 1%; margin-left: 1.8%; max-width: 98.2%;">
     <?php $contD = 0; ?>
     @foreach ($series as $serie)
 
-
+    @if ($serie->categoria_id == $categoria->id)
     <div id="div-{{$contD}}" class="zoom2 col divCatalogoImagen">
 
         <a class=" shadow" href="{{route('mostrarSerie',['serie' => $serie->id])}}" style="width: 100%; height: 100%;">
@@ -68,9 +68,12 @@
         </a>
     </div>
     <?php $contD++; ?>
+    @endif
+
+
+
     @endforeach
 </div>
-
 
 <br><br>
 
@@ -78,6 +81,7 @@
     var menu = document.getElementById('MenuInicio');
     menu.style.opacity = 1;
 </script>
+
 
 <script>
     function obtener(t) {
@@ -106,7 +110,6 @@
                 }
                 divFotos.style.width = w + "px";
                 divFotos.style.height = (w + (w * .3)) + "px";
-                // divFotos.style.marginLeft = (ancho * .005) + "px";
                 i++;
             }
 
@@ -114,4 +117,5 @@
         return t;
     }
 </script>
+
 @endsection

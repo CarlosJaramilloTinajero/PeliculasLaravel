@@ -1,5 +1,8 @@
 @extends('vistaBaseMenu')
 @section('content')
+
+
+
 <!-- Slide fantasma -->
 <section class="splide" style="margin-top: -300%; position: absolute;">
     <ul class="splide__pagination opacity-0"></ul>
@@ -33,23 +36,132 @@
 
     </div>
 </section>
-
-<title>PELICULAS DE CHILL</title>
-
 <style>
-    .button2 {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    @media screen and (min-width: 1000px) {
+
+        .descripcion {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            opacity: .9;
+            font-size: 19px;
+        }
+
+        .titulo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 22px;
+        }
+
+    }
+
+    @media screen and (max-width: 1000px) {
+
+        .descripcion {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            opacity: .9;
+            font-size: 15px;
+        }
+
+        .titulo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 19px;
+        }
+
+    }
+
+    .splide__slide {
+        padding-top: 1.5vw;
+        padding-bottom: 1.5vw;
+    }
+
+    .splide__slide img {
+        transition: box-shadow .5s ease-in-out;
+        -webkit-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+        box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    }
+
+    .splide__slide img:hover {
+        -webkit-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+        box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    }
+
+    .subTitulo {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        text-shadow: -3px 3px 5px rgba(0, 0, 0, 1);
+        margin-bottom: 1%;
+        /* font-family: 'Roboto Flex', sans-serif; */
+    }
+
+
+
+    .imgCol {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 35px;
+    }
+
+    @media screen and (min-width:888px) {
+        .desCol {
+            width: 55%;
+        }
+
+        .pelicula {
+            width: 95%;
+            padding-top: 80px;
+            margin: 0 auto;
+        }
+    }
+
+    @media screen and (max-width:888px) {
+        .desCol {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .pelicula {
+            width: 100%;
+            padding-top: 80px;
+            margin: 0 auto;
+        }
+    }
+
+    .imagen {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: box-shadow .7s ease-in-out;
+        -webkit-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+        box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    }
+
+    .imagen:hover {
+        -webkit-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+        box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    }
+
+    .btnVerPeli {
+        margin-left: 5%;
+        margin-bottom: 15px
+    }
+
+    .btnVerPeli svg {
+        width: 1.5em;
+        height: 1.5em;
     }
 </style>
-<div class="row">
+<title>PELICULAS DE CHILL - {{$pelicula->nombre}}</title>
+<div class="row pelicula row row-cols-2 row-cols-lg-2">
 
-    <div id="Imagen" class="col-sm-12 col-md-6 transicion shadow-lg zoom3">
-        <img class="rounded " style="object-fit: cover; width: 100%; height: 100%; margin-left: 10px;" src="{{asset($pelicula->ImagenCartel)}}" alt="">
+    <div id="Imagen" class="col zoom3 imgCol">
+        <img class="rounded imagen " src="{{asset($pelicula->ImagenCartel)}}" alt="">
     </div>
 
-    <div class="col-sm-12 col-md-6">
-        <p id="nombre" style="margin-top: 30px; margin-left: 10px; font-size: 33px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"><strong>{{$pelicula->nombre}}</strong></p>
-        <p id="descripcion" style="margin-top: 20px; font-size: 21px; font-family: sans-serif; margin-left: 10px;  max-width: 874px;">
+    <div class="col desCol">
+        <p id="nombre" class="titulo"><strong>{{$pelicula->nombre}}</strong></p>
+        <p class="descripcion">
             {{$pelicula->descripcion}}
         </p>
         @auth
@@ -81,20 +193,20 @@
 
 
                     @csrf
-                    <a href="{{route('verPelicula',['pelicula' => $pelicula->id])}}" id="btn-0" class="btn shadow-lg boton3" type="button"><svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                    <a href="{{route('verPelicula',['pelicula' => $pelicula->id])}}" id="btn-0" style="margin-left: 0;" class="btn shadow-lg boton3 btnVerPeli" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
                             <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
                         </svg><strong> VER AHORA</strong></a>
-                    <a href="{{route('verTailer',['pelicula' => $pelicula->id])}}" id="btn-1" class="btn shadow-lg boton3" type="button"><strong>TRAILER</strong></a>
+                    <a href="{{route('verTailer',['pelicula' => $pelicula->id])}}" id="btn-1" class="btn shadow-lg boton3 btnVerPeli" type="button"><strong>TRAILER</strong></a>
 
                     @auth
                     @if (!$agregada)
-                    <button type="submit" id="btn-2" class="btn shadow-lg boton3">
+                    <button type="submit" id="btn-2" class="btn shadow-lg boton3 btnVerPeli">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                         </svg>
                     </button>
                     @else
-                    <button type="submit" id="btn-2" class="btn shadow-lg boton3">
+                    <button type="submit" id="btn-2" class="btn shadow-lg boton3 btnVerPeli">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                         </svg>
@@ -109,7 +221,7 @@
 
 </div>
 <section class="splide" style="margin-top: 5%;">
-    <hr class="border opacity-10">
+    <hr class="hrClass">
     <ul class="splide__pagination opacity-0"></ul>
 
     <div class="splide__arrows">
@@ -121,7 +233,7 @@
         </button>
     </div>
     <div class="splide__track">
-        <h6 id="LetrasSlide0" style="margin-bottom: 2%;"><strong>Recomendado para ti</strong> </h6>
+        <h6 id="LetrasSlide0" class="subTitulo"><strong>Recomendado para ti</strong> </h6>
         <ul class="splide__list">
             <?php
             $divs1 = 0; ?>
@@ -256,9 +368,6 @@
             var imga = div.getElementsByTagName('img')[0];
             div.style.width = w + "px";
             div.style.height = (w + 2) + "px";
-            imga.style.boxShadow = "0 0 " + (ancho * .018) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .018) + "px rgba(0, 0, 0, 4)";
-
-            // div.style.margin = "left " + (ancho * .005) + "px";
             i++;
         }
 
@@ -289,7 +398,7 @@
             imagen.style.width = (ancho * .4) + "px";
             imagen.style.height = (ancho * .38) + "px";
         }
-        imagen.style.marginTop = "80px";
+        // imagen.style.marginTop = "80px";
 
 
         //botones
@@ -307,61 +416,8 @@
 
             }
             btn.style.fontSize = (aux * .014) + "px";
-
-            btn.style.paddingLeft = (aux * .016) + "px";
-            btn.style.paddingRight = (aux * .016) + "px";
-
-            if (i == 1) {
-                btn.style.paddingTop = (aux * .008) + "px";
-                btn.style.paddingBottom = (aux * .008) + "px";
-            }
-            if (i == 2 || i == 3) {
-                btn.style.borderRadius = (aux * .08) + "px";
-                btn.style.paddingLeft = (aux * .0086) + "px";
-                btn.style.paddingRight = (aux * .0086) + "px";
-            }
-
-            btn.style.marginTop = "25px";
-            btn.style.marginLeft = "17px";
-            if (ancho <= 1150) {
-                btn.style.marginBottom = "18px";
-            }
             i++;
         }
-
-        //svg Boton
-        var iconPlay = document.getElementById('iconPlay');
-        if (ancho > 1500) {
-            var aux = 1500;
-            iconPlay.style.width = (aux * .025) + "px";
-            iconPlay.style.height = (aux * .025) + "px";
-        } else {
-            if (ancho < 900) {
-                iconPlay.style.width = "23px";
-                iconPlay.style.height = "23px";
-            } else {
-                iconPlay.style.width = (ancho * .025) + "px";
-                iconPlay.style.height = (ancho * .025) + "px";
-            }
-
-        }
-
-        //Descripcion pelicula
-        var descripcion = document.getElementById('descripcion');
-        var nombre = document.getElementById('nombre');
-        if (ancho < 1150) {
-            descripcion.style.fontSize = "18px";
-            nombre.style.fontSize = "28px";
-        } else {
-            descripcion.style.fontSize = "21px";
-            nombre.style.fontSize = "33px";
-        }
-        if (ancho <= 767) {
-            nombre.style.marginTop = "30px";
-        } else {
-            nombre.style.marginTop = "105px";
-        }
-
         return t;
     }
 </script>

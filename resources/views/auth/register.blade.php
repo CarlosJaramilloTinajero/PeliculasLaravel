@@ -4,7 +4,7 @@
 <title>Registro</title>
 <style>
     .contenedorA {
-        width: 450px;
+        max-width: 450px;
         height: max-content;
         margin-left: auto;
         margin-right: auto;
@@ -62,7 +62,7 @@
         <input type="password" class="form-control" name="password_confirmation"><br>
 
         <center>
-            <p style="color: white;">Ya tines cuenta? <br> <a style="color: white;" href="{{route('login')}}">Inicia sesion</a></p>
+            <p style="color: white;">Ya tines cuenta? <br> <a style="color: white; text-decoration: underline;" href="{{route('login')}}">Inicia sesion</a></p>
         </center>
         <div class="d-grid gap-2">
 

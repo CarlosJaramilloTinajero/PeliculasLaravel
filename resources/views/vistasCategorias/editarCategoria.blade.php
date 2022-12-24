@@ -1,7 +1,7 @@
 @extends('vistaBaseMenu')
 @section('content')
 <title>Editar categoria</title>
-<div class="container w-50 p-5" style="margin-top: 100px;">
+<div class="container p-5" style="margin-top: 100px;">
 
 
     <h2>Editar la categoria</h2>
@@ -32,17 +32,37 @@
         </div>
 
         <div class="mb-3">
+            <label for="Name" class="form-label">Tipo de categoria
+            </label>
+            <select class="form-select" name="Tipo">
+                @if ($categoria->Tipo == "serie")
+                <option selected value="serie">Serie</option>
+                <option value="pelicula">Pelicula</option>
+                @else
+                <option value="serie">Serie</option>
+                <option selected value="pelicula">Pelicula</option>
+                @endif
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="color" class="form-label">Color de la categoria</label>
             <input type="color" class="form-control" name="color" value="{{$categoria->Color}}" }>
         </div>
 
-        <button type="submit" class="btn btn-primary">Modificar</button>
+        <button type="submit" class="btn botonesCategorias">Modificar</button>
     </form>
 </div>
 <br>
-<div class="container w-55 p-5 ">
-    <h2>Peliculas agregadas con esta categoria</h2>
-    <table class="table table-striped Tabla">
+<div class="container p-5 ">
+    <h2>
+        @if ($categoria->Tipo == "serie")
+        Series
+        @else
+        Peliculas
+        @endif
+        agregadas con esta categoria</h2>
+    <table class="table table-striped Tabla table-sm">
         <tr>
             <th>#</th>
             <th>Categoria</th>
@@ -52,17 +72,17 @@
             <th>Acciones</th>
         </tr>
         <?php $j = 0; ?>
-        @foreach ($peliculas as $pelicula)
-        @if ($pelicula->categoria_id==$categoria->id)
+        @foreach ($tipo as $tipoE)
+        @if ($tipoE->categoria_id==$categoria->id)
         <tr>
             <?php $j++; ?>
             <td>{{$j}}</td>
 
             <td style="background-color: {{$categoria->Color}};"><a href="{{route('categoria.show', ['categorium' => $categoria->id])}}"><strong>{{$categoria->nombre}}</strong></a></td>
 
-            <td>{{$pelicula->nombre}}</td>
+            <td>{{$tipoE->nombre}}</td>
             <?php
-            $x = str_split($pelicula->descripcion);
+            $x = str_split($tipoE->descripcion);
             $aux = "";
             $maxPalabras = 10;
             if ($x > $maxPalabras) {
@@ -71,19 +91,56 @@
                 }
                 // echo $aux;
             } else {
-                $aux = $pelicula->descripcion;
+                $aux = $tipoE->descripcion;
             }
 
             ?>
+            @if ($categoria->Tipo == "serie")
             <td style="max-width: 200px;">{{$aux}}...</td>
-            <td><a href="{{asset($pelicula->ImagenCartel)}}" target="_blank"><img src="{{asset($pelicula->ImagenCartel)}}" alt="" class="ImagenTabla"></a></td>
+            <td><a href="{{asset($tipoE->imagen)}}" target="_blank"><img src="{{asset($tipoE->imagen)}}" alt="" class="ImagenTabla"></a></td>
             <td>
-                <a class="btn btn-secondary" style="margin-top: 10px;" href="{{route('pelicula.show',['pelicula' => $pelicula->id])}}">Modificar</a>
-                <button type="button" style="margin-top: 10px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{$pelicula->id}}">Elimiar</button>
+                <!-- <a class="btn btn-secondary" style="margin-top: 10px;" href="{{route('modificarSerie',['serie' => $tipoE->id])}}">Modificar</a> -->
+                <!-- <button type="button" style="margin-top: 10px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{$tipoE->id}}">Elimiar</button> -->
+                <button type="button" class="btn btn-secondary  btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Acciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('modificarSerie',['serie' => $tipoE->id])}}">Modificar</a></li>
+                    <li>
+                        <form action="{{route('EliminarSerie',['serie' => $tipoE->id])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="dropdown-item" value="Eliminar">
+                        </form>
+                    </li>
+                </ul>
             </td>
+            @endif
+            @if ($categoria->Tipo == "pelicula")
+            <td style="max-width: 200px;">{{$aux}}...</td>
+            <td><a href="{{asset($tipoE->ImagenCartel)}}" target="_blank"><img src="{{asset($tipoE->ImagenCartel)}}" alt="" class="ImagenTabla"></a></td>
+            <td>
+                <!-- <a class="btn btn-secondary" style="margin-top: 10px;" href="{{route('pelicula.show',['pelicula' => $tipoE->id])}}">Modificar</a> -->
+                <!-- <button type="button" style="margin-top: 10px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{$tipoE->id}}">Elimiar</button> -->
+                <button type="button" class="btn btn-secondary  btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Acciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('pelicula.show',['pelicula' => $tipoE->id])}}">Modificar</a></li>
+                    <li>
+                        <form action="{{route('pelicula.destroy',['pelicula' => $tipoE->id])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="dropdown-item" value="Eliminar">
+                        </form>
+                    </li>
+                </ul>
+            </td>
+            @endif
+
         </tr>
 
-        <div class="modal fade" id="modal-{{$pelicula->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modal-{{$tipoE->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -91,15 +148,27 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ¿Esta seguro de eliminar la pelicula <strong>{{$pelicula->nombre}}</strong>?
+                        ¿Esta seguro de eliminar la
+                        @if ($categoria->Tipo=="serie")
+                        serie
+                        @else
+                        pelicula
+                        @endif
+                        <strong>{{$tipoE->nombre}}</strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <form action="{{route('pelicula.destroy',['pelicula' => $pelicula->id])}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" class="btn btn-danger" value="Eliminar">
-                        </form>
+
+                        @if ($categoria->Tipo=="serie")
+                        <form action="{{route('EliminarSerie',['serie' => $tipoE->id])}}" method="POST">
+                            @else
+                            <form action="{{route('pelicula.destroy',['pelicula' => $tipoE->id])}}" method="POST">
+                                @endif
+
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger" value="Eliminar">
+                            </form>
 
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 @section('content')
 <title>Agregar categoria</title>
 
-<div class="container w-50 p-5" style="margin-top: 100px;">
+<div class="container p-5" style="margin-top: 100px;">
 
 
     <h2>Agregar una nueva categoria</h2>
@@ -32,12 +32,21 @@
         </div>
 
         <div class="mb-3">
+            <label for="Name" class="form-label">Tipo de categoria
+            </label>
+            <select class="form-select" name="Tipo">
+                <option value="serie">Serie</option>
+                <option value="pelicula">Pelicula</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="color" class="form-label">Color de la categoria</label>
             <input type="color" class="form-control" name="color">
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Agregar</button>
+        <button type="submit" class="btn botonesCategorias">Agregar</button>
     </form>
 </div>
 <br>

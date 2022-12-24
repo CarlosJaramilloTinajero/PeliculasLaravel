@@ -4,7 +4,7 @@
 <title>Login</title>
 <style>
     .contenedorA {
-        width: 450px;
+        max-width: 450px;
         height: max-content;
         margin-left: auto;
         margin-right: auto;
@@ -56,7 +56,7 @@
         <input type="password" class="form-control" name="password"><br>
 
         <center>
-            <p style="color: white;">No tienes cuenta? <br> <a style="color: white;" href="{{route('registro')}}">Registrate</a></p>
+            <p style="color: white;">No tienes cuenta? <br> <a style="color: white; text-decoration: underline;" href="{{route('registro')}}">Registrate</a></p>
         </center>
         <div class="d-grid gap-2">
             <button type="submit" class="btn boton3">Iniciar sesion</button>

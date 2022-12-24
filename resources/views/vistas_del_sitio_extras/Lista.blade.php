@@ -249,10 +249,10 @@
             var AltoPorcentaje = .345;
         } else if (ancho < pan1 && ancho > pan2) {
             var AnchoPorcentaje = .250;
-            var AltoPorcentaje = .3785;
+            var AltoPorcentaje = .44;
         } else if (ancho < pan2) {
             var AnchoPorcentaje = .320;
-            var AltoPorcentaje = .3785;
+            var AltoPorcentaje = .52;
         }
         w = AnchoPorcentaje * ancho;
         h = AltoPorcentaje * ancho;

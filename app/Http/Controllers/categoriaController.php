@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\categoria;
 use App\Models\pelicula;
+use App\Models\serie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -59,7 +60,9 @@ class categoriaController extends Controller
         $categoria = new categoria();
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
+        $categoria->Tipo = $request->Tipo;
         $categoria->Color = $request->color;
+
 
         $categoria->save();
 
@@ -76,9 +79,13 @@ class categoriaController extends Controller
     {
         if (Auth::check() && auth()->user()->name == "admin") {
             $categoria = categoria::find($id);
-            $peliculas = pelicula::all();
+            if ($categoria->Tipo == "serie") {
+                $tipo = serie::all();
+            } else {
+                $tipo = pelicula::all();
+            }
 
-            return view('vistasCategorias.editarCategoria', ['categoria' => $categoria, 'peliculas' => $peliculas]);
+            return view('vistasCategorias.editarCategoria', ['categoria' => $categoria, 'tipo' => $tipo]);
         } else {
             return redirect()->route('extras');
         }
@@ -115,6 +122,7 @@ class categoriaController extends Controller
         $categoria = categoria::find($id);
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
+        $categoria->Tipo = $request->Tipo;
         $categoria->Color = $request->color;
 
         $categoria->save();
@@ -137,12 +145,23 @@ class categoriaController extends Controller
         $categoria = categoria::find($id);
 
         //Con esta linea de codigo se eliminan primero los registros de la tablatodos que tengan como llave foranea el id de la categoria a elimainar
-        $categoria->peliculas()->each(function ($pelicula) {
-            if (!File::delete($pelicula->ImagenCartel)) {
-                return redirect()->back()->with('error', 'Error al borrar la imagen');
-            }
-            $pelicula->delete();
-        });
+
+        if ($categoria->tipo == "serie") {
+            $categoria->series()->each(function ($serie) {
+                if (!File::delete($serie->imagen)) {
+                    return redirect()->back()->with('error', 'Error al borrar la imagen');
+                }
+                $serie->delete();
+            });
+        } else {
+            $categoria->peliculas()->each(function ($pelicula) {
+                if (!File::delete($pelicula->ImagenCartel)) {
+                    return redirect()->back()->with('error', 'Error al borrar la imagen');
+                }
+                $pelicula->delete();
+            });
+        }
+
 
         $categoria->delete();
 

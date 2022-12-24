@@ -2,7 +2,7 @@
 @section('content')
 
 <title>Editar pelicula</title>
-<div class="container w-50 p-5 " style="margin-top: 100px;">
+<div class="container p-5 " style="margin-top: 100px;">
     <h2>Editar la pelicula</h2>
     @if (session('success'))
     <h5 class="alert alert-success">{{session('success')}}</h5>
@@ -74,10 +74,12 @@
             <label for="Name" class="form-label">Categoria de la pelicula</label>
             <select class="form-select" name="categoria_id">
                 @foreach ($categorias as $categoria)
+                @if ($categoria->Tipo == "pelicula")
                 @if ($categoria->id == $pelicula->categoria_id)
                 <option selected value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                 @else
                 <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                @endif
                 @endif
                 @endforeach
             </select>
@@ -99,7 +101,7 @@
             <input type="file" class="form-control" id="exampleInputEmail1" name="ImagenCartel" accept="image/x-png,image/jpg,image/jpeg">
         </div>
 
-        <button style="margin-top: 16px;" type="submit" class="btn btn-primary">Modificar</button>
+        <button style="margin-top: 16px;" type="submit" class="btn botonesCategorias">Modificar</button>
     </form>
 </div>
 <br>

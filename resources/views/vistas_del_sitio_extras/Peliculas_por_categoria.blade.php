@@ -12,10 +12,14 @@
             <ul class="splide__list">
                 <a href="{{route('extrasPeliculas')}}" selected class="btn botonesCategorias">Todas las peliculas</a>
                 @foreach ($categorias as $categoriam)
+                @if ($categoriam->Tipo=="pelicula")
                 @if ($categoria->id == $categoriam->id)
-                <a href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoriam->id])}}" class="btn botonesCategorias" style="background-color: white; color: black;">{{$categoriam->nombre}}</a>
+
+
+                <a href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoriam->id])}}" class="btn botonesCategorias selectBtn">{{$categoriam->nombre}}</a>
                 @else
                 <a href="{{route('extrasPeliculas_porCategoria',['categoria' => $categoriam->id])}}" class="btn botonesCategorias">{{$categoriam->nombre}}</a>
+                @endif
                 @endif
                 @endforeach
 
@@ -27,7 +31,7 @@
 <div class="MenuCategorias2 bg-dark bg-gradient d-lg-none">
     <div style="margin-left: 35px; padding-top: 60px; ">
         <div class="nav-item dropdown">
-            <a style="color: white; font-size: 21px;" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a style="color: white; font-size: 16px; width: max-content; margin-left: -20px;" class="nav-link dropdown-toggle btn botonesCategorias btn botonesCategorias" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Peliculas - {{$categoria->nombre}}
             </a>
             <ul class="dropdown-menu">
@@ -45,12 +49,12 @@
 
 
 
-<div id="divF" class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 1%;">
+<div id="divF" class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 1%; margin-left: 1.8%; max-width: 98.2%;">
     <?php $contD = 0; ?>
     @foreach ($peliculas as $pelicula)
 
     @if ($pelicula->categoria_id == $categoria->id)
-    <div id="div-{{$contD}}" class="zoom2 col">
+    <div id="div-{{$contD}}" class="zoom2 col divCatalogoImagen">
 
         <a class=" shadow" href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}" style="width: 100%; height: 100%;">
             <div class=" card text-bg-dark PeliculaDiv" style="width: 100%; height: 100%;">
@@ -91,12 +95,12 @@
         var w = 0;
         var i = 0;
         // var divD = document.getElementById('divF');
-        
+
         while (document.getElementById('div-' + i)) {
             var divFotos = document.getElementById('div-' + i);
             if (divFotos != null) {
                 if (ancho > pan0) {
-                    w = (AnchoPorcentaje -.0795)  * ancho;
+                    w = (AnchoPorcentaje - .0795) * ancho;
                 } else if (ancho > pan1 && ancho <= pan0) {
                     w = (AnchoPorcentaje - .0455) * ancho;
                 } else if (ancho < pan1 && ancho >= pan2) {
@@ -106,7 +110,6 @@
                 }
                 divFotos.style.width = w + "px";
                 divFotos.style.height = (w + (w * .3)) + "px";
-                divFotos.style.margin = (ancho * .005) + "px";
                 i++;
             }
 

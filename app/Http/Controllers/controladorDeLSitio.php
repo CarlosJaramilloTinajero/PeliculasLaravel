@@ -53,10 +53,10 @@ class controladorDeLSitio extends Controller
     }
 
 
-    public function index_series()
-    {
-        return view('vistas_del_sitio_extras.Series');
-    }
+    // public function index_series()
+    // {
+    //     return view('vistas_del_sitio_extras.Series');
+    // }
 
     public function index_Peliculas()
     {
