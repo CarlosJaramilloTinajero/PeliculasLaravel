@@ -52,6 +52,7 @@
         var divU = div.getElementsByClassName('carta')[z];
         divU.style.width = w + "px";
         divU.style.height = h + "px";
+        divU.style.opacity = 1;
         divU.style.marginLeft = (ancho * .005) + "px";
       }
 
@@ -107,6 +108,8 @@
       } else {
         l.style.fontSize = "13px";
       }
+
+      l.style.opacity = 1;
       i++;
     }
 
@@ -130,6 +133,7 @@
       var div = document.getElementById('divPrimerSlide' + i);
       div.style.width = w + "px";
       div.style.height = (w + 2) + "px";
+      div.style.opacity = 1;
       i++;
     }
 
@@ -175,6 +179,7 @@
       var imga = div.getElementsByTagName('img')[0];
       div.style.width = w + "px";
       div.style.height = (h + 2) + "px";
+      div.style.opacity = 1;
       // imga.style.boxShadow = "0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4), 0 0 " + (ancho * .02) + "px rgba(0, 0, 0, 4)";
       i++;
     }
@@ -258,6 +263,7 @@
 
   .opaciti-0 {
     opacity: 0;
+    transition: opacity 3s ease-in-out;
   }
 </style>
 
@@ -282,7 +288,7 @@ foreach ($peliculas as $peliculaf) {
     // var idS = id.toString();
     var img = document.getElementById(id);
     var idS = setTimeout(() => {
-      img.style.opacity = 1;
+      // img.style.opacity = 1;
       window.clearTimeout(idS);
     }, 1000);
   }
@@ -367,8 +373,9 @@ foreach ($peliculas as $peliculaf) {
       @foreach ($peliculas as $pelicula)
       <li class="splide__slide zoom">
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
-          <div id="divPrimerSlide{{$divs1}}">
-            <img onload="onloadImgs('imagen{{$divs1}}')" id="imagen{{$divs1}}" style=" margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="imagen('{{asset($pelicula->ImagenCartel)}}')" src="{{asset($pelicula->ImagenCartel)}}" class="rounded PeliculaDiv opaciti-0" alt="...">
+          <div id="divPrimerSlide{{$divs1}}" class="opaciti-0">
+            <img style=" margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="imagen('{{asset($pelicula->ImagenCartel)}}')" src="{{asset($pelicula->ImagenCartel)}}" class="rounded PeliculaDiv" alt="...">
+            <!-- onload="onloadImgs('imagen{{$divs1}}')" id="imagen{{$divs1}}" -->
           </div>
         </a>
       </li>
@@ -395,7 +402,7 @@ foreach ($peliculas as $peliculaf) {
   </div>
 
   <div class="splide__track">
-    <h6 id="LetrasSlide0" class="subTitulo"><strong>Recomendado para tí</strong> </h6>
+    <h6 id="LetrasSlide0" class="subTitulo opaciti-0"><strong>Recomendado para tí</strong> </h6>
     <ul class="splide__list">
 
       <?php $pel = 0 ?>
@@ -404,8 +411,9 @@ foreach ($peliculas as $peliculaf) {
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
           <div id="divSegundoSlide{{$pel}}" class="zoom">
             <center>
-              <div class="carta">
-                <img onload="onloadImgs('imgS2{{$pel}}')" id="imgS2{{$pel}}" src="{{asset($pelicula->ImagenCartel)}}" class="opaciti-0" alt="..." style="box-shadow: none;">
+              <div class="carta opaciti-0">
+                <img src="{{asset($pelicula->ImagenCartel)}}" alt="..." style="box-shadow: none;">
+                <!-- onload="onloadImgs('imgS2{{$pel}}')" id="imgS2{{$pel}}" -->
                 <div class="bodyCarta">
                   <div class="enMedio">
                     <h5>{{$pelicula->nombre}}</h5>
@@ -469,7 +477,7 @@ foreach ($categorias as $categoriaE) {
     </button>
   </div>
   <div class="splide__track">
-    <h6 id="LetrasSlide{{$i}}" class="subTitulo"><strong>{{$categoriaPel->nombre}}</strong> </h6>
+    <h6 id="LetrasSlide{{$i}}" class="subTitulo opaciti-0"><strong>{{$categoriaPel->nombre}}</strong> </h6>
     <ul class="splide__list">';
       @foreach ($peliculas as $pelicula)
 
@@ -478,10 +486,10 @@ foreach ($categorias as $categoriaE) {
       <li class="splide__slide zoom">
         <a href="{{route('mostrarPelicula', ['pelicula' => $pelicula->id])}}">
           <center>
-            <div id="divCategoria{{$divs3}}" style="height:90%;">
+            <div id="divCategoria{{$divs3}}" style="height:90%;" class="opaciti-0">
 
-              <img src="{{asset($pelicula->ImagenCartel)}}" onload="onloadImgs('imgS3{{$divs3}}')" id="imgS3{{$divs3}}" class=" PeliculaDiv rounded opaciti-0" alt="...">
-
+              <img src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded" alt="...">
+              <!-- onload="onloadImgs('imgS3{{$divs3}}')" id="imgS3{{$divs3}}"  -->
             </div>
           </center>
         </a>
