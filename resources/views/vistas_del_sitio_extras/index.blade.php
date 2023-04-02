@@ -189,17 +189,94 @@
 </script>
 
 <style>
+  .carta {
+    position: relative;
+    width: 302px;
+    height: 240px;
+    z-index: 1;
+    -webkit-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
+    transition: box-shadow .7s ease-in-out;
+    border-radius: 2%;
+    overflow: hidden;
+  }
+
+  .carta:hover {
+    -webkit-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
+  }
+
+  .carta .bodyCarta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1b1c19;
+    height: 35%;
+
+  }
+
+  .carta img {
+    transition: height 1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65%;
+  }
+
+  .carta:hover img {
+    transition: height .3s ease-in-out;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .carta:hover .bodyCarta {
+    transition: background-color 1s ease-in-out;
+    transition: height 1s ease-in-out;
+    left: 0;
+    height: 100%;
+    background-color: #1b1c197c;
+  }
+
+  .carta:hover h5,
+  .carta:hover p {
+    transition: text-shadow 1s ease-in-out;
+    text-shadow: 0 0 1.5vw rgba(255, 255, 255, 0.9), 0 0 1.5vw rgba(255, 255, 255, 0.9);
+  }
+
+  .carta:hover .bodyCarta p {
+    opacity: .75;
+  }
+
+  .enMedio {
+    position: absolute;
+    width: 90%;
+    height: max-content;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+
+  .color-container_inicio {
+    width: 1%;
+    height: 1%;
+    min-width: 10px;
+    min-height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: -1.2%;
+    margin-left: 2%;
+  }
+
   #capa1 {
     position: absolute;
     z-index: 2;
-  }
-
-  #background {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-    width: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* background-size: cover; */
   }
 
   .imagenFondoD {
@@ -265,6 +342,16 @@
     opacity: 0;
     transition: opacity 3s ease-in-out;
   }
+
+  .PeliculaDiv {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+  }
+
+  .PeliculaDiv:hover {
+    border: 2px white solid;
+  }
 </style>
 
 
@@ -278,20 +365,6 @@ foreach ($peliculas as $peliculaf) {
 
 <script>
   let idT = null;
-
-  function onloadImg() {
-    var img = document.getElementById('ImagenFondo');
-    img.style.opacity = .8;
-  }
-
-  function onloadImgs(id) {
-    // var idS = id.toString();
-    var img = document.getElementById(id);
-    var idS = setTimeout(() => {
-      // img.style.opacity = 1;
-      window.clearTimeout(idS);
-    }, 1000);
-  }
 
   function imagen(src) {
     var img = document.getElementById('ImagenFondo');
@@ -375,7 +448,6 @@ foreach ($peliculas as $peliculaf) {
         <a href="{{route('mostrarPelicula',['pelicula' => $pelicula->id])}}">
           <div id="divPrimerSlide{{$divs1}}" class="opaciti-0">
             <img style=" margin-top: 4.5%; margin-bottom: 4.4%; height: 90%;" onmouseover="imagen('{{asset($pelicula->ImagenCartel)}}')" src="{{asset($pelicula->ImagenCartel)}}" class="rounded PeliculaDiv" alt="...">
-            <!-- onload="onloadImgs('imagen{{$divs1}}')" id="imagen{{$divs1}}" -->
           </div>
         </a>
       </li>
@@ -413,7 +485,6 @@ foreach ($peliculas as $peliculaf) {
             <center>
               <div class="carta opaciti-0">
                 <img src="{{asset($pelicula->ImagenCartel)}}" alt="..." style="box-shadow: none;">
-                <!-- onload="onloadImgs('imgS2{{$pel}}')" id="imgS2{{$pel}}" -->
                 <div class="bodyCarta">
                   <div class="enMedio">
                     <h5>{{$pelicula->nombre}}</h5>
@@ -489,7 +560,6 @@ foreach ($categorias as $categoriaE) {
             <div id="divCategoria{{$divs3}}" style="height:90%;" class="opaciti-0">
 
               <img src="{{asset($pelicula->ImagenCartel)}}" class=" PeliculaDiv rounded" alt="...">
-              <!-- onload="onloadImgs('imgS3{{$divs3}}')" id="imgS3{{$divs3}}"  -->
             </div>
           </center>
         </a>

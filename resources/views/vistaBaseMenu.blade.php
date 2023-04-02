@@ -36,7 +36,6 @@
     }
 
     footer {
-      /* background-color: rgb(20, 20, 20); */
       background-color: #060608;
       padding-top: 80px;
       padding-bottom: 10px;
@@ -93,12 +92,6 @@
       scale: .97;
     }
 
-    .ImagenSlideInicio {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     .botonesMenuCuentaDrop {
       color: white;
       opacity: .8;
@@ -121,15 +114,6 @@
       color: white;
     }
 
-    .TituloMenuCuenta {
-      margin-left: 20px;
-      margin-right: 20px;
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      margin-top: 20px;
-    }
-
     .botonesMenuCuenta:hover {
       opacity: 1;
     }
@@ -140,12 +124,11 @@
 
     a {
       text-decoration: none;
+      color: white;
     }
 
     .popover__title {
       font-size: 18px;
-      /* line-height: 36px; */
-      /* text-decoration: none; */
       color: white;
       text-align: left;
       margin-right: 20px;
@@ -159,7 +142,6 @@
     .popover__wrapper {
       position: relative;
       margin-top: 10px;
-      /* display: inline-block; */
     }
 
     .popover__content2 {
@@ -174,9 +156,7 @@
       border-radius: 4px;
       padding-top: 14px;
       padding-bottom: 20px;
-      /* padding-right: 20px; */
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-      /* width: auto; */
     }
 
     .popover__content2:before {
@@ -244,12 +224,6 @@
       margin-right: 80px;
     }
 
-    .botonesNav {
-      margin-left: 30px;
-      text-decoration: none;
-      color: black;
-    }
-
     .popover-title {
       color: blue;
       font-size: 15px;
@@ -298,7 +272,6 @@
     }
 
     .MostrarContenidos {
-
       margin-left: 2.2%;
     }
 
@@ -335,12 +308,6 @@
       color: white;
     }
 
-    .splideCategorias {
-      width: 100%;
-      height: 30px;
-
-    }
-
     .Tabla {
       width: 100%;
     }
@@ -348,11 +315,6 @@
     .ImagenTabla {
       width: 25px;
       height: 35px;
-    }
-
-    a {
-      text-decoration: none;
-      color: white;
     }
 
     h6 {
@@ -367,7 +329,6 @@
     }
 
     body {
-      /* background-color: rgb(26, 26, 27); */
       background-color: #1e1d25;
       overflow-x: hidden;
     }
@@ -385,113 +346,13 @@
       visibility: visible;
     }
 
-    .ImagenVistaInicio {
-      width: 100%;
-      height: 90%;
-    }
-
-    .PeliculaDiv {
-      width: 100%;
-      height: 90%;
-      object-fit: cover;
-    }
-
-    .PeliculaDiv:hover {
-      border: 2px white solid;
-    }
-
-    .carta {
-      position: relative;
-      width: 302px;
-      height: 240px;
-      z-index: 1;
-      -webkit-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
-      box-shadow: -1vw 1vw 1vw 0px rgba(0, 0, 0, 0.75);
-      transition: box-shadow .7s ease-in-out;
-      border-radius: 2%;
-      overflow: hidden;
-    }
-
-    .carta:hover {
-      -webkit-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
-      box-shadow: -1.4vw 1.4vw 1vw 0px rgba(0, 0, 0, 0.75);
-    }
-
-    .carta .bodyCarta {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #1b1c19;
-      height: 35%;
-
-    }
-
-    .carta img {
-      transition: height 1s ease-in-out;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 65%;
-    }
-
-    .carta:hover img {
-      transition: height .3s ease-in-out;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-
-    .carta:hover .bodyCarta {
-      transition: background-color 1s ease-in-out;
-      transition: height 1s ease-in-out;
-      left: 0;
-      height: 100%;
-      background-color: #1b1c197c;
-    }
-
     .bodyCarta h5,
     .bodyCarta p {
       font-family: 'Roboto Flex', sans-serif;
     }
 
-    .carta:hover h5,
-    .carta:hover p {
-      transition: text-shadow 1s ease-in-out;
-      text-shadow: 0 0 1.5vw rgba(255, 255, 255, 0.9), 0 0 1.5vw rgba(255, 255, 255, 0.9);
-    }
-
     .bodyCarta p {
       opacity: .5;
-    }
-
-    .carta:hover .bodyCarta p {
-      opacity: .75;
-    }
-
-    .enMedio {
-      position: absolute;
-      width: 90%;
-      height: max-content;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-
-    }
-
-    .color-container_inicio {
-      width: 1%;
-      height: 1%;
-      min-width: 10px;
-      min-height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-bottom: -1.2%;
-      margin-left: 2%;
     }
 
     .color-container {
@@ -509,11 +370,6 @@
       max-width: 1000px;
       width: 95%;
     }
-
-    /* 
-    .container .btn{
-
-    } */
 
     img {
       object-fit: cover;
@@ -538,18 +394,6 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    .MenuCategorias {
-      width: 100%;
-      height: 220px;
-      margin-top: 60px;
-    }
-
-    .MenuCategorias2 {
-      width: 100%;
-      height: 150px;
-      margin-top: 60px;
-    }
-
     .barraInicio {
       color: white;
       text-decoration: none;
@@ -572,7 +416,6 @@
 
     .boton5 {
       color: white !important;
-      /* padding: 0.5em 1.2em; */
       transition: all 1s ease-in-out;
       position: relative;
       text-align: center;
@@ -618,16 +461,6 @@
       height: 20px;
     }
 
-    .menuDespeglegable1 {
-      font-size: 18px;
-
-    }
-
-    .menuDespeglegable2 {
-      font-size: 23px;
-
-    }
-
     .hrClass {
       width: 90%;
       border: 0;
@@ -655,17 +488,13 @@
   function obtener(t) {
     return t;
   }
-
-  // window.onload = () => {
-  //   obtener(true);
-  // };
 </script>
 
 <body onload="var c =true; c=obtener(c);" onresize="var c =true; c=obtener(c);" onscroll="scroll();">
 
   <header>
 
-    <div id="MenuInicio" class="menuInicio  fixed-top"></div>
+    <div id="MenuInicio" class="menuInicio fixed-top"></div>
     <nav class="navbar fixed-top">
       <div class="container-fluid">
 

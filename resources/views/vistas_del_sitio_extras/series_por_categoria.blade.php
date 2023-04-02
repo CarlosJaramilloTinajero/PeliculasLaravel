@@ -1,6 +1,18 @@
 @extends('vistaBaseMenu')
 @section('content')
+<style>
+    .MenuCategorias {
+        width: 100%;
+        height: 220px;
+        margin-top: 60px;
+    }
 
+    .MenuCategorias2 {
+        width: 100%;
+        height: 150px;
+        margin-top: 60px;
+    }
+</style>
 <title>PELICULAS DE CHILL - SERIES</title>
 
 <div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">

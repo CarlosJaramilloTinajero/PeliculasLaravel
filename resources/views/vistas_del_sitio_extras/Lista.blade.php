@@ -45,6 +45,16 @@
         text-shadow: 1px 1px 6px #fff;
         border: none;
     }
+
+    .PeliculaDiv {
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+    }
+
+    .PeliculaDiv:hover {
+        border: 2px white solid;
+    }
 </style>
 
 <?php $cont = 0; ?>

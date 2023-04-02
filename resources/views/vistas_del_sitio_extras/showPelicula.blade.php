@@ -151,6 +151,16 @@
         width: 1.5em;
         height: 1.5em;
     }
+
+    .PeliculaDiv {
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+    }
+
+    .PeliculaDiv:hover {
+        border: 2px white solid;
+    }
 </style>
 <title>PELICULAS DE CHILL - {{$pelicula->nombre}}</title>
 <div class="row pelicula row row-cols-2 row-cols-lg-2">

@@ -1,9 +1,19 @@
 @extends('vistaBaseMenu')
 @section('content')
 <title>Series</title>
-<!-- <center>
-    <p style="margin-top: 100px;">PAGINA EN PROCESO</p>
-</center> -->
+<style>
+    .MenuCategorias {
+        width: 100%;
+        height: 220px;
+        margin-top: 60px;
+    }
+
+    .MenuCategorias2 {
+        width: 100%;
+        height: 150px;
+        margin-top: 60px;
+    }
+</style>
 
 <div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">
 
