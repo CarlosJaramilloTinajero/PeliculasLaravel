@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
-class temporadasController extends Controller
+class TemporadasController extends Controller
 {
     public function index($serie)
     {

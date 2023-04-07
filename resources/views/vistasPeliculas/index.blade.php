@@ -1,4 +1,4 @@
-@extends('vistaBaseMenu')
+@extends('frontend.layout.vistaBaseMenu')
 @section('content')
 <title>Peliculas</title>
 <div class="container p-5" style="margin-top: 100px;">

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class RegiterController extends Controller
     public function show()
     {
         if (Auth::check()) {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
         return view('auth.register');
     }

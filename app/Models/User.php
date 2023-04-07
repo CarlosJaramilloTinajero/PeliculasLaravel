@@ -50,4 +50,9 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
         // $this->attributes['password'] = encrypt($value);
     }
+
+    public function movies()
+    {
+        return $this->hasMany(lista::class, 'idUser', 'id');
+    }
 }

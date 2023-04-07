@@ -9,7 +9,7 @@ use App\Models\lista;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
-class peliculaController extends Controller
+class PeliculaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class peliculaController extends Controller
             $categorias = categoria::all();
             return view('vistasPeliculas.index', ['peliculas' => $peliculas, 'categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -34,13 +34,11 @@ class peliculaController extends Controller
      */
     public function create()
     {
-
-
         if (Auth::check() && auth()->user()->name == "admin") {
             $categorias = categoria::all();
             return view('vistasPeliculas.agregarPelicula', ['categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -53,7 +51,7 @@ class peliculaController extends Controller
     public function store(Request $request)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
         $request->validate([
             'nombre' => 'required|min:4',
@@ -99,7 +97,7 @@ class peliculaController extends Controller
             $categorias = categoria::all();
             return view('vistasPeliculas.editarPelicula', ['pelicula' => $pelicula, 'categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -125,7 +123,7 @@ class peliculaController extends Controller
     {
 
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
 
         if ($request->chbImagen == "si") {
@@ -144,8 +142,6 @@ class peliculaController extends Controller
                 'ImagenCartel' => 'required|image'
             ]);
         }
-
-
 
         $pelicula = pelicula::find($id);
 
@@ -189,7 +185,7 @@ class peliculaController extends Controller
     public function destroy($id)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
 
         $pelicula = pelicula::find($id);
@@ -197,12 +193,11 @@ class peliculaController extends Controller
             return redirect()->back()->with('error', 'Error al borrar la imagen');
         }
 
-        $listas = lista::all();
+        $listas = $pelicula->lists;
         foreach ($listas as $lista) {
-            if ($lista->idPelicula == $pelicula->id) {
-                $lista->delete();
-            }
+            $lista->delete();
         }
+
         $pelicula->delete();
         return redirect()->route('pelicula.index')->with('success', 'Pelicula eliminada correctamente');
     }

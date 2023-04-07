@@ -1,4 +1,4 @@
-@extends('vistaBaseMenu')
+@extends('frontend.layout.vistaBaseMenu')
 @section('content')
 <title>Agregar temporada - {{$serie->nombre}}</title>
 <div class="container w-50 p-5" style="margin-top: 100px;">

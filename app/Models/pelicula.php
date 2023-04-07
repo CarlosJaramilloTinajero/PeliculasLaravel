@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class pelicula extends Model
 {
     use HasFactory;
+
+    public function category()
+    {
+        $this->belongsTo(categoria::class, 'categoria_id', 'id');
+    }
+
+    public function lists()
+    {
+        return $this->hasMany(lista::class, 'idPelicula', 'id');
+    }
 }

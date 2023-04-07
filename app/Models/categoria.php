@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\pelicula;
 use App\Models\serie;
+
 class categoria extends Model
 {
     use HasFactory;
 
-    //Con este metodo devolvemos todos las peliculas 
     public function peliculas()
     {
-        //Esto metodo es el que nos hace la referencia de que una categoria puede tener muchos todos (1 --> muchos)
-        return $this->hasMany(pelicula::class);
+        return $this->hasMany(pelicula::class, 'categoria_id', 'id');
     }
 
     public function series()

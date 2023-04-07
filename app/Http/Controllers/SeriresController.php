@@ -9,32 +9,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class serires extends Controller
+class SeriresController extends Controller
 {
-
-
-    public function mostrarSerie($serie)
-    {
-            $serieF = serie::find($serie);
-            return view('vistas_del_sitio_extras.mostrarSerie', ['serie' => $serieF]);
-    }
-
-    public function mostrarSeries()
-    {
-        $categorias = categoria::all();
-        $series = serie::all();
-        return view('vistas_del_sitio_extras.Series', ['categorias' => $categorias, 'series' => $series]);
-    }
-
-    public function mostrar_series_por_categoria($categoria)
-    {
-            $series = serie::all();
-            $categorias = categoria::all();
-            $categoriam = categoria::find($categoria);
-
-            return view('vistas_del_sitio_extras.series_por_categoria', ['categoria' => $categoriam, 'series' => $series, 'categorias' => $categorias]);
-    }
-
     public function index()
     {
         if (Auth::check() && auth()->user()->name == "admin") {
@@ -42,7 +18,7 @@ class serires extends Controller
             $categorias = categoria::all();
             return view('vistasSeries.index', ['series' => $series, 'categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -54,7 +30,7 @@ class serires extends Controller
             $categorias = categoria::all();
             return view('vistasSeries.editarSerie', ['serie' => $serie, 'categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -62,7 +38,7 @@ class serires extends Controller
     {
 
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
 
         if ($request->chbImagen == "si") {
@@ -114,14 +90,14 @@ class serires extends Controller
             $categorias = categoria::all();
             return view('vistasSeries.agregarSerie', ['categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
     public function store(Request $request)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
         $request->validate([
             'nombre' => 'required|min:4',
@@ -152,7 +128,7 @@ class serires extends Controller
     public function destroy($id)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
 
         $serie = serie::find($id);

@@ -1,4 +1,4 @@
-@extends('vistaBaseMenu')
+@extends('frontend.layout.vistaBaseMenu')
 @section('content')
 
 <title>Login</title>
@@ -47,7 +47,7 @@
     <h5 class="alert alert-danger">{{$message}}</h5>
     @enderror
 
-    <form action="{{route('login')}}" method="POST">
+    <form action="{{route('login.user')}}" method="POST">
         @csrf
         <label for="inputEmail3" class="labelC form-label">Nombre de usuario / Email</label>
         <input type="text" class="form-control" name="name"><br>
@@ -56,7 +56,7 @@
         <input type="password" class="form-control" name="password"><br>
 
         <center>
-            <p style="color: white;">No tienes cuenta? <br> <a style="color: white; text-decoration: underline;" href="{{route('registro')}}">Registrate</a></p>
+            <p style="color: white;">No tienes cuenta? <br> <a style="color: white; text-decoration: underline;" href="{{route('registro.show')}}">Registrate</a></p>
         </center>
         <div class="d-grid gap-2">
             <button type="submit" class="btn boton3">Iniciar sesion</button>

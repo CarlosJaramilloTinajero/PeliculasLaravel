@@ -1,82 +1,105 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\peliculaController;
-use App\Http\Controllers\categoriaController;
-use App\Http\Controllers\controladorDelSitio;
-use App\Http\Controllers\listaController;
-use App\Http\Controllers\loginController;
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\RegiterController;
-use App\Http\Controllers\serires;
-use App\Http\Controllers\temporadasController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\PeliculaController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\Frontend\ControladorDeLSitio;
+use App\Http\Controllers\Frontend\ListController;
+use App\Http\Controllers\Frontend\LoginController;
+use App\Http\Controllers\Frontend\LogoutController;
+use App\Http\Controllers\Frontend\MovieController;
+use App\Http\Controllers\Frontend\RegiterController;
+use App\Http\Controllers\SeriresController;
+use App\Http\Controllers\TemporadasController;
+use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\SeriresController as FrontenSeriresController;
+use App\Http\Services\OMDbAPI\RepositoryOMDBApi;
+use App\Http\Services\OMDbAPI\ServiceOMDBApi;
+use App\Models\categoria;
 
-Route::patch('/Temporada/update/{serie}/{temporada}', [temporadasController::class, 'update'])->name('updateTemporada');
+//********************************  Website  *************************************
+Route::get('/', [ControladorDeLSitio::class, 'index'])->name('home');
 
-Route::get('/Temporada/show/{serie}/{temporada}', [temporadasController::class, 'show'])->name('showTemporada');
+Route::delete('lista/{lista}', [ListController::class, 'destroy'])->name('eliminarLista');
 
-Route::delete('/Temporada/destroy/{temporada}', [temporadasController::class, 'destroy'])->name('eliminarTemporada');
+Route::post('/lista/{pelicula}', [ListController::class, 'store'])->name('agregarLista');
 
-Route::post('/Temporada/store/{serie}', [temporadasController::class, 'store'])->name('storeTemporada');
+Route::get('/lista', [ListController::class, 'index'])->name('Lista');
 
-Route::get('/Temporada/create/{serie}', [temporadasController::class, 'agregarTemporada'])->name('agregarTemporada');
+Route::get('/series', [FrontenSeriresController::class, 'mostrarSeries'])->name('Series');
 
-Route::get('/Temporadas/{serie}', [temporadasController::class, 'index'])->name('temporadasAgregadas');
+Route::get('/serie/{serie}', [FrontenSeriresController::class, 'mostrarSerie'])->name('mostrarSerie');
 
-Route::delete('Lista/{lista}', [listaController::class, 'destroy'])->name('eliminarLista');
+Route::get('/series/show/{categoria}', [FrontenSeriresController::class, 'mostrar_series_por_categoria'])->name('seriesPorCategoria');
 
-Route::post('/Lista/{pelicula}', [listaController::class, 'store'])->name('agregarLista');
+Route::patch('/user/{user}', [UserController::class, 'update'])->name('modificarUser');
 
-Route::get('/Lista', [listaController::class, 'index'])->name('Lista');
+Route::get('/ver-trailer/{pelicula}', [MovieController::class, 'showTrailer'])->name('verTailer');
 
-Route::get('/Series', [serires::class, 'mostrarSeries'])->name('Series');
+Route::get('/ver-pelicula/{pelicula}', [MovieController::class, 'showMovie'])->name('verPelicula');
 
-Route::get('/modificarSerie/{serie}', [serires::class, 'show'])->name('modificarSerie');
+Route::get('/pelicula/show/{pelicula}', [MovieController::class, 'showMovieView'])->name('show.movie');
 
-Route::patch('/Serie/{serie}', [serires::class, 'update'])->name('update.serie');
+Route::get('/peliculas/{categoria}', [MovieController::class, 'showMoviesByCategory'])->name('extrasPeliculas_porCategoria');
 
-Route::delete('/Serie/{serie}', [serires::class, 'destroy'])->name('EliminarSerie');
+Route::get('/peliculas', [MovieController::class, 'showMovies'])->name('extrasPeliculas');
 
-Route::get('/Series/create', [serires::class, 'create'])->name('create.series');
+Route::get('/registro', [RegiterController::class, 'show'])->name('registro.show');
 
-Route::get('/SeriesIndex', [serires::class, 'index'])->name('seriesAgregadas');
+Route::post('/registro', [RegiterController::class, 'Register'])->name('registro');
 
-Route::post('/Serie', [serires::class, 'store'])->name('agregarSerie');
+Route::get('/login', [LoginController::class, 'show'])->name('login');
 
-Route::get('/Series/{categoria}', [serires::class, 'mostrar_series_por_categoria'])->name('seriesPorCategoria');
+Route::post('/login', [LoginController::class, 'login'])->name('login.user');
 
-Route::get('/Serie/{serie}', [serires::class, 'mostrarSerie'])->name('mostrarSerie');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-Route::patch('/User/{user}', [userController::class, 'update'])->name('modificarUser');
-
-Route::get('/VerTrailer/{pelicula}', [controladorDelSitio::class, 'verTrailer'])->name('verTailer');
-
-Route::get('/VerPelicula/{pelicula}', [controladorDelSitio::class, 'verPelicula'])->name('verPelicula');
-
-Route::get('/Pelicula/{pelicula}', [controladorDelSitio::class, 'showPelicula'])->name('mostrarPelicula');
-
-Route::get('/Peliculas/{categoria}', [controladorDelSitio::class, 'index_Peliculas_por_categoria'])->name('extrasPeliculas_porCategoria');
+Route::get('/cuenta', [UserController::class, 'cuenta'])->name('cuenta');
 
 
-Route::get('/Peliculas', [controladorDelSitio::class, 'index_Peliculas'])->name('extrasPeliculas');
+// ***************************  admin  ********************************
 
-Route::get('/', [controladorDelSitio::class, 'index'])->name('extras');
+Route::patch('/temporada/update/{serie}/{temporada}', [TemporadasController::class, 'update'])->name('updateTemporada');
 
-Route::get('/Inicio', [controladorDelSitio::class, 'index'])->name('extras');
+Route::get('/temporada/show/{serie}/{temporada}', [TemporadasController::class, 'show'])->name('showTemporada');
 
-Route::resource('pelicula', peliculaController::class);
+Route::delete('/temporada/destroy/{temporada}', [TemporadasController::class, 'destroy'])->name('eliminarTemporada');
 
-Route::resource('categoria', categoriaController::class);
+Route::post('/temporada/store/{serie}', [TemporadasController::class, 'store'])->name('storeTemporada');
 
-Route::get('/Registro', [RegiterController::class, 'show'])->name('registro');
+Route::get('/temporada/create/{serie}', [TemporadasController::class, 'agregarTemporada'])->name('agregarTemporada');
 
-Route::post('/Registro', [RegiterController::class, 'Register'])->name('registro');
+Route::get('/temporadas/{serie}', [TemporadasController::class, 'index'])->name('temporadasAgregadas');
 
-Route::get('/Login', [loginController::class, 'show'])->name('login');
+Route::get('/modificar-serie/{serie}', [SeriresController::class, 'show'])->name('modificarSerie');
 
-Route::post('/Login', [loginController::class, 'login'])->name('login');
+Route::patch('/serie/{serie}', [SeriresController::class, 'update'])->name('update.serie');
 
-Route::get('/Logout', [LogoutController::class, 'logout'])->name('logout');
+Route::delete('/serie/{serie}', [SeriresController::class, 'destroy'])->name('EliminarSerie');
 
-Route::get('/Cuenta', [controladorDelSitio::class, 'Cuenta'])->name('cuenta');
+Route::get('/series/create', [SeriresController::class, 'create'])->name('create.series');
+
+Route::get('/series-index', [SeriresController::class, 'index'])->name('seriesAgregadas');
+
+Route::post('/serie', [SeriresController::class, 'store'])->name('agregarSerie');
+
+Route::resource('pelicula', PeliculaController::class);
+
+Route::resource('categoria', CategoriaController::class);
+
+Route::get('/add-movie-by-api', function () {
+    $categorias = categoria::all();
+    return view('api-omba.add', ['categorias' => $categorias]);
+})->name('add.omba');
+
+Route::get('/prueba', function () {
+    $service = new ServiceOMDBApi();
+
+    $repository = new RepositoryOMDBApi();
+
+    $responseByTitle = $service->getMoviesBySearch('batman');
+
+    $responseById = $service->getMoviesById('tt0372784');
+
+    dd($responseByTitle, $responseById);
+});

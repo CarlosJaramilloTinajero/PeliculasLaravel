@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class loginController extends Controller
+class LoginController extends Controller
 {
 
     public function show()
     {
         if (Auth::check()) {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
         return view('auth.Login');
     }
@@ -22,7 +23,7 @@ class loginController extends Controller
     {
         $credentials = $request->getCredentials();
         if (!Auth::validate($credentials)) {
-            return redirect()->route('login')->with('error','Contraseña o usuario incorrectos');
+            return redirect()->route('login')->with('error', 'Contraseña o usuario incorrectos');
         }
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
         Auth::login($user);
@@ -31,6 +32,6 @@ class loginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        return redirect()->route('extras');
+        return redirect()->route('home');
     }
 }

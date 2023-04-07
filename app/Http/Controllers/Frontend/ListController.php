@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\lista;
 use App\Models\pelicula;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class listaController extends Controller
+class ListController extends Controller
 {
 
     public function index()
     {
         if (Auth::check()) {
-            $peliculas = pelicula::all();
-            $listas = lista::all();
-            return view('vistas_del_sitio_extras.Lista', ['listas' => $listas, 'peliculas' => $peliculas]);
+            $user = User::with('movies')->where('id', auth()->user()->id)->first();
+            return view('frontend.modules.user.lista', ['user' => $user]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -30,7 +31,7 @@ class listaController extends Controller
             $lista->save();
             return redirect()->back();
         }
-        return redirect()->route('extras');
+        return redirect()->route('home');
     }
 
     public function destroy($lista)
@@ -40,7 +41,7 @@ class listaController extends Controller
             $listaF->delete();
             return redirect()->back();
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 }

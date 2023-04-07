@@ -9,7 +9,7 @@ use App\Models\serie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
-class categoriaController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class categoriaController extends Controller
 
             return view('vistasCategorias.index', ['categorias' => $categorias]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -37,7 +37,7 @@ class categoriaController extends Controller
         if (Auth::check() && auth()->user()->name == "admin") {
             return view('vistasCategorias.agregarCategoria');
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -50,7 +50,7 @@ class categoriaController extends Controller
     public function store(Request $request)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
         $request->validate([
             'nombre' => 'required|min:4',
@@ -87,7 +87,7 @@ class categoriaController extends Controller
 
             return view('vistasCategorias.editarCategoria', ['categoria' => $categoria, 'tipo' => $tipo]);
         } else {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
     }
 
@@ -112,7 +112,7 @@ class categoriaController extends Controller
     public function update(Request $request, $id)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
         $request->validate([
             'nombre' => 'required|min:4',
@@ -139,7 +139,7 @@ class categoriaController extends Controller
     public function destroy($id)
     {
         if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('extras');
+            return redirect()->route('home');
         }
 
         $categoria = categoria::find($id);
