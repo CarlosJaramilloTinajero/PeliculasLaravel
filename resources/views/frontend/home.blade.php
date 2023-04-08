@@ -25,7 +25,7 @@
         </div>
         <div class="splide__track">
             <ul class="splide__list">
-                @foreach ($peliculas as $pelicula)
+                @foreach ($peliculas->take(8) as $pelicula)
                     <li class="splide__slide slide first-slide">
                         <a href="{{ route('show.movie', ['pelicula' => $pelicula->id]) }}">
                             <div class="cart-movie cart-movie-full zoom"

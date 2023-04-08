@@ -1,0 +1,57 @@
+.imageOMBA {
+    width: 80px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.imageOMBA img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.paginationMovies {
+    width: 250px;
+    height: auto;
+    margin: 10px auto;
+    display: flex;
+}
+
+.paginationMovies .changePage {
+    width: 35%;
+}
+
+.paginationMovies .changePage:first-child {
+    margin-right: 10px;
+}
+
+.paginationMovies .changePage:last-child {
+    margin-left: 10px;
+}
+
+.paginationMovies .pageMovies {
+    width: 30%;
+}
+
+.paginationMovies .pageMovies input {
+    width: 100%;
+    height: 36px;
+    margin-top: 4px;
+    /* padding: 0 3px; */
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: unset;
+}
+
+.pageText {
+    text-align: center;
+    width: 250px;
+    margin: 10px auto;
+}
+
+.pageText p {
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: rgba(0, 0, 0, 0.8);
+}

@@ -8,6 +8,7 @@ use App\Models\categoria;
 use App\Models\lista;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PeliculaController extends Controller
 {
@@ -67,13 +68,14 @@ class PeliculaController extends Controller
         $pelicula->descripcion = $request->descripcion;
 
         if ($request->hasFile('ImagenCartel')) {
-            $archivo = $request->file('ImagenCartel');
-            $destino = 'Imagenes/imagenes_de_Cartel_Grande_Peliculas/';
-            $nombreArchiivo = time() . '-' . $archivo->getClientOriginalName();
-            if ($archivo->move($destino, $nombreArchiivo)) {
-                $pelicula->ImagenCartel = $destino . $nombreArchiivo;
+            $file = $request->file('ImagenCartel');
+            $destino = 'Imagenes/imagenes_de_Cartel_Grande_Peliculas';
+
+            if ($path = Storage::disk('public')->putFile($destino, $file)) {
+                $pelicula->ImagenCartel = 'storage/' . $path;
             }
         }
+
         $pelicula->linkPelicula = $request->linkPelicula;
         $pelicula->linkTrailer = $request->linkTrailer;
         $pelicula->categoria_id = $request->categoria_id;
@@ -149,18 +151,22 @@ class PeliculaController extends Controller
 
             if ($request->hasFile('ImagenCartel')) {
 
-                if (!File::delete($pelicula->ImagenCartel)) {
-                    return redirect()->back()->with('error', 'Error al borrar la imagen');
+                if (strpos($pelicula->ImagenCartel, 'https://') == false) {
+                    if (Storage::disk('public')->exists(str_replace('storage/', '', $pelicula->ImagenCartel))) {
+                        if (!Storage::disk('public')->delete(str_replace('storage/', '', $pelicula->ImagenCartel))) {
+                            return redirect()->back()->with('error', 'Error al borrar la imagen');
+                        }
+                    }
                 }
 
-                $archivo = $request->file('ImagenCartel');
-                $destino = 'Imagenes/imagenes_de_Cartel_Grande_Peliculas/';
-                $nombreArchiivo = time() . '-' . $archivo->getClientOriginalName();
-                if (!$archivo->move($destino, $nombreArchiivo)) {
+                $file = $request->file('ImagenCartel');
+                $destino = 'Imagenes/imagenes_de_Cartel_Grande_Peliculas';
+
+                if (!$path = Storage::disk('public')->putFile($destino, $file)) {
                     return redirect()->back()->with('error', 'Error al cargar la imagen');
-                } else {
-                    $pelicula->ImagenCartel = $destino . $nombreArchiivo;
                 }
+                $pelicula->ImagenCartel = 'storage/' . $path;
+
             } else {
                 return redirect()->back()->with('error', 'Error al escoger la imagen');
             }
@@ -189,8 +195,12 @@ class PeliculaController extends Controller
         }
 
         $pelicula = pelicula::find($id);
-        if (!File::delete($pelicula->ImagenCartel)) {
-            return redirect()->back()->with('error', 'Error al borrar la imagen');
+        if (strpos($pelicula->ImagenCartel, 'https://') == false) {
+            if (Storage::disk('public')->exists(str_replace('storage/', '', $pelicula->ImagenCartel))) {
+                if (!Storage::disk('public')->delete(str_replace('storage/', '', $pelicula->ImagenCartel))) {
+                    return redirect()->back()->with('error', 'Error al borrar la imagen');
+                }
+            }
         }
 
         $listas = $pelicula->lists;

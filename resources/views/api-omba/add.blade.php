@@ -1,4 +1,7 @@
 @extends('frontend.layout.vistaBaseMenu')
+@push('css')
+    <link rel="stylesheet" href="{{asset('css/styleOMBA.css')}}">
+@endpush
 @section('content')
     <title>Agregar pelicula</title>
     <div class="container p-4" style="margin-top: 100px;">

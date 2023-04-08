@@ -1,63 +1,4 @@
 <div>
-    <style>
-        .imageOMBA {
-            width: 80px;
-            height: 100px;
-            margin: 0 auto;
-        }
-
-        .imageOMBA img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover
-        }
-
-        .paginationMovies {
-            width: 250px;
-            height: auto;
-            margin: 10px auto;
-            display: flex;
-        }
-
-        .paginationMovies .changePage {
-            width: 35%;
-        }
-
-        .paginationMovies .changePage:first-child {
-            margin-right: 10px;
-        }
-
-        .paginationMovies .changePage:last-child {
-            margin-left: 10px;
-        }
-
-        .paginationMovies .pageMovies {
-            width: 30%;
-        }
-
-        .paginationMovies .pageMovies input {
-            width: 100%;
-            height: 36px;
-            margin-top: 4px;
-            /* padding: 0 3px; */
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: unset;
-        }
-
-        .pageText {
-            text-align: center;
-            width: 250px;
-            margin: 10px auto;
-        }
-
-        .pageText p {
-            margin-bottom: 0px;
-            font-size: 15px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: rgba(0, 0, 0, 0.8);
-        }
-    </style>
     @if (!$addMovieForm)
         <form wire:submit.prevent="search({{ true }})">
             <div class="mb-3">
@@ -68,21 +9,26 @@
         @if ($submited)
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Exito </strong> {{ ' !' . $submited }}!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" wire:click="changeAlert('successForm')" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
             </div>
         @endif
 
-        @if (is_numeric($results))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ '#' . $results . ' resultados encontrados' }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @else
-            @if ($results)
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>{{ $results }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @if ($msgSearch)
+            @if (is_numeric($results))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ '#' . $results . ' resultados encontrados' }}</strong>
+                    <button type="button" wire:click="changeAlert('successSearch')" class="btn-close"
+                        data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+            @else
+                @if ($results)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ $results }}</strong>
+                        <button type="button" wire:click="changeAlert('successSearch')" class="btn-close"
+                            data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
             @endif
         @endif
 
@@ -143,6 +89,15 @@
             <button wire:click="resetMovieData()" class="btn btn-secondary btn-sm">Regresar</button>
         </div>
         <form wire:submit.prevent="submit">
+
+            @if ($msgErrorForm)
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error </strong> {{ ' !' . $msgErrorForm }}!
+                    <button type="button" class="btn-close" wire:click="changeAlert('msgErrorForm')"
+                        data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="mb-3">
                 <p class="text-start h6">Agregar pelicula '{{ $movieTitle }}'</p>
             </div>
@@ -165,7 +120,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                <select name="" id="" class="form-select">
+                <select name="" id="" class="form-select" wire:model="movieCategory">
+                    <option value="">Categorias</option>
                     @foreach ($categories as $item)
                         <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                     @endforeach
@@ -186,12 +142,13 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" wire:model="movie.Plot" id="floatingInput" placeholder="">
+                <input type="text" class="form-control" wire:model="movie.Plot" id="floatingInput"
+                    placeholder="">
                 <label for="floatingInput">Sintesis</label>
             </div>
 
             <div class="mb-3">
-                <label for="" class="form-label">Imagen API {{ $pictureApi }}</label>
+                <label for="" class="form-label">Imagen API</label>
                 <div class="imageOMBA" style="margin: 0 0 0 0;">
                     <img class="{{ $pictureApi ? 'img-thumbnail opacity-50' : 'img-thumbnail' }}"
                         src="{{ isset($movie['Poster']) ? $movie['Poster'] : '' }}" alt="">
@@ -212,11 +169,25 @@
                     class="form-control" wire:model="imageForm" id="floatingInput">
                 <label for="floatingInput">Imagen</label>
             </div>
+            @auth
+                @if (auth()->user()->name == 'admin')
+                    <div class="mt-4 mb-2 d-flex justify-content-end">
+                        <button type="submit" class="btn boton2 px-4">Agregar</button>
+                    </div>
+                @else
+                    <div class="mt-4 mb-2 d-flex justify-content-end">
+                        <a class="btn boton2 px-4 opacity-50">Administrador</a>
+                    </div>
+                @endif
+            @endauth
 
+            @guest
+                <div class="mt-4 mb-2 d-flex justify-content-end">
+                    <a class="btn boton2 px-4 opacity-50">Administrador</a>
+                </div>
 
-            <div class="mt-4 mb-2 d-flex justify-content-end">
-                <button type="submit" class="btn boton2 px-4">Agregar</button>
-            </div>
+            @endguest
+
         </form>
     @endif
 </div>

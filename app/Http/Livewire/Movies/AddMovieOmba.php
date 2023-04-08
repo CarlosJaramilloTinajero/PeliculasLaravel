@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Movies;
 
 use App\Http\Services\OMDbAPI\ServiceOMDBApi;
 use App\Models\categoria;
+use App\Models\pelicula;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -14,9 +16,9 @@ class AddMovieOmba extends Component
 
     public $search = "", $movies = [], $movie = [], $movieTitle = "", $page = 1, $results = null, $pictureApi = false, $imageForm = null;
 
-    public $addMovieForm = false, $submited = null;
+    public $addMovieForm = false, $submited = null, $msgSearch = false, $movieCategory = "";
 
-    public $categories;
+    public $categories, $msgErrorForm = null;
 
     public function mount()
     {
@@ -40,6 +42,8 @@ class AddMovieOmba extends Component
         $this->movieTitle = "";
         $this->pictureApi = false;
         $this->imageForm = null;
+        $this->movieCategory = "";
+        $this->msgErrorForm = null;
         $this->changeForm(false);
     }
 
@@ -81,6 +85,7 @@ class AddMovieOmba extends Component
     {
         if ($form) {
             $this->page = 1;
+            $this->resetAlerts();
         } else {
 
             if ($this->page == 0) {
@@ -103,10 +108,98 @@ class AddMovieOmba extends Component
         } else {
             $this->results = $searchData['Error'];
         }
+
+        if ($form) {
+            $this->msgSearch = true;
+        }
     }
+
+    public function resetAlerts()
+    {
+        $this->submited = null;
+        $this->msgSearch = false;
+        $this->msgErrorForm = null;
+    }
+
+    public function changeAlert($alert)
+    {
+        switch ($alert) {
+            case 'successForm':
+                $this->submited = null;
+                break;
+
+            case 'successSearch':
+                $this->msgSearch = false;
+                break;
+
+            case 'msgErrorForm':
+                $this->msgErrorForm = null;
+                break;
+        }
+    }
+
     public function submit()
     {
-        $this->submited = "Pelicula " . $this->movie['Title'] . ' agregada correctamente';
-        $this->resetMovieData();
+        try {
+            if ($error = $this->validateForm()) {
+                $this->msgErrorForm = $error;
+                return;
+            }
+
+            $movie = new pelicula();
+
+            if (!$this->pictureApi) {
+                $path = $this->movie['Poster'];
+                $path = str_replace('X300', 'X1000', $path);
+                // $file = file_get_contents($path);
+                // $fileName = explode('.', $path);
+                // $fileName = $fileName[count($fileName) - 1];
+                // $fileName = time() . '.' .  $fileName;
+                $movie->ImagenCartel = $path;
+            } else {
+                $file = $this->imageForm;
+                $fileName = $file->getClientOriginalName();
+
+                $destino = 'Imagenes/imagenes_de_Cartel_Grande_Peliculas/' . $fileName;
+
+                if (!Storage::disk('public')->put($destino, $file)) {
+                    $this->msgErrorForm = 'Error al subir la imagen';
+                    return;
+                }
+                $movie->ImagenCartel = 'storage/' . $destino;
+            }
+
+            // $destino = 'Imagenes/imagenes_de_Cartel_Grande_Peliculas/' . $fileName;
+
+            // if (!Storage::disk('public')->put($destino, $file)) {
+            //     $this->msgErrorForm = 'Error al subir la imagen';
+            //     return;
+            // }
+
+            $movie->nombre = $this->movie['Title'];
+            $movie->descripcion = $this->movie['Plot'];
+            $movie->linkPelicula = "";
+            $movie->linkTrailer = "";
+            // $movie->ImagenCartel = 'storage/' . $destino;
+            $movie->categoria_id = $this->movieCategory;
+            $movie->year_released = $this->movie['Released'];
+            $movie->save();
+
+            $this->submited = "Pelicula " . $this->movie['Title'] . ' agregada correctamente';
+            $this->resetMovieData();
+        } catch (\Exception $e) {
+            report($e);
+        }
+    }
+
+    public function validateForm()
+    {
+        if ($this->movieCategory == "") {
+            return "La categoria es necesaria, porfavor seleccione una";
+        }
+        if ($this->pictureApi && !$this->imageForm) {
+            return "La imagen es necesaria, si no quiere subir una imagen seleccione la imagen de la API";
+        }
+        return null;
     }
 }
