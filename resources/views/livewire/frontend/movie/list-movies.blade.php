@@ -1,10 +1,9 @@
-
 <ul class="splide__list">
-
     @foreach ($user->movies as $lista)
         <li class="splide__slide slide second-slide">
             <a href="{{ route('show.movie', ['pelicula' => $lista->movie->id]) }}">
-                <div class="cart-movie cart-movie-full zoom p-relative">
+                <div class="cart-movie cart-movie-full p-relative cart-movie-hover"
+                    style="box-shadow: -8px 8px 8px {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $lista->movie->category->Color) }}">
                     <div class="cart-movie-img">
                         <img src="{{ $lista->movie->ImagenCartel }}" alt="">
                     </div>

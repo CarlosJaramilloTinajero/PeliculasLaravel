@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\Frontend\ControladorDeLSitio;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ListController;
 use App\Http\Controllers\Frontend\LoginController;
 use App\Http\Controllers\Frontend\LogoutController;
@@ -18,7 +18,7 @@ use App\Http\Services\OMDbAPI\ServiceOMDBApi;
 use App\Models\categoria;
 
 //********************************  Website  *************************************
-Route::get('/', [ControladorDeLSitio::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::delete('lista/{lista}', [ListController::class, 'destroy'])->name('eliminarLista');
 

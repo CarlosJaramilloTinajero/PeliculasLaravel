@@ -41,8 +41,9 @@
         </div>
     </section>
 
-    @if (count($peliculas) > 0)
+    @if (count($relatedMovies) > 0)
         <!-- //Segundo slide -->
+        <div class="splide-home"></div>
         <section class="splide" data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
 
             <ul class="splide__pagination opacity-0"></ul>
@@ -59,12 +60,13 @@
             <div class="splide__track">
                 <h6 class="subTitulo opaciti-0"><strong>Recomendado para tí</strong> </h6>
                 <ul class="splide__list">
-                    @foreach ($peliculas as $pelicula)
+                    @foreach ($relatedMovies as $pelicula)
                         <li class="splide__slide slide second-slide">
-                            <a href="{{ route('show.movie', ['pelicula' => $pelicula->id]) }}">
-                                <div class="cart-movie cart-movie-full zoom">
+                            <a href="{{ route('show.movie', ['pelicula' => $pelicula['id']]) }}">
+                                <div class="cart-movie cart-movie-full cart-movie-hover"
+                                    style="box-shadow: -11px 11px 10px {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $pelicula['categoryColor']) }}">
                                     <div class="cart-movie-img">
-                                        <img src="{{ $pelicula->ImagenCartel }}" alt="">
+                                        <img src="{{ $pelicula['ImagenCartel'] }}" alt="">
                                     </div>
                                     {{-- <div class="cart-movie-body">
                                         <p class="name-movie">{{ $pelicula->nombre }}</p>
@@ -80,7 +82,8 @@
         <!-- Por categoria -->
         @foreach ($categorias as $categoria)
             @if (count($categoria->peliculas) > 0)
-                <section style="margin-top:3%;" class="splide"
+                <div class="splide-home"></div>
+                <section class="splide"
                     data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
 
                     <ul class="splide__pagination opacity-0"></ul>
@@ -94,14 +97,15 @@
                         </button>
                     </div>
                     <div class="splide__track">
-                        <h6 id="LetrasSlide" class="subTitulo opaciti-0">
+                        <h6 class="subTitulo opaciti-0">
                             <strong>{{ $categoria->nombre }}</strong>
                         </h6>
-                        <ul class="splide__list">';
-                            @foreach ($categoria->peliculas as $pelicula)
+                        <ul class="splide__list">
+                            @foreach ($categoria->peliculas->take(13) as $pelicula)
                                 <li class="splide__slide slide second-slide">
                                     <a href="{{ route('show.movie', ['pelicula' => $pelicula->id]) }}">
-                                        <div class="cart-movie cart-movie-full zoom">
+                                        <div class="cart-movie cart-movie-full cart-movie-hover"
+                                            style="box-shadow: -8px 8px 8px {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $categoria->Color) }}">
                                             <div class="cart-movie-img">
                                                 <img src="{{ $pelicula->ImagenCartel }}" alt="">
                                             </div>

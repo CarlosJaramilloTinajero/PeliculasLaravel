@@ -33,24 +33,25 @@ class MovieController extends Controller
     public function showMovies()
     {
         $categorias = categoria::all();
-        $peliculas = pelicula::all();
+        $peliculas = pelicula::paginate(20);
         return view('frontend.modules.movies.peliculas', ['peliculas' => $peliculas, 'categorias' => $categorias]);
     }
 
     public function showMoviesByCategory($categoria)
     {
-        $peliculas = pelicula::all();
         $categorias = categoria::all();
-        $categoriam = categoria::find($categoria);
+        $categoriam = categoria::with('peliculas')->find($categoria);
+        $peliculas = pelicula::where('categoria_id', $categoriam->id)->paginate(20);
 
-        return view('frontend.modules.movies.peliculas-por-categoria', ['categoria' => $categoriam, 'peliculas' => $peliculas, 'categorias' => $categorias]);
+        $opacityBoxShadows = '.15';
+        return view('frontend.modules.movies.peliculas-por-categoria', ['peliculas' => $peliculas, 'opacityBoxShadows' => $opacityBoxShadows, 'categoria' => $categoriam, 'categorias' => $categorias]);
     }
 
     public function showMovieView($pelicula)
     {
-        $peliculaN = pelicula::find($pelicula);
-        $peliculas = pelicula::all();
-        $listas = lista::all();
-        return view('frontend.modules.movies.showPelicula', ['pelicula' => $peliculaN, 'peliculas' => $peliculas, 'listas' => $listas]);
+        $peliculaN = pelicula::with('category')->find($pelicula);
+        $related = pelicula::with('category')->where('id', '!=', $peliculaN->id)->where('categoria_id', $peliculaN->categoria_id)->take(9)->get();
+        $opacityBoxShadows = '.6';
+        return view('frontend.modules.movies.show-movie', ['opacityBoxShadows' => $opacityBoxShadows, 'pelicula' => $peliculaN, 'related' => $related]);
     }
 }

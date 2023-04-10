@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label for="color" class="form-label">Color de la categoria</label>
-            <input type="color" class="form-control" name="color" value="{{$categoria->Color}}" }>
+            <input type="color" class="form-control" name="color" value="{{$categoria->Color}}" >
         </div>
 
         <button type="submit" class="btn botonesCategorias">Modificar</button>
@@ -71,36 +71,17 @@
             <th>Imagen</th>
             <th>Acciones</th>
         </tr>
-        <?php $j = 0; ?>
-        @foreach ($tipo as $tipoE)
-        @if ($tipoE->categoria_id==$categoria->id)
+        @foreach ($tipo as $key => $tipoE)
         <tr>
-            <?php $j++; ?>
-            <td>{{$j}}</td>
+            <td>{{$key}}</td>
 
             <td style="background-color: {{$categoria->Color}};"><a href="{{route('categoria.show', ['categorium' => $categoria->id])}}"><strong>{{$categoria->nombre}}</strong></a></td>
 
             <td>{{$tipoE->nombre}}</td>
-            <?php
-            $x = str_split($tipoE->descripcion);
-            $aux = "";
-            $maxPalabras = 10;
-            if ($x > $maxPalabras) {
-                for ($i = 0; $i < $maxPalabras; $i++) {
-                    $aux .= $x[$i];
-                }
-                // echo $aux;
-            } else {
-                $aux = $tipoE->descripcion;
-            }
-
-            ?>
             @if ($categoria->Tipo == "serie")
-            <td style="max-width: 200px;">{{$aux}}...</td>
+            <td style="max-width: 200px;">{{Str::limit($tipoE->descripcion, 10)}}</td>
             <td><a href="{{asset($tipoE->imagen)}}" target="_blank"><img src="{{asset($tipoE->imagen)}}" alt="" class="ImagenTabla"></a></td>
             <td>
-                <!-- <a class="btn btn-secondary" style="margin-top: 10px;" href="{{route('modificarSerie',['serie' => $tipoE->id])}}">Modificar</a> -->
-                <!-- <button type="button" style="margin-top: 10px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{$tipoE->id}}">Elimiar</button> -->
                 <button type="button" class="btn btn-secondary  btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Acciones
                 </button>
@@ -117,11 +98,9 @@
             </td>
             @endif
             @if ($categoria->Tipo == "pelicula")
-            <td style="max-width: 200px;">{{$aux}}...</td>
+            <td style="max-width: 200px;">{{Str::limit($tipoE->descripcion, 10)}}</td>
             <td><a href="{{asset($tipoE->ImagenCartel)}}" target="_blank"><img src="{{asset($tipoE->ImagenCartel)}}" alt="" class="ImagenTabla"></a></td>
             <td>
-                <!-- <a class="btn btn-secondary" style="margin-top: 10px;" href="{{route('pelicula.show',['pelicula' => $tipoE->id])}}">Modificar</a> -->
-                <!-- <button type="button" style="margin-top: 10px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{$tipoE->id}}">Elimiar</button> -->
                 <button type="button" class="btn btn-secondary  btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Acciones
                 </button>
@@ -174,7 +153,6 @@
                 </div>
             </div>
         </div>
-        @endif
         @endforeach
     </table>
 </div>

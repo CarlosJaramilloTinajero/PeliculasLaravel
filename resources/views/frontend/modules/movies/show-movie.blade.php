@@ -1,6 +1,7 @@
 @extends('frontend.layout.vistaBaseMenu')
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/styleShowMovie.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styleIncio.css') }}">
 @endpush
 @section('content')
     <title>PELICULAS DE CHILL - {{ $pelicula->nombre }}</title>
@@ -11,22 +12,13 @@
         </div>
 
         <div class="col desCol">
+            <p class="category"
+                style="color: {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $pelicula->category->Color) }}">
+                {{ $pelicula->category->nombre }}</p>
             <p id="nombre" class="titulo"><strong>{{ $pelicula->nombre }}</strong></p>
             <p class="descripcion">
                 {{ $pelicula->descripcion }}
             </p>
-            @auth
-                <?php $agregada = false;
-                $listaId = null; ?>
-                @foreach ($listas as $lista)
-                    @if ($lista->idUser == auth()->user()->id)
-                        @if ($pelicula->id == $lista->idPelicula)
-                            <?php $agregada = true;
-                            $listaId = $lista->id; ?>
-                        @endif
-                    @endif
-                @endforeach
-            @endauth
 
             <div class="d-flex">
                 <a href="{{ route('verPelicula', ['pelicula' => $pelicula->id]) }}" id="btn-0"
@@ -56,11 +48,11 @@
         </div>
         <div class="splide__track">
             <ul class="splide__list">
-                @foreach ($peliculas as $pelicula)
+                @foreach ($related as $pelicula)
                     <li class="splide__slide slide first-slide">
                         <a href="{{ route('show.movie', ['pelicula' => $pelicula->id]) }}">
-                            <div class="cart-movie cart-movie-full zoom"
-                                onmouseover="imagen('{{ asset($pelicula->ImagenCartel) }}')">
+                            <div class="cart-movie cart-movie-full cart-movie-hover"
+                                style="box-shadow: -8px 8px 8px {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $pelicula->category->Color) }}">
                                 <div class="cart-movie-img">
                                     <img src="{{ asset($pelicula->ImagenCartel) }}" alt="...">
                                 </div>

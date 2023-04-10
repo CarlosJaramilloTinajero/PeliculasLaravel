@@ -8,11 +8,11 @@ use Livewire\Component;
 
 class ListMovies extends Component
 {
-    public $movies, $user;
+    public $movies, $user, $opacityBoxShadows = '.8';
 
     public function mount()
     {
-        $this->user = User::with('movies')->find(auth()->id());
+        $this->user = User::with('movies.movie.category')->find(auth()->id());
     }
 
     public function render()

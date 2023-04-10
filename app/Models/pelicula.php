@@ -11,7 +11,7 @@ class pelicula extends Model
 
     public function category()
     {
-        $this->belongsTo(categoria::class, 'categoria_id', 'id');
+        return $this->belongsTo(categoria::class, 'categoria_id', 'id');
     }
 
     public function lists()

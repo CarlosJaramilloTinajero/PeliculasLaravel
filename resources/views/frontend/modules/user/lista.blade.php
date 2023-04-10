@@ -5,8 +5,7 @@
 @section('content')
     <title>Lista</title>
 
-    <section class="splide margin-top-5"
-        data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
+    <section class="splide" data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
 
         <ul class="splide__pagination opacity-0"></ul>
 
@@ -19,11 +18,13 @@
             </button>
         </div>
         <div class="splide__track">
+            <div class="margin-top-4"></div>
+
             @if (count($user->movies) > 0)
-                <h6 id="LetrasSlide0" style="margin-bottom : 2%;"><strong>Tu lista</strong> </h6>
+                <h5 id="LetrasSlide0" style="margin-bottom : 20px;"><strong>Tu lista</strong> </h5>
             @else
                 <center>
-                    <h6 id="LetrasSlide0" style="margin-bottom : 2%;"><strong>Lista vacia</strong> </h6>
+                    <h5 id="LetrasSlide0" style="margin-bottom : 20px;"><strong>Lista vacia</strong> </h5>
                 </center>
             @endif
             @livewire('frontend.movie.list-movies')
@@ -63,16 +64,16 @@
             i = 0;
             while (document.getElementById('LetrasSlide' + i)) {
                 var l = document.getElementById('LetrasSlide' + i);
-                if (ancho < 800) {
-                    l.style.marginTop = "3px";
-                } else {
-                    l.style.marginTop = (.01 * ancho) + "px";
-                }
-                if (ancho > 950) {
-                    l.style.fontSize = (.013 * ancho) + "px";
-                } else {
-                    l.style.fontSize = "13px";
-                }
+                // if (ancho < 800) {
+                //     l.style.marginTop = "3px";
+                // } else {
+                //     l.style.marginTop = (.01 * ancho) + "px";
+                // }
+                // if (ancho > 950) {
+                //     l.style.fontSize = (.013 * ancho) + "px";
+                // } else {
+                //     l.style.fontSize = "13px";
+                // }
                 i++;
             }
             return t;

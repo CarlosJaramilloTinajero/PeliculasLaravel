@@ -80,15 +80,31 @@ class CategoriaController extends Controller
         if (Auth::check() && auth()->user()->name == "admin") {
             $categoria = categoria::find($id);
             if ($categoria->Tipo == "serie") {
-                $tipo = serie::all();
+                $tipo = $categoria->series;
             } else {
-                $tipo = pelicula::all();
+                $tipo = $categoria->peliculas;
+            }
+            if (!explode('#', $categoria->Color)) {
+                $rgb = explode(',', str_replace(')', '', explode('(', $categoria->Color)[1]));
+
+                $r = $rgb[0];
+                $g = $rgb[1];
+                $b = $rgb[2];
+
+                $categoria->Color = '#' . $this->rgbToHex($r, $g, $b);
             }
 
             return view('vistasCategorias.editarCategoria', ['categoria' => $categoria, 'tipo' => $tipo]);
         } else {
             return redirect()->route('home');
         }
+    }
+
+    public function rgbToHex($r, $g, $b)
+    {
+        return str_pad(dechex($r), 2, '0', STR_PAD_LEFT)
+            . str_pad(dechex($g), 2, '0', STR_PAD_LEFT)
+            . str_pad(dechex($b), 2, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -123,8 +139,12 @@ class CategoriaController extends Controller
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
         $categoria->Tipo = $request->Tipo;
-        $categoria->Color = $request->color;
 
+        $hex = $request->color;
+        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+        $rgb = "rgb($r, $g, $b)";
+
+        $categoria->Color = $rgb;
         $categoria->save();
 
         return redirect()->route('categoria.index')->with('success', 'Categoria actualizada correctamente');
