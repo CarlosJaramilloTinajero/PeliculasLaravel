@@ -14,34 +14,23 @@ class ListController extends Controller
 
     public function index()
     {
-        if (Auth::check()) {
-            $user = User::with('movies')->where('id', auth()->user()->id)->first();
-            return view('frontend.modules.user.lista', ['user' => $user]);
-        } else {
-            return redirect()->route('home');
-        }
+        $user = User::with('movies')->where('id', auth()->user()->id)->first();
+        return view('frontend.modules.user.lista', ['user' => $user]);
     }
 
     public function store($pelicula)
     {
-        if (Auth::check()) {
-            $lista = new lista();
-            $lista->idUser =  auth()->user()->id;
-            $lista->idPelicula = $pelicula;
-            $lista->save();
-            return redirect()->back();
-        }
-        return redirect()->route('home');
+        $lista = new lista();
+        $lista->idUser =  auth()->user()->id;
+        $lista->idPelicula = $pelicula;
+        $lista->save();
+        return redirect()->back();
     }
 
     public function destroy($lista)
     {
-        if (Auth::check()) {
-            $listaF = lista::find($lista);
-            $listaF->delete();
-            return redirect()->back();
-        } else {
-            return redirect()->route('home');
-        }
+        $listaF = lista::find($lista);
+        $listaF->delete();
+        return redirect()->back();
     }
 }

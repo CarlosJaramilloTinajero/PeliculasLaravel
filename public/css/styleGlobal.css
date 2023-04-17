@@ -12,6 +12,30 @@
     background-color: #2d7491;
 }
 
+.mantenimiento-container {
+    position: relative;
+    width: 100vw;
+    height: 70vh;
+}
+
+.mantenimiento-container .text-info {
+    position: absolute;
+    width: 90%;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.mantenimiento-container .text-info h1 {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    transform: translateY(-40px);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 19px rgba(255, 255, 255, 0.5);
+}
+
 footer {
     background-color: #060608;
     padding-top: 80px;
@@ -57,7 +81,7 @@ footer strong {
     margin-top: 30px;
 }
 
-.pagintaion-div{
+.pagintaion-div {
     margin-top: 40px;
     margin-bottom: 0px;
 }
@@ -76,7 +100,7 @@ footer strong {
 .rowCatalogo {
     margin-top: 1%;
     margin-left: 1.8%;
-    max-width: 1400px;
+    max-width: 1300px;
     width: 92vw;
     margin: 0 auto;
 }
@@ -578,6 +602,42 @@ h1 {
 .opaciti-0 {
     opacity: 1;
     transition: opacity 3s ease-in-out;
+}
+
+.opacity-03 {
+    opacity: .3;
+}
+
+.opacity-04 {
+    opacity: .4;
+}
+
+.opacity-04 {
+    opacity: .4;
+}
+
+.opacity-05 {
+    opacity: .5;
+}
+
+.opacity-06 {
+    opacity: .6;
+}
+
+.opacity-07 {
+    opacity: .7;
+}
+
+.opacity-08 {
+    opacity: .8;
+}
+
+.opacity-09 {
+    opacity: .9;
+}
+
+.opacity-1 {
+    opacity: 1;
 }
 
 .p-relative {

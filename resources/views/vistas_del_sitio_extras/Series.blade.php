@@ -1,21 +1,23 @@
 @extends('frontend.layout.vistaBaseMenu')
 @section('content')
-<title>Series</title>
-<style>
-    .MenuCategorias {
-        width: 100%;
-        height: 220px;
-        margin-top: 60px;
-    }
+    <title>Series</title>
+    <style>
+        .MenuCategorias {
+            width: 100%;
+            height: 220px;
+            margin-top: 60px;
+        }
 
-    .MenuCategorias2 {
-        width: 100%;
-        height: 150px;
-        margin-top: 60px;
-    }
-</style>
+        .MenuCategorias2 {
+            width: 100%;
+            height: 150px;
+            margin-top: 60px;
+        }
+    </style>
 
-<div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">
+    @include('frontend.components.mantenimiento')
+
+    {{-- <div class="MenuCategorias bg-dark bg-gradient d-none d-lg-block">
 
     <div style="margin-top: 60px;" class="splide ">
         <h1 style="margin-bottom: 40px; font-size: 40px ">Series - Todas las series</h1>
@@ -28,7 +30,7 @@
                     <a href="" selected class="btn botonesCategorias selectBtn">Todas las series</a>
                 </li>
                 @foreach ($categorias as $categoria)
-                @if ($categoria->Tipo=="serie")
+                @if ($categoria->Tipo == 'serie')
                 <li class="splide__slide">
                     <a href="{{route('seriesPorCategoria',['categoria' => $categoria->id])}}" class="btn  botonesCategorias">{{$categoria->nombre}}</a>
                 </li>
@@ -48,7 +50,7 @@
             </a>
             <ul class="dropdown-menu">
                 @foreach ($categorias as $categoria)
-                @if ($categoria->Tipo=="serie")
+                @if ($categoria->Tipo == 'serie')
                 <li><a class="dropdown-item" href="{{route('seriesPorCategoria',['categoria' => $categoria->id])}}">{{$categoria->nombre}}</a></li>
                 @endif
                 @endforeach
@@ -57,9 +59,9 @@
 
 
     </div>
-</div>
+</div> --}}
 
-<div id="divF" class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 1%; margin-left: 1.8%; max-width: 98.2%;">
+    {{-- <div id="divF" class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 1%; margin-left: 1.8%; max-width: 98.2%;">
     <?php $contD = 0; ?>
     @foreach ($series as $serie)
 
@@ -79,49 +81,46 @@
     </div>
     <?php $contD++; ?>
     @endforeach
-</div>
+</div> --}}
 
+    <script>
+        var menu = document.getElementById('MenuInicio');
+        menu.style.opacity = 1;
+    </script>
 
-<br><br>
+    <script>
+        function obtener(t) {
+            let ancho = document.documentElement.clientWidth;
+            var AnchoPorcentaje = .237;
+            var sumaPorcentaje = .0035;
+            var pan0 = 1750;
+            var pan1 = 900;
+            var pan2 = 650;
+            var pantA = 0;
+            var w = 0;
+            var i = 0;
+            // var divD = document.getElementById('divF');
 
-<script>
-    var menu = document.getElementById('MenuInicio');
-    menu.style.opacity = 1;
-</script>
-
-<script>
-    function obtener(t) {
-        let ancho = document.documentElement.clientWidth;
-        var AnchoPorcentaje = .237;
-        var sumaPorcentaje = .0035;
-        var pan0 = 1750;
-        var pan1 = 900;
-        var pan2 = 650;
-        var pantA = 0;
-        var w = 0;
-        var i = 0;
-        // var divD = document.getElementById('divF');
-
-        while (document.getElementById('div-' + i)) {
-            var divFotos = document.getElementById('div-' + i);
-            if (divFotos != null) {
-                if (ancho > pan0) {
-                    w = (AnchoPorcentaje - .0795) * ancho;
-                } else if (ancho > pan1 && ancho <= pan0) {
-                    w = (AnchoPorcentaje - .0455) * ancho;
-                } else if (ancho < pan1 && ancho >= pan2) {
-                    w = (AnchoPorcentaje + sumaPorcentaje) * ancho;
-                } else if (ancho < pan2) {
-                    w = ((AnchoPorcentaje + (sumaPorcentaje * 2)) + .08) * ancho;
+            while (document.getElementById('div-' + i)) {
+                var divFotos = document.getElementById('div-' + i);
+                if (divFotos != null) {
+                    if (ancho > pan0) {
+                        w = (AnchoPorcentaje - .0795) * ancho;
+                    } else if (ancho > pan1 && ancho <= pan0) {
+                        w = (AnchoPorcentaje - .0455) * ancho;
+                    } else if (ancho < pan1 && ancho >= pan2) {
+                        w = (AnchoPorcentaje + sumaPorcentaje) * ancho;
+                    } else if (ancho < pan2) {
+                        w = ((AnchoPorcentaje + (sumaPorcentaje * 2)) + .08) * ancho;
+                    }
+                    divFotos.style.width = w + "px";
+                    divFotos.style.height = (w + (w * .3)) + "px";
+                    // divFotos.style.marginLeft = (ancho * .005) + "px";
+                    i++;
                 }
-                divFotos.style.width = w + "px";
-                divFotos.style.height = (w + (w * .3)) + "px";
-                // divFotos.style.marginLeft = (ancho * .005) + "px";
-                i++;
-            }
 
+            }
+            return t;
         }
-        return t;
-    }
-</script>
+    </script>
 @endsection

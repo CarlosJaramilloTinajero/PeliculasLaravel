@@ -12,11 +12,8 @@ class UserController extends Controller
 {
     public function cuenta()
     {
-        if (Auth::check()) {
-            // $password = Crypt::decrypt(auth()->user()->password, true);
-            return view('frontend.modules.user.cuenta');
-        }
-        return redirect()->route('home');
+        // $password = Crypt::decrypt(auth()->user()->password, true);
+        return view('frontend.modules.user.cuenta');
     }
 
     public function update(Request $request, $user)

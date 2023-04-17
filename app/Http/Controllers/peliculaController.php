@@ -51,9 +51,6 @@ class PeliculaController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('home');
-        }
         $request->validate([
             'nombre' => 'required|min:4',
             'descripcion' => 'required|min:10',
@@ -124,10 +121,6 @@ class PeliculaController extends Controller
     public function update(Request $request, $id)
     {
 
-        if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('home');
-        }
-
         if ($request->chbImagen == "si") {
             $request->validate([
                 'nombre' => 'required|min:4',
@@ -190,10 +183,6 @@ class PeliculaController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('home');
-        }
-
         $pelicula = pelicula::find($id);
         if (strpos($pelicula->ImagenCartel, 'https://') == false) {
             if (Storage::disk('public')->exists(str_replace('storage/', '', $pelicula->ImagenCartel))) {

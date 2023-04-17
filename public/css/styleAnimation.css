@@ -1,0 +1,274 @@
+.animation-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.animation-container.animation-loanding {
+    animation: animation-loanding;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-0-animation {
+    opacity: 0;
+    animation: opacity-1;
+}
+
+.linea {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    border-radius: 100%;
+    border: 3px solid transparent;
+}
+
+.linea.linea-1 {
+    animation: linea-1;
+    width: 200px;
+    height: 200px;
+    border-top-color: rgb(255, 0, 0);
+    border-bottom-color: rgb(162, 0, 255);
+}
+
+.linea.linea-2 {
+    animation: linea-2;
+    width: 80px;
+    height: 80px;
+    border-top-color: rgb(8, 0, 255);
+    border-bottom-color: rgb(0, 255, 153);
+}
+
+.cuadro {
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    border-radius: 3px;
+    transform: rotate(0deg);
+    transform-origin: bottom right;
+    background-color: rgba(0, 255, 153, .9);
+    opacity: 0;
+}
+
+.animation-home {
+    animation: animation-home;
+}
+
+.animation-default-loading {
+    animation: default-loading;
+    transform: translateY(0px);
+}
+
+/* Keys */
+
+@keyframes default-loading {
+
+    10% {
+        opacity: .4;
+        transform: translateY(-30px);
+    }
+
+    30% {
+        opacity: .6;
+        transform: translateY(-70px);
+    }
+
+    50% {
+        opacity: .9;
+        transform: translateY(-90px);
+    }
+
+    70% {
+        opacity: .3;
+        transform: translateY(-70px);
+    }
+
+    90% {
+        opacity: .1;
+        transform: translateY(-30px);
+    }
+}
+
+@keyframes animation-home {
+    10% {
+        opacity: .5;
+    }
+
+    20% {
+        opacity: .95;
+    }
+
+    70% {
+        opacity: .6;
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes linea-1 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        border-top-color: rgb(0, 255, 153);
+        border-bottom-color: rgb(8, 0, 255);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes linea-2 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        border-top-color: rgb(162, 0, 255);
+        border-bottom-color: rgb(255, 0, 0);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes animation-loanding {
+
+    80% {
+        opacity: 1;
+    }
+
+    95% {
+        background-color: rgba(0, 0, 0, 1);
+    }
+
+    99% {
+        z-index: 100;
+    }
+
+    100% {
+        z-index: -100;
+        background-color: rgba(0, 0, 0, 0);
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes opacity-1 {
+    0% {
+        opacity: 0;
+    }
+
+    70%{
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Helpers */
+
+.animation {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animation-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.animation.animation-fast {
+    animation-duration: 3s;
+}
+
+.animation.animation-duration-05s {
+    animation-duration: .5s;
+}
+
+.animation.animation-duration-11s {
+    animation-duration: 1.1s;
+}
+
+.animation.animation-duration-13s {
+    animation-duration: 1.3s;
+}
+
+.animation.animation-duration-1s {
+    animation-duration: 1s;
+}
+
+.animation.animation-duration-2s {
+    animation-duration: 2s;
+}
+
+.animation.animation-duration-3s {
+    animation-duration: 3s;
+}
+
+.animation.animation-duration-4s {
+    animation-duration: 4s;
+}
+
+.animation.animation-duration-5s {
+    animation-duration: 5s;
+}
+
+.animation.animation-slow {
+    animation-duration: 7s;
+}
+
+.animation.animation-ultra-slow {
+    animation-duration: 9s;
+}
+
+.animation.animation-infinite {
+    animation-iteration-count: infinite;
+}
+
+.animation.animation-delay-1s {
+    animation-delay: 1s;
+}
+
+.animation.animation-delay-2s {
+    animation-delay: 2s;
+}
+
+.animation.animation-delay-3s {
+    animation-delay: 3s;
+}
+
+.animation.animation-delay-6s {
+    animation-delay: 6s;
+}
+
+.animation.animation-forwards {
+    animation-fill-mode: forwards;
+}
+
+.animation.animation-both {
+    animation-fill-mode: both;
+}
+
+.animation.animation-timing-ease-in-out {
+    animation-timing-function: ease-in-out;
+}
+
+.animation.animation-timing-linear {
+    animation-timing-function: linear;
+}

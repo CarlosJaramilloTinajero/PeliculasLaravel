@@ -1,4 +1,4 @@
-<footer>
+<footer class="opacity-0-animation animation animation-slow animation-forwards animation-delay-1s">
     <center>
         <div>
             <p style="color: white;">

@@ -49,9 +49,6 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('home');
-        }
         $request->validate([
             'nombre' => 'required|min:4',
             'descripcion' => 'required|min:10'
@@ -84,7 +81,8 @@ class CategoriaController extends Controller
             } else {
                 $tipo = $categoria->peliculas;
             }
-            if (!explode('#', $categoria->Color)) {
+
+            if (count(explode('#', $categoria->Color)) == 1) {
                 $rgb = explode(',', str_replace(')', '', explode('(', $categoria->Color)[1]));
 
                 $r = $rgb[0];
@@ -127,9 +125,6 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('home');
-        }
         $request->validate([
             'nombre' => 'required|min:4',
             'descripcion' => 'required|min:10'
@@ -158,9 +153,6 @@ class CategoriaController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::check() || auth()->user()->name != "admin") {
-            return redirect()->route('home');
-        }
 
         $categoria = categoria::find($id);
 

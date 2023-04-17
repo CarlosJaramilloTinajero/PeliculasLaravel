@@ -76,27 +76,6 @@
             {{ $peliculas->links() }}
         </div>
     </div>
-
-    {{-- <div id="divF" class="row row-cols-1 row-cols-md-3 g-4"
-        style="margin-top: 1%; margin-left: 1.8%; max-width: 98.2%;">
-        @foreach ($peliculas as $pelicula)
-            <div id="div-{{ $contD }}" class="zoom2 col divCatalogoImagen">
-
-                <a class=" shadow" href="{{ route('show.movie', ['pelicula' => $pelicula->id]) }}"
-                    style="width: 100%; height: 100%;">
-                    <div class=" card text-bg-dark PeliculaDiv" style="width: 100%; height: 100%;">
-                        <img src="{{ asset($pelicula->ImagenCartel) }}" class=" rounded card-img" alt="..."
-                            style="height: 100%;">
-                        <div class="card-img-overlay">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
-                            <p class="card-text"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        @endforeach
-    </div> --}}
 @endsection
 
 @section('script')

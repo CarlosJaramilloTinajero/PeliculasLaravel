@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=10, initial-scale=1.0">
     <meta name="google" value="notranslate">
 
-
-
-
     {{-- BootStrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -29,14 +26,16 @@
     {{-- Icons --}}
     <link rel="shortcut icon" href="/Imagenes/Icono/icon.png">
 
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@1,500&family=Roboto+Flex:opsz,wght@8..144,600&display=swap"
         rel="stylesheet">
+
+    {{-- Styles --}}
     <link rel="stylesheet" href="{{ asset('css/styleGlobal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styleAnimation.css') }}">
 
     @stack('css')
     @livewireStyles
@@ -53,9 +52,23 @@
 
     @include('frontend.layout.header')
 
-    @yield('content')
+    <div class="opacity-0-animation animation animation-slow animation-forwards animation-delay-1s">
+        @yield('content')
+    </div>
 
     @include('frontend.layout.footer')
+
+    {{-- Animaciones de carga --}}
+    @php
+        $number = rand(0, 50);
+    @endphp
+
+    @if ($number > 25)
+        @include('frontend.components.animation-default')
+    @else
+        @include('frontend.components.animation-circles')
+    @endif
+    {{-- Fin animaciones carga --}}
 
     <script>
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

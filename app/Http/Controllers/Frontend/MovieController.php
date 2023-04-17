@@ -23,7 +23,6 @@ class MovieController extends Controller
     public function showMovie($pelicula)
     {
         if (Auth::check()) {
-
             $peliculaT = pelicula::find($pelicula);
             return view('frontend.modules.movies.ver-pelicula', ['pelicula' => $peliculaT]);
         }

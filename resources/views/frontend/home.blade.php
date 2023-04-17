@@ -44,7 +44,8 @@
     @if (count($relatedMovies) > 0)
         <!-- //Segundo slide -->
         <div class="splide-home"></div>
-        <section class="splide" data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
+        <section class="splide"
+            data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
 
             <ul class="splide__pagination opacity-0"></ul>
 
@@ -58,7 +59,8 @@
             </div>
 
             <div class="splide__track">
-                <h6 class="subTitulo opaciti-0"><strong>Recomendado para tí</strong> </h6>
+                <h6 class="subTitulo"><strong>Recomendado
+                        para tí</strong> </h6>
                 <ul class="splide__list">
                     @foreach ($relatedMovies as $pelicula)
                         <li class="splide__slide slide second-slide">
