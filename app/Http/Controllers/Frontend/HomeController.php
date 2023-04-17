@@ -20,7 +20,7 @@ class HomeController extends Controller
         return view('frontend.home', ['resImage' => $resolucionImage, 'opacityBoxShadows' => $opacityBoxShadows, 'categorias' => $categorias, 'peliculas' => $peliculas, 'relatedMovies' => $relatedMovies]);
     }
 
-    public static function getMoviesByCategories(array|Collection $categories, $maxMovies = 14): array|null
+    public static function getMoviesByCategories(array|Collection $categories, $maxMovies = 10): array|null
     {
         $byCategory = intval(ceil($maxMovies / count($categories)));
         $movies = [];
