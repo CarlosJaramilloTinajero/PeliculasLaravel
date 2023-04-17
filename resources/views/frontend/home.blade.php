@@ -44,8 +44,7 @@
     @if (count($relatedMovies) > 0)
         <!-- //Segundo slide -->
         <div class="splide-home"></div>
-        <section class="splide"
-            data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
+        <section class="splide" data-splide='{"perPage": 4,"breakpoints": {"1200": {"perPage": 3}, "850": {"perPage": 2}}}'>
 
             <ul class="splide__pagination opacity-0"></ul>
 
@@ -68,7 +67,8 @@
                                 <div class="cart-movie cart-movie-full cart-movie-hover"
                                     style="box-shadow: -11px 11px 10px {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $pelicula['categoryColor']) }}">
                                     <div class="cart-movie-img">
-                                        <img src="{{ $pelicula['ImagenCartel'] }}" alt="">
+                                        <img src="{{ str_contains($pelicula['ImagenCartel'], 'https://m.media-amazon.com/') ? str_replace('X1000', 'X' . $resImage, $pelicula['ImagenCartel']) : $pelicula['ImagenCartel'] }}"
+                                            alt="">
                                     </div>
                                     {{-- <div class="cart-movie-body">
                                         <p class="name-movie">{{ $pelicula->nombre }}</p>
@@ -109,7 +109,8 @@
                                         <div class="cart-movie cart-movie-full cart-movie-hover"
                                             style="box-shadow: -8px 8px 8px {{ str_replace(')', ', ' . $opacityBoxShadows . ');', $categoria->Color) }}">
                                             <div class="cart-movie-img">
-                                                <img src="{{ $pelicula->ImagenCartel }}" alt="">
+                                                <img src="{{ str_contains($pelicula->ImagenCartel, 'https://m.media-amazon.com/') ? str_replace('X1000', 'X' . $resImage, $pelicula->ImagenCartel) : $pelicula->ImagenCartel }}"
+                                                    alt="">
                                             </div>
                                     </a>
                                 </li>

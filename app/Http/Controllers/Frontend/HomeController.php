@@ -16,8 +16,8 @@ class HomeController extends Controller
         $peliculas = pelicula::with('category')->get();
         $relatedMovies = self::getMoviesByCategories(self::getCategories($categorias));
         $opacityBoxShadows = '.6';
-
-        return view('frontend.home', ['opacityBoxShadows' => $opacityBoxShadows, 'categorias' => $categorias, 'peliculas' => $peliculas, 'relatedMovies' => $relatedMovies]);
+        $resolucionImage = 370;
+        return view('frontend.home', ['resImage' => $resolucionImage, 'opacityBoxShadows' => $opacityBoxShadows, 'categorias' => $categorias, 'peliculas' => $peliculas, 'relatedMovies' => $relatedMovies]);
     }
 
     public static function getMoviesByCategories(array|Collection $categories, $maxMovies = 14): array|null
