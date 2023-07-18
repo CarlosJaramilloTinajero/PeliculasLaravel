@@ -13,6 +13,7 @@ use App\Http\Controllers\SeriresController;
 use App\Http\Controllers\TemporadasController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\SeriresController as FrontenSeriresController;
+use App\Http\Controllers\OMBAController;
 use App\Models\categoria;
 
 //********************************  Website  *************************************
@@ -31,10 +32,9 @@ Route::get('/peliculas/{categoria}', [MovieController::class, 'showMoviesByCateg
 
 Route::get('/peliculas', [MovieController::class, 'showMovies'])->name('extrasPeliculas');
 
-Route::get('/add-movie-by-api', function () {
-    $categorias = categoria::all();
-    return view('api-omba.add', ['categorias' => $categorias]);
-})->name('add.omba');
+Route::get('/add-movie-by-api', [OMBAController::class, 'byLivewireMovies'])->name('add.omba');;
+
+Route::get('/api-omba-vue', [OMBAController::class, 'byVueMovies'])->name('vue.movies');
 
 // *********************   guest   ***************************
 Route::middleware('guest')->group(function () {
