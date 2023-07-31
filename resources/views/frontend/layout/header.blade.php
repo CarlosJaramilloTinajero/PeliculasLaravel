@@ -6,8 +6,8 @@
 
         <div class="container-fluid">
 
-            <!-- Visible solo el pantallas mas chicas que las lg -->
-            <div class="d-lg-none">
+            <!-- Visible solo el pantallas mas chicas que las xl -->
+            <div class="d-xl-none">
                 <a class="barraInicio2 boton5" href="{{ route('home') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
                         class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -55,10 +55,8 @@
                 @endguest
             </div>
 
-
-
-            <!-- Visible solo el pantallas mas grandes que las lg -->
-            <div class="d-none d-lg-block">
+            <!-- Visible solo el pantallas mas grandes que las xl -->
+            <div class="d-none d-xl-block">
 
                 <a class="barraInicio  boton5" href="{{ route('home') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
@@ -115,7 +113,6 @@
 
 
             </div>
-
 
             <div class="popover__wrapper">
                 <div>

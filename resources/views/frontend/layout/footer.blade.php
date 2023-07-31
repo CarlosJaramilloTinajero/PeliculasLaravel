@@ -10,6 +10,7 @@
                     <p class="col" style="max-width: 150px; color: white; text-align: center;">
                         <strong>FrameWorks utilizados</strong><br>
                         Laravel <br>
+                       <a href="{{route('vue.movies')}}">Vue.js</a>
                     </p>
                 </div>
                 <div class="p-2">
